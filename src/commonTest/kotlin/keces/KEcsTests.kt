@@ -13,7 +13,6 @@ import kotlin.test.assertNotEquals
 
 class KEcsTests {
     class RecordTimeSystem : System() {
-
         val deltas = arrayListOf<Float>()
         var updates = 0
         var average = 0.0f
@@ -52,7 +51,6 @@ class KEcsTests {
     data class Velocity(val x: Float, val y: Float)
 
     class MoveSystem : System() {
-
         init {
             register<Position>()
             register<Velocity>()
@@ -61,7 +59,7 @@ class KEcsTests {
         override fun update(delta: Float, total: Float, entities: List<Entity>) {
             entities.forEach { entity ->
                 val vel = entity.get<Velocity>()
-                var pos = entity.get<Position>()
+                val pos = entity.get<Position>()
 
                 pos.x += vel.x
                 pos.y += vel.y

@@ -7,15 +7,15 @@ import kecs.system.System
 class KEcs {
     private val systems = arrayListOf<System>()
     private val entities = arrayListOf<Entity>()
-    private var current = 0L
+    private var current = 0.0f
     private var total = 0.0f
 
     fun update() {
-        val new = Platform.getSystemMilliSeconds()
-        if (current == 0L) {
+        val new = Platform.getSystemSeconds()
+        if (current == 0.0f) {
             current = new
         }
-        val delta = (new - current) / 1000.0f
+        val delta = new - current
         total += delta
         current = new
         systems.forEach {

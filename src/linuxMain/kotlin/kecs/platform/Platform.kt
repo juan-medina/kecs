@@ -4,6 +4,6 @@ import kotlin.system.getTimeMillis
 
 actual class Platform {
     actual companion object {
-        actual fun getSystemMilliSeconds() = getTimeMillis()
+        actual fun getSystemSeconds() = getTimeMillis() / 1000.0f
     }
 }
