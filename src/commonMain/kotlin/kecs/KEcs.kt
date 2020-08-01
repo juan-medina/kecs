@@ -12,15 +12,15 @@ class KEcs {
     }
     private val systems = arrayListOf<System>()
     private val entities = arrayListOf<Entity>()
-    private var current = 0.0f
+    private var current = 0L
     private var total = 0.0f
 
     fun update() {
-        val new = Platform.getSystemSeconds()
-        if (current == 0.0f) {
+        val new = Platform.getSystemMillis()
+        if (current == 0L) {
             current = new
         }
-        val delta = new - current
+        val delta = (new - current) / 1000.0f
         total += delta
         current = new
         systems.forEach {

@@ -6,7 +6,7 @@ import kecs.KEcs.dsl.ecs
 import kecs.entity.Entity
 import kecs.entity.Entity.dsl.entity
 import kecs.system.System
-import kotlin.random.Random
+import kotlin.math.truncate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -35,14 +35,15 @@ class KEcsTests {
         val steps = 4
 
         for (x in 1..steps) {
-            val rnd = Random.nextInt(2, 4)
-            TestUtils.sleep(rnd)
+            TestUtils.sleep(x)
             ecs.update()
         }
 
         assertEquals(steps, rts.updates, "we have not been call $steps times")
         assertNotEquals(rts.total, 0.0f, "we should have a total time")
         assertEquals(rts.deltas.sum(), rts.total, "sum of deltas should be equal to total")
+        val approximately = (2..steps).sum().toFloat()
+        assertEquals(truncate(rts.total), approximately, "we should record approximately time")
     }
 
     data class Position(var x: Float, var y: Float)
