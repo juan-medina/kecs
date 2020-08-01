@@ -31,4 +31,8 @@ actual class KEcs {
     actual fun add(entity: Entity) {
         entities.add(entity)
     }
+
+    actual inline operator fun <reified T : System> T.unaryPlus() {
+        add(this)
+    }
 }

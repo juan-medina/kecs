@@ -1,6 +1,8 @@
 package keces
 
 import kecs.KEcs
+import kecs.dsl.ecs
+import kecs.dsl.entity
 import kecs.entity.Entity
 import kecs.system.System
 import platform.posix.sleep
@@ -74,34 +76,33 @@ class KEcsTests {
 
     @Test
     fun anotherTest() {
-        val ecs = KEcs()
+        val world = ecs {
+            +MoveSystem()
+        }
 
-        val mvs = MoveSystem()
-        ecs.add(mvs)
+        val obj1 = entity {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
 
-        val obj1 = Entity()
+        world.add(obj1)
 
-        obj1.add(Position(0.0f, 0.0f))
-        obj1.add(Velocity(1.0f, 2.0f))
+        val obj2 = entity {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.5f, 2.5f)
+        }
 
-        ecs.add(obj1)
+        world.add(obj2)
 
-        val obj2 = Entity()
+        val obj3 = entity {
+            +Position(0.0f, 0.0f)
+        }
 
-        obj2.add(Position(0.0f, 0.0f))
-        obj2.add(Velocity(1.5f, 2.5f))
+        world.add(obj3)
 
-        ecs.add(obj2)
+        world.update()
+        world.update()
 
-        val obj3 = Entity()
-
-        obj3.add(Position(0.0f, 0.0f))
-
-        ecs.add(obj3)
-
-        ecs.update()
-        ecs.update()
-/*
         assertEquals(2.0f, obj1.get<Position>().x)
         assertEquals(4.0f, obj1.get<Position>().y)
 
@@ -109,7 +110,7 @@ class KEcsTests {
         assertEquals(5.0f, obj2.get<Position>().y)
 
         assertEquals(0.0f, obj3.get<Position>().x)
-        assertEquals(0.0f, obj3.get<Position>().y)*/
+        assertEquals(0.0f, obj3.get<Position>().y)
     }
 
 }

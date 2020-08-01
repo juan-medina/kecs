@@ -6,7 +6,12 @@ import kecs.system.System
 expect class KEcs {
 
     fun update()
+
     fun add(system: System)
+
     fun add(entity: Entity)
 
+    inline operator fun <reified T : System> T.unaryPlus()
+
 }
+

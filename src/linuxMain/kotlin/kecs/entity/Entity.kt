@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 actual class Entity {
     val components = hashMapOf<KClass<*>, Any>()
 
-    actual inline fun <reified T : Any> add(component: T) {
+    actual inline infix fun <reified T : Any> add(component: T) {
         components[T::class] = component
     }
 
@@ -26,4 +26,9 @@ actual class Entity {
         }
         return out
     }
+
+    actual inline operator fun <reified T : Any> T.unaryPlus() {
+        add(this)
+    }
+
 }
