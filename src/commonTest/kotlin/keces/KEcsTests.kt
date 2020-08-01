@@ -2,9 +2,9 @@ package keces
 
 import keces.platform.test.TestUtils
 import kecs.KEcs
-import kecs.dsl.ecs
-import kecs.dsl.entity
+import kecs.KEcs.dsl.ecs
 import kecs.entity.Entity
+import kecs.entity.Entity.dsl.entity
 import kecs.system.System
 import kotlin.random.Random
 import kotlin.test.Test
@@ -24,7 +24,6 @@ class KEcsTests {
             this.total = total
             average = total / updates
         }
-
     }
 
     @Test
@@ -67,7 +66,6 @@ class KEcsTests {
                 entity.set(pos)
             }
         }
-
     }
 
     @Test

@@ -1,10 +1,15 @@
 package kecs
 
+import kecs.dsl.KEcsDsl
 import kecs.entity.Entity
 import kecs.platform.Platform
 import kecs.system.System
 
 class KEcs {
+    @Suppress("ClassName")
+    companion object dsl{
+        fun ecs(init: KEcsDsl.() -> Unit) = KEcsDsl().apply(init).ecs()
+    }
     private val systems = arrayListOf<System>()
     private val entities = arrayListOf<Entity>()
     private var current = 0.0f
@@ -29,9 +34,5 @@ class KEcs {
 
     fun add(entity: Entity) {
         entities.add(entity)
-    }
-
-    inline operator fun <reified T : System> T.unaryPlus() {
-        add(this)
     }
 }
