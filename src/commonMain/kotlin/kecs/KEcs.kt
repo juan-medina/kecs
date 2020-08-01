@@ -7,7 +7,7 @@ import kecs.system.System
 
 class KEcs {
     @Suppress("ClassName")
-    companion object dsl{
+    companion object dsl {
         fun ecs(init: KEcsDsl.() -> Unit) = KEcsDsl().apply(init).ecs()
     }
     private val systems = arrayListOf<System>()

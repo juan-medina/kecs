@@ -1,6 +1,6 @@
 package keces.platform.test
 
-import  platform.posix.sleep
+import platform.posix.sleep
 
 actual class TestUtils {
     actual companion object {

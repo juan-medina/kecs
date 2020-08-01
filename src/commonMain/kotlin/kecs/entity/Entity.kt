@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 
 class Entity {
     @Suppress("ClassName")
-    companion object dsl{
+    companion object dsl {
         fun entity(init: EntityDsl.() -> Unit) = EntityDsl().apply(init).entity()
     }
     val components = hashMapOf<KClass<*>, Any>()
