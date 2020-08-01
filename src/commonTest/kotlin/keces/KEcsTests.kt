@@ -1,18 +1,17 @@
 package keces
 
+import keces.platform.test.TestUtils
 import kecs.KEcs
 import kecs.dsl.ecs
 import kecs.dsl.entity
 import kecs.entity.Entity
 import kecs.system.System
-import platform.posix.sleep
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
 class KEcsTests {
-
     class RecordTimeSystem : System() {
 
         val deltas = arrayListOf<Float>()
@@ -39,7 +38,7 @@ class KEcsTests {
 
         for (x in 1..steps) {
             val rnd = Random.nextInt(2, 4)
-            sleep(rnd.toUInt())
+            TestUtils.sleep(rnd)
             ecs.update()
         }
 
@@ -61,7 +60,6 @@ class KEcsTests {
 
         override fun update(delta: Float, total: Float, entities: List<Entity>) {
             entities.forEach { entity ->
-                println("$entity")
                 val vel = entity.get<Velocity>()
                 var pos = entity.get<Position>()
 
@@ -112,5 +110,4 @@ class KEcsTests {
         assertEquals(0.0f, obj3.get<Position>().x)
         assertEquals(0.0f, obj3.get<Position>().y)
     }
-
 }

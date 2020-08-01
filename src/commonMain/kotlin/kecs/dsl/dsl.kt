@@ -3,7 +3,6 @@ package kecs.dsl
 import kecs.KEcs
 import kecs.entity.Entity
 
-expect fun entity(init: Entity.() -> Unit) : Entity
+fun entity(init: Entity.() -> Unit) = Entity().apply(init)
 
-expect fun ecs(init: KEcs.() -> Unit) : KEcs
-
+fun ecs(init: KEcs.() -> Unit) = KEcs().apply(init)

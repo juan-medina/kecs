@@ -1,13 +1,16 @@
 package kecs.system
 
 import kecs.entity.Entity
+import kotlin.reflect.KClass
 
-expect abstract class System {
-
+abstract class System {
     abstract fun update(delta: Float, total: Float, entities: List<Entity>)
 
-    inline fun <reified T : Any> register()
+    val componentsClasses: ArrayList<KClass<out Any>> = arrayListOf()
 
-    fun filter(entity: Entity) : Boolean
+    inline fun <reified T : Any> register() {
+        componentsClasses.add(T::class)
+    }
 
+    fun filter(entity: Entity) = entity.components.keys.containsAll(componentsClasses)
 }
