@@ -19,4 +19,8 @@ class Entity {
     inline fun <reified T : Any> get(): T {
         return components.getValue(T::class) as T
     }
+
+    inline fun <reified T : Any> hasComponent(): Boolean {
+        return components.containsKey(T::class)
+    }
 }
