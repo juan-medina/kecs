@@ -8,6 +8,7 @@ class Entity {
     companion object dsl {
         fun entity(init: EntityDsl.() -> Unit) = EntityDsl().apply(init).entity()
     }
+
     val components = hashMapOf<KClass<*>, Any>()
 
     inline infix fun <reified T : Any> add(component: T) {
@@ -16,11 +17,23 @@ class Entity {
 
     inline fun <reified T : Any> set(component: T) = add(component)
 
-    inline fun <reified T : Any> get(): T {
-        return components.getValue(T::class) as T
+    inline fun <reified T : Any> get() = components.getValue(T::class) as T
+
+    inline fun <reified T : Any> hasComponent() = components.containsKey(T::class)
+
+    fun isEmpty() = components.size == 0
+
+    inline fun <reified T : Any> removeComponent() {
+        components.remove(T::class)
     }
 
-    inline fun <reified T : Any> hasComponent(): Boolean {
-        return components.containsKey(T::class)
+    fun <T : Any> removeComponent(obj: T) {
+        val candidates = components.filter {
+            it.value == obj
+        }
+        if (candidates.size == 1) {
+            val found = candidates.getValue(candidates.keys.first())
+            components.remove(found::class)
+        }
     }
 }

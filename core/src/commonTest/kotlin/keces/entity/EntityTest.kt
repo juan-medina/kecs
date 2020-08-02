@@ -1,0 +1,127 @@
+package keces.entity
+
+import kecs.entity.Entity
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
+
+class EntityTest {
+    data class Position(var x: Float, var y: Float)
+
+    data class Velocity(val x: Float, val y: Float)
+
+    enum class EntityState {
+        InitialState,
+        EndState
+    }
+
+    @Test
+    fun `we can create a entity and get it components`() {
+        val ent = Entity()
+        ent.add(Position(0.0f, 0.0f))
+        ent.add(Velocity(1.0f, 2.0f))
+
+        val pos = ent.get<Position>()
+        assertEquals(0.0f, pos.x)
+        assertEquals(0.0f, pos.y)
+
+        val vel = ent.get<Velocity>()
+        assertEquals(1.0f, vel.x)
+        assertEquals(2.0f, vel.y)
+    }
+
+    @Test
+    fun `we can check if a entity has components`() {
+        val ent = Entity()
+        ent.add(Position(1.0f, 2.0f))
+
+        assertTrue(ent.hasComponent<Position>())
+        assertFalse(ent.hasComponent<Velocity>())
+    }
+
+    @Test
+    fun `we can change an entity component value`() {
+        val ent = Entity()
+        ent.add(Position(1.0f, 2.0f))
+        ent.add(Velocity(3.0f, 4.0f))
+
+        val pos = ent.get<Position>()
+        val vel = ent.get<Velocity>()
+
+        pos.x += vel.x
+        pos.y += vel.y
+
+        ent.set(pos)
+
+        val newPos = ent.get<Position>()
+        assertEquals(4.0f, newPos.x)
+        assertEquals(6.0f, newPos.y)
+    }
+
+    @Test
+    fun `a new entity is empty`() {
+        val ent = Entity()
+
+        assertTrue(ent.isEmpty())
+    }
+
+    @Test
+    fun `a entity with components is not empty`() {
+        val ent = Entity()
+        ent.add(Position(1.0f, 2.0f))
+
+        assertFalse(ent.isEmpty())
+    }
+
+    @Test
+    fun `we can remove components by class`() {
+        val ent = Entity()
+        ent.add(Position(1.0f, 2.0f))
+        ent.add(Velocity(3.0f, 4.0f))
+
+        assertTrue(ent.hasComponent<Position>())
+        assertTrue(ent.hasComponent<Velocity>())
+
+        ent.removeComponent<Velocity>()
+
+        assertTrue(ent.hasComponent<Position>())
+        assertFalse(ent.hasComponent<Velocity>())
+    }
+
+    @Test
+    fun `we can remove components by value`() {
+        val ent = Entity()
+        ent.add(Position(1.0f, 2.0f))
+        ent.add(Velocity(3.0f, 4.0f))
+
+        assertTrue(ent.hasComponent<Position>())
+        assertTrue(ent.hasComponent<Velocity>())
+
+        val vel = ent.get<Velocity>()
+
+        ent.removeComponent(vel)
+
+        assertTrue(ent.hasComponent<Position>())
+        assertFalse(ent.hasComponent<Velocity>())
+    }
+
+    @Test
+    fun `we can work with enums`() {
+        val ent = Entity()
+
+        ent.add(Position(1.0f, 2.0f))
+        ent.add(Velocity(3.0f, 4.0f))
+        ent.add(EntityState.InitialState)
+
+        var state = ent.get<EntityState>()
+
+        assertEquals(EntityState.InitialState, state)
+
+        ent.set(EntityState.EndState)
+
+        state = ent.get()
+
+        assertEquals(EntityState.EndState, state)
+    }
+}
