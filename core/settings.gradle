@@ -1,0 +1,3 @@
+project.name = 'kecs'
+
+enableFeaturePreview('GRADLE_METADATA')

@@ -1,4 +1,8 @@
 rootProject.name = 'kecs'
 
-
 enableFeaturePreview('GRADLE_METADATA')
+
+include ':core'
+include ':sample'
+
+project(':core').name = 'kecs'
