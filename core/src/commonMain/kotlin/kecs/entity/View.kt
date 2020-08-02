@@ -2,7 +2,7 @@ package kecs.entity
 
 import kecs.dsl.EntityDsl
 
-class View : MutableList<Entity> {
+open class View : MutableList<Entity> {
     private val entities = arrayListOf<Entity>()
 
     fun add(init: EntityDsl.() -> Unit) = Entity.entity(init).let {
