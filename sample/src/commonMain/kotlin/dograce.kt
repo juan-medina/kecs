@@ -4,6 +4,32 @@ import kecs.system.System
 import kotlin.math.min
 import kotlin.random.Random
 
+/**
+ * Example of a dog race using a ECS
+ * The output will be something like :
+ *
+ *   100 dogs running....
+ *
+ *   Race end after 52830 loops
+ *
+ *   The Winner is Forcibly Vocal Wasp!
+ *
+ *   Mechanical Rabbit arrived in 5.0s
+ *
+ *   Final Dog lines:
+ *
+ *   1st Forcibly Vocal Wasp in 5.472s
+ *   2nd Monthly Mutual Snail in 5.486s
+ *   3rd Incredibly Social Raccoon in 5.495s
+ *   4st Extremely Intimate Macaw in 5.498s
+ *   ....
+ *   97st Awfully Sweet Mosquito in 9.782s
+ *   98st Wholly Pleased Deer in 9.795s
+ *   99st Hopelessly Humble Sunbird in 9.855s
+ *   100st Reliably Wired Dolphin in 9.879s
+ *
+ **/
+
 const val NUM_DOGS = 100
 const val MIN_DOG_SPEED = 30.0f
 const val MAX_DOG_SPEED = 55.0f
@@ -34,54 +60,13 @@ enum class RaceStatus {
     End
 }
 
-class MovementSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
-        ecs.view(Position::class, Movement::class).forEach {
-            val movement = it.get<Movement>()
-            if (movement.status == MovementStatus.Running) {
-                val position = it.get<Position>()
-                val step = (movement.speed * delta)
-                val feet = position.at + step
-                position.time += delta
-                position.at = min(position.at + step, RACE_LENGTH)
-                if (feet == RACE_LENGTH) {
-                    movement.status = MovementStatus.Stopped
-                }
-            }
-        }
-    }
-}
-
-class WinnerSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
-        if (!ecs.hasComponent<Winner>()) {
-            ecs.view(Position::class, Dog::class).forEach {
-                val position = it.get<Position>()
-                val dog = it.get<Dog>()
-                if (position.at == RACE_LENGTH) {
-                    ecs.add { +Winner(dog.name) }
-                    return@update
-                }
-            }
-        }
-    }
-}
-
-class RaceSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
-        if (ecs.component<RaceStatus>() != RaceStatus.End) {
-            val allStopped = ecs.components<Movement>().all {
-                it.status == MovementStatus.Stopped
-            }
-            if (allStopped) {
-                val status = ecs.entity(RaceStatus::class)
-                status.set(RaceStatus.End)
-            }
-        }
-    }
-}
-
 fun ClosedRange<Float>.random() = start + ((endInclusive - start) * Random.nextFloat())
+
+fun List<String>.randomCapitalize(): String {
+    return this[Random.nextInt(1, this.size)].capitalize()
+}
+
+fun randomDogName() = "${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${names.randomCapitalize()}"
 
 fun Float.threeDecimals() = (this * 1000).toInt() / 1000.0f
 
@@ -91,12 +76,6 @@ fun Int.withSuffix() = "$this" + when (this) {
     3 -> "rd"
     else -> "st"
 }
-
-fun List<String>.randomCapitalize(): String {
-    return this[Random.nextInt(1, this.size)].capitalize()
-}
-
-fun randomDogName() = "${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${names.randomCapitalize()}"
 
 fun dogRace() {
     val world = ecs {
@@ -148,6 +127,53 @@ fun dogRace() {
         val dog = it.get<Dog>()
         val pos = it.get<Position>()
         println("${(place + 1).withSuffix()} ${dog.name} in ${pos.time.threeDecimals()}s")
+    }
+}
+
+class MovementSystem : System() {
+    override fun update(delta: Float, total: Float, ecs: KEcs) {
+        ecs.view(Position::class, Movement::class).forEach {
+            val movement = it.get<Movement>()
+            if (movement.status == MovementStatus.Running) {
+                val position = it.get<Position>()
+                val step = (movement.speed * delta)
+                val feet = position.at + step
+                position.time += delta
+                position.at = min(position.at + step, RACE_LENGTH)
+                if (feet == RACE_LENGTH) {
+                    movement.status = MovementStatus.Stopped
+                }
+            }
+        }
+    }
+}
+
+class WinnerSystem : System() {
+    override fun update(delta: Float, total: Float, ecs: KEcs) {
+        if (!ecs.hasComponent<Winner>()) {
+            ecs.view(Position::class, Dog::class).forEach {
+                val position = it.get<Position>()
+                val dog = it.get<Dog>()
+                if (position.at == RACE_LENGTH) {
+                    ecs.add { +Winner(dog.name) }
+                    return@update
+                }
+            }
+        }
+    }
+}
+
+class RaceSystem : System() {
+    override fun update(delta: Float, total: Float, ecs: KEcs) {
+        if (ecs.component<RaceStatus>() != RaceStatus.End) {
+            val allStopped = ecs.components<Movement>().all {
+                it.status == MovementStatus.Stopped
+            }
+            if (allStopped) {
+                val status = ecs.entity(RaceStatus::class)
+                status.set(RaceStatus.End)
+            }
+        }
     }
 }
 
