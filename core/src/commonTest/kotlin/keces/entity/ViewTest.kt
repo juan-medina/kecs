@@ -4,7 +4,9 @@ import kecs.entity.Entity.dsl.entity
 import kecs.entity.View
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 
 class ViewTest {
     data class Position(val x: Float, val y: Float)
@@ -246,5 +248,33 @@ class ViewTest {
 
         assertEquals(1.0f, vel.x)
         assertEquals(2.0f, vel.y)
+    }
+
+    @Test
+    fun `we can check if we have a any entity with a component`() {
+        val view = View()
+
+        view.add {
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Velocity(2.0f, 3.0f)
+        }
+
+        assertTrue(view.hasComponent<Velocity>())
+        assertFalse(view.hasComponent<Position>())
+    }
+
+    @Test
+    fun `we can check if we have a single entity with a component`() {
+        val view = View()
+
+        view.add {
+            +Velocity(1.0f, 2.0f)
+        }
+
+        assertTrue(view.hasComponent<Velocity>())
+        assertFalse(view.hasComponent<Position>())
     }
 }
