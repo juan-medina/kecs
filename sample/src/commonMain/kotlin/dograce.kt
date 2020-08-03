@@ -5,10 +5,13 @@ import kotlin.math.min
 import kotlin.random.Random
 
 /**
- * Example of a dog race using a ECS
- * The output will be something like :
+ * Example of a animal race using a ECS
+ *  all of then run following a mechanical
+ *  rabbit as lure.
  *
- *   100 dogs running....
+ * The output of this will be something like :
+ *
+ *   100 animals running....
  *
  *   Race end after 52830 loops
  *
@@ -16,30 +19,30 @@ import kotlin.random.Random
  *
  *   Mechanical Rabbit arrived in 5.0s
  *
- *   Final Dog lines:
+ *   Final lines:
  *
- *   1st Forcibly Vocal Wasp in 5.472s
- *   2nd Monthly Mutual Snail in 5.486s
- *   3rd Incredibly Social Raccoon in 5.495s
- *   4st Extremely Intimate Macaw in 5.498s
+ *   1st Explicitly Huge Eft in 5.47s
+ *   2nd Solely Working Guppy in 5.48s
+ *   3rd Evenly Factual Cougar in 5.531s
+ *   4st Suitably Elegant Piglet in 5.533s
  *   ....
- *   97st Awfully Sweet Mosquito in 9.782s
- *   98st Wholly Pleased Deer in 9.795s
- *   99st Hopelessly Humble Sunbird in 9.855s
- *   100st Reliably Wired Dolphin in 9.879s
+ *   97st Unlikely Assuring Hagfish in 9.864s
+ *   98st Extremely Infinite Chipmunk in 9.926s
+ *   99st Broadly Major Minnow in 9.954s
+ *   100st Violently Charming Kangaroo in 9.974s9s
  *
  **/
 
-const val NUM_DOGS = 100
-const val MIN_DOG_SPEED = 30.0f
-const val MAX_DOG_SPEED = 55.0f
+const val NUM_ANIMALS = 100
+const val MIN_ANIMAL_SPEED = 30.0f
+const val MAX_ANIMAL_SPEED = 55.0f
 const val RACE_LENGTH_IN_YARDS = 100.0f
 const val RACE_LENGTH = RACE_LENGTH_IN_YARDS * 3.0f
-const val RABBIT_SPEED = RACE_LENGTH / 5.0f
+const val LURE_SPEED = RACE_LENGTH / 5.0f
 
-data class Rabbit(val name: String)
+data class Lure(val name: String)
 
-data class Dog(val name: String)
+data class Animal(val name: String)
 
 enum class MovementStatus {
     Running,
@@ -66,7 +69,7 @@ fun List<String>.randomCapitalize(): String {
     return this[Random.nextInt(1, this.size)].capitalize()
 }
 
-fun randomDogName() = "${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${names.randomCapitalize()}"
+fun randomAnimalName() = "${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${animals.randomCapitalize()}"
 
 fun Float.threeDecimals() = (this * 1000).toInt() / 1000.0f
 
@@ -77,7 +80,7 @@ fun Int.withSuffix() = "$this" + when (this) {
     else -> "st"
 }
 
-fun dogRace() {
+fun animalRace() {
     val world = ecs {
         +MovementSystem()
         +WinnerSystem()
@@ -88,21 +91,21 @@ fun dogRace() {
         +RaceStatus.Running
     }
 
-    val rabbit = world.add {
-        +Rabbit(name = "Mechanical Rabbit")
+    val lure = world.add {
+        +Lure(name = "Mechanical Rabbit")
         +Position(at = 0.0f)
-        +Movement(speed = RABBIT_SPEED)
+        +Movement(speed = LURE_SPEED)
     }
 
-    for (x in 1..NUM_DOGS) {
+    for (x in 1..NUM_ANIMALS) {
         world.add {
-            +Dog(name = randomDogName())
+            +Animal(name = randomAnimalName())
             +Position(at = 0.0f)
-            +Movement(speed = (MIN_DOG_SPEED..MAX_DOG_SPEED).random())
+            +Movement(speed = (MIN_ANIMAL_SPEED..MAX_ANIMAL_SPEED).random())
         }
     }
 
-    println("$NUM_DOGS dogs running....\n")
+    println("$NUM_ANIMALS animals running....\n")
 
     var loops = 0
     while (world.component<RaceStatus>() != RaceStatus.End) {
@@ -115,18 +118,18 @@ fun dogRace() {
     val winner = world.component<Winner>()
     println("The Winner is ${winner.name}!\n")
 
-    val rabbitName = rabbit.get<Rabbit>().name
-    val rabbitTime = rabbit.get<Position>().time
-    println("$rabbitName arrived in ${rabbitTime.threeDecimals()}s \n")
+    val lureName = lure.get<Lure>().name
+    val lureTime = lure.get<Position>().time
+    println("$lureName arrived in ${lureTime.threeDecimals()}s \n")
 
-    println("Final Dog lines:\n")
+    println("Final lines:\n")
 
-    world.view(Dog::class, Position::class).sortedBy {
+    world.view(Animal::class, Position::class).sortedBy {
         it.get<Position>().time
     }.forEachIndexed { place, it ->
-        val dog = it.get<Dog>()
+        val animal = it.get<Animal>()
         val pos = it.get<Position>()
-        println("${(place + 1).withSuffix()} ${dog.name} in ${pos.time.threeDecimals()}s")
+        println("${(place + 1).withSuffix()} ${animal.name} in ${pos.time.threeDecimals()}s")
     }
 }
 
@@ -137,10 +140,9 @@ class MovementSystem : System() {
             if (movement.status == MovementStatus.Running) {
                 val position = it.get<Position>()
                 val step = (movement.speed * delta)
-                val feet = position.at + step
                 position.time += delta
                 position.at = min(position.at + step, RACE_LENGTH)
-                if (feet == RACE_LENGTH) {
+                if (position.at == RACE_LENGTH) {
                     movement.status = MovementStatus.Stopped
                 }
             }
@@ -151,11 +153,11 @@ class MovementSystem : System() {
 class WinnerSystem : System() {
     override fun update(delta: Float, total: Float, ecs: KEcs) {
         if (!ecs.hasComponent<Winner>()) {
-            ecs.view(Position::class, Dog::class).forEach {
+            ecs.view(Position::class, Animal::class).forEach {
                 val position = it.get<Position>()
-                val dog = it.get<Dog>()
+                val animal = it.get<Animal>()
                 if (position.at == RACE_LENGTH) {
-                    ecs.add { +Winner(dog.name) }
+                    ecs.add { +Winner(animal.name) }
                     return@update
                 }
             }
@@ -177,7 +179,7 @@ class RaceSystem : System() {
     }
 }
 
-val names: List<String> = listOf(
+val animals: List<String> = listOf(
     "ox", "ant", "ape", "asp", "bat", "bee", "boa", "bug", "cat", "cod", "cow",
     "cub", "doe", "dog", "eel", "eft", "elf", "elk", "emu", "ewe", "fly", "fox",
     "gar", "gnu", "hen", "hog", "imp", "jay", "kid", "kit", "koi", "lab", "man",
