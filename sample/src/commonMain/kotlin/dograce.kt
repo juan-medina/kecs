@@ -36,9 +36,7 @@ enum class RaceStatus {
 
 class MovementSystem : System() {
     override fun update(delta: Float, total: Float, ecs: KEcs) {
-        ecs.filter {
-            it.hasComponent<Position>() and it.hasComponent<Movement>()
-        }.forEach {
+        ecs.view(Position::class, Movement::class).forEach {
             val movement = it.get<Movement>()
             if (movement.status == MovementStatus.Running) {
                 val position = it.get<Position>()
@@ -56,10 +54,8 @@ class MovementSystem : System() {
 
 class WinnerSystem : System() {
     override fun update(delta: Float, total: Float, ecs: KEcs) {
-        if (ecs.none { it.hasComponent<Winner>() }) {
-            ecs.filter {
-                it.hasComponent<Position>() and it.hasComponent<Dog>()
-            }.forEach {
+        if (!ecs.hasComponent<Winner>()) {
+            ecs.view(Position::class, Dog::class).forEach {
                 val position = it.get<Position>()
                 val dog = it.get<Dog>()
                 if (position.at == RACE_LENGTH) {
@@ -73,14 +69,12 @@ class WinnerSystem : System() {
 
 class RaceSystem : System() {
     override fun update(delta: Float, total: Float, ecs: KEcs) {
-        val status = ecs.single { it.hasComponent<RaceStatus>() }
-        if (status.get<RaceStatus>() != RaceStatus.End) {
-            val allStopped = ecs.filter {
-                it.hasComponent<Movement>()
-            }.all {
-                it.get<Movement>().status == MovementStatus.Stopped
+        if (ecs.component<RaceStatus>() != RaceStatus.End) {
+            val allStopped = ecs.components<Movement>().all {
+                it.status == MovementStatus.Stopped
             }
             if (allStopped) {
+                val status = ecs.entity(RaceStatus::class)
                 status.set(RaceStatus.End)
             }
         }
@@ -104,7 +98,7 @@ fun List<String>.randomCapitalize(): String {
 
 fun randomDogName() = "${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${names.randomCapitalize()}"
 
-fun sample() {
+fun dogRace() {
     val world = ecs {
         +MovementSystem()
         +WinnerSystem()
@@ -132,14 +126,14 @@ fun sample() {
     println("$NUM_DOGS dogs running....\n")
 
     var loops = 0
-    while (world.single { it.hasComponent<RaceStatus>() }.get<RaceStatus>() != RaceStatus.End) {
+    while (world.component<RaceStatus>() != RaceStatus.End) {
         loops++
         world.update()
     }
 
     println("Race end after $loops loops\n")
 
-    val winner = world.single { it.hasComponent<Winner>() }.get<Winner>()
+    val winner = world.component<Winner>()
     println("The Winner is ${winner.name}!\n")
 
     val rabbitName = rabbit.get<Rabbit>().name
@@ -148,9 +142,7 @@ fun sample() {
 
     println("Final Dog lines:\n")
 
-    world.filter {
-        it.hasComponent<Dog>() and it.hasComponent<Position>()
-    }.sortedBy {
+    world.view(Dog::class, Position::class).sortedBy {
         it.get<Position>().time
     }.forEachIndexed { place, it ->
         val dog = it.get<Dog>()
