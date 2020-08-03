@@ -19,6 +19,8 @@ open class View() : MutableList<Entity> {
 
     inline fun <reified T : Any> components() = filter { it.hasComponent<T>() }.map { it.get<T>() }
 
+    inline fun <reified T : Any> component() = filter { it.hasComponent<T>() }.map { it.get<T>() }.single()
+
     fun entity(vararg types: KClass<out Any>) = single { it.hasComponents(*types) }
 
     override val size: Int

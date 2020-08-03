@@ -202,6 +202,28 @@ class ViewTest {
     }
 
     @Test
+    fun `we can get a single component`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+        }
+
+        view.add {
+            +Velocity(1.0f, 2.0f)
+        }
+
+        val velocity = view.component<Velocity>()
+
+        assertEquals(1.0f, velocity.x)
+        assertEquals(2.0f, velocity.y)
+    }
+
+    @Test
     fun `we can get a single entity on classes`() {
         val view = View()
 
