@@ -19,6 +19,8 @@ import kotlin.random.Random
  *
  *   100 animals running....
  *
+ *   Race complete: 100 % [██████████████████████████████] 9.976s
+ *
  *   Race end after 52830 loops
  *
  *   The Winner is Forcibly Vocal Wasp!
@@ -46,16 +48,21 @@ const val NUM_ANIMALS = 100
 
 /** Minimal Speed of each animal, in ft/s **/
 const val MIN_ANIMAL_SPEED = 30.0f
+
 /** Max Speed of each animal, ft/s **/
 const val MAX_ANIMAL_SPEED = 55.0f
 
 /** Race length in yards **/
 const val RACE_LENGTH_IN_YARDS = 100.0f
+
 /** Race length in feet **/
 const val RACE_LENGTH = RACE_LENGTH_IN_YARDS * 3.0f
 
 /** The lure speed, it will reach the end in 5s **/
 const val LURE_SPEED = RACE_LENGTH / 5.0f
+
+/** Number of blocks for our progress bar **/
+const val NUM_BLOCKS = 30
 
 // Components
 
@@ -113,20 +120,38 @@ fun Int.withSuffix() = "$this" + when (this) {
     else -> "st"
 }
 
+/** format a int in three digits with spaces on the left
+ *
+ * _48
+ *
+ * __5
+ *
+ * 100
+ *
+ * **/
+fun Int.threeDigits(): String {
+    val digits = this.toString().length
+    val remaining = 3 - digits
+    return " ".repeat(remaining) + "$this"
+}
+
 // our race
 
 fun animalRace() {
-    // we create our world adding 3 systems, each of them it handle only one concern
+    // we create our world adding 4 systems, each of them it handle only one concern
     //  - the movement system it take care or moving things, both animals and the lure
     //  - the winner system will take care or knowing which animal won
     //  - the race system will take care to know when the race has ended
+    //  - the progress system will draw a progress bar with the overall completion,
+    //      but it could be removed without affecting the logic
     val world = ecs {
         +MovementSystem()
         +WinnerSystem()
         +RaceSystem()
+        +ProgressSystem()
     }
 
-    // we create and entity that has the race status to running
+    // we create and entity that has the race status set to running
     world.add {
         +RaceStatus.Running
     }
@@ -165,6 +190,8 @@ fun animalRace() {
         //  last update
         world.update()
     }
+
+    println("\n")
 
     // we will print the total loops, this number will be random since we have
     //  random animal speeds they will take different time to complete the race
@@ -258,6 +285,60 @@ class RaceSystem : System() {
                 val status = ecs.entity(RaceStatus::class)
                 status.set(RaceStatus.Ended)
             }
+        }
+    }
+}
+
+/** This System will draw a progress bar of the race **/
+class ProgressSystem : System() {
+    // how much time we have been racing
+    var time = 0.0f
+
+    // last update, we don't want to update the progress all
+    //  the time, just when the time change (using 3 decimals)
+    var lastUpdate = Float.MIN_VALUE
+
+    /** display a progress bar like:
+     *
+     * text  22 % [██████------------------------] 1.592s
+     *
+     **/
+    private fun drawBar(completion: Float, time: Float, text: String) {
+        // get the blocks to fill █
+        val blocksToFill = (NUM_BLOCKS * completion).toInt()
+        val filledBlocks = "█".repeat(blocksToFill)
+
+        // get the blocks empty |
+        val blocksEmpty = NUM_BLOCKS - blocksToFill
+        val emptyBlocks = "-".repeat(blocksEmpty)
+
+        // calculate the percentage
+        val percent = (completion * 100).toInt()
+
+        // compose the bar, we use \r to reset the cursor
+        print("\r$text ${percent.threeDigits()} % [$filledBlocks$emptyBlocks] ${time.threeDecimals()}s  ")
+    }
+
+    override fun update(delta: Float, total: Float, ecs: KEcs) {
+        // get from all entities that has position the position
+        val positions = ecs.components<Position>()
+
+        // if we average all that we have run so far and divide by the length of the race
+        //  we will have the overall completion (0..1) of the race
+        val completion = positions.map { it.at }.average().toFloat() / RACE_LENGTH
+
+        // We accumulate the race time
+        time += delta
+
+        // we round the time to three decimals
+        val update = time.threeDecimals()
+
+        // if update time has change from the last update
+        if (update != lastUpdate) {
+            // draw the bar
+            drawBar(completion, update, "Race complete:")
+            // store last update
+            lastUpdate = update
         }
     }
 }
