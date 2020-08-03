@@ -21,6 +21,7 @@ class Entity {
 
     inline fun <reified T : Any> hasComponent() = components.containsKey(T::class)
 
+    @Suppress("UNUSED_PARAMETER")
     inline fun <reified T : Any> hasComponent(type: KClass<out T>) = hasComponent<T>()
 
     fun hasComponents(vararg types: KClass<out Any>) = components.keys.containsAll(types.toList())
