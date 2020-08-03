@@ -17,9 +17,7 @@ class DslTests {
 
     class MoveSystem : System() {
         override fun update(delta: Float, total: Float, ecs: KEcs) {
-            ecs.filter {
-                it.hasComponent<Velocity>() and it.hasComponent<Position>()
-            }.forEach {
+            ecs.view(Velocity::class, Position::class).forEach {
                 val vel = it.get<Velocity>()
                 val pos = it.get<Position>().copy()
 
@@ -69,10 +67,8 @@ class DslTests {
             +object : System() {
                 override fun update(delta: Float, total: Float, ecs: KEcs) {
                     val vel = Velocity(1.0f, 1.0f)
-                    ecs.filter {
-                        it.hasComponent<Position>()
-                    }.forEach {
-                        it.get<Position>() += vel
+                    ecs.components<Position>().forEach {
+                        it += vel
                     }
                 }
             }

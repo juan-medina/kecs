@@ -41,6 +41,30 @@ class EntityTest {
     }
 
     @Test
+    fun `we can check if a entity has components by class`() {
+        val ent = Entity()
+        ent.add(Position(1.0f, 2.0f))
+
+        assertTrue(ent.hasComponent(Position::class))
+        assertFalse(ent.hasComponent(Velocity::class))
+    }
+
+    @Test
+    fun `we can check if a entity has components by classes`() {
+        val ent1 = Entity()
+        ent1.add(Position(1.0f, 2.0f))
+        ent1.add(Velocity(3.0f, 4.0f))
+
+        assertTrue(ent1.hasComponents(Position::class, Velocity::class))
+
+        val ent2 = Entity()
+        ent2.add(Position(1.0f, 2.0f))
+
+        assertTrue(ent2.hasComponents(Position::class))
+        assertFalse(ent2.hasComponents(Position::class, Velocity::class))
+    }
+
+    @Test
     fun `we can change an entity component value`() {
         val ent = Entity()
         ent.add(Position(1.0f, 2.0f))

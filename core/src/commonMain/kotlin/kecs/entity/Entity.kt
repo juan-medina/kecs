@@ -21,6 +21,10 @@ class Entity {
 
     inline fun <reified T : Any> hasComponent() = components.containsKey(T::class)
 
+    inline fun <reified T : Any> hasComponent(type: KClass<out T>) = hasComponent<T>()
+
+    fun hasComponents(vararg types: KClass<out Any>) = components.keys.containsAll(types.toList())
+
     fun isEmpty() = components.size == 0
 
     inline fun <reified T : Any> removeComponent() {

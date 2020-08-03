@@ -1,14 +1,25 @@
 package kecs.entity
 
 import kecs.dsl.EntityDsl
+import kotlin.reflect.KClass
 
-open class View : MutableList<Entity> {
+open class View() : MutableList<Entity> {
+    constructor(entities: Iterable<Entity>) : this() {
+        addAll(entities)
+    }
+
     private val entities = arrayListOf<Entity>()
 
     fun add(init: EntityDsl.() -> Unit) = Entity.entity(init).let {
         add(it)
         it
     }
+
+    fun view(vararg types: KClass<out Any>) = View(filter { it.hasComponents(*types) })
+
+    inline fun <reified T : Any> components() = filter { it.hasComponent<T>() }.map { it.get<T>() }
+
+    fun entity(vararg types: KClass<out Any>) = single { it.hasComponents(*types) }
 
     override val size: Int
         get() = entities.size

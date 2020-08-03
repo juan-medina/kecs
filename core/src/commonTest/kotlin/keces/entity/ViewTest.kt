@@ -138,4 +138,91 @@ class ViewTest {
             assertEquals(2.0f, vel.y)
         }
     }
+
+    @Test
+    fun `we can view on component classes`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+        }
+
+        val window = view.view(Position::class, Velocity::class)
+
+        assertEquals(2, window.size)
+
+        window.forEach {
+            val pos = it.get<Position>()
+            val vel = it.get<Velocity>()
+
+            assertEquals(0.0f, pos.x)
+            assertEquals(0.0f, pos.y)
+
+            assertEquals(1.0f, vel.x)
+            assertEquals(2.0f, vel.y)
+        }
+    }
+
+    @Test
+    fun `we can get components on classes`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+        }
+
+        val velocities = view.components<Velocity>()
+
+        assertEquals(2, velocities.size)
+
+        velocities.forEach {
+            assertEquals(1.0f, it.x)
+            assertEquals(2.0f, it.y)
+        }
+    }
+
+    @Test
+    fun `we can get a single entity on classes`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Velocity(2.0f, 3.0f)
+        }
+
+        val ent = view.entity(Velocity::class, Position::class)
+
+        val pos = ent.get<Position>()
+        val vel = ent.get<Velocity>()
+
+        assertEquals(0.0f, pos.x)
+        assertEquals(0.0f, pos.y)
+
+        assertEquals(1.0f, vel.x)
+        assertEquals(2.0f, vel.y)
+    }
 }
