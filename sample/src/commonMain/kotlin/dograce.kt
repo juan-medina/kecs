@@ -5,11 +5,17 @@ import kotlin.math.min
 import kotlin.random.Random
 
 /**
- * Example of a animal race using a ECS
- *  all of then run following a mechanical
- *  rabbit as lure.
+ * Example of a animal race using a ECS, all animals will race following
+ *  a mechanical rabbit as lure.
  *
- * The output of this will be something like :
+ * This example is has an inspiration of the classical
+ *  horse race example used to teach concurrency and threads.
+ *
+ * However since we use a ECS everything runs concurrently in a
+ *  single thread so we could have thousands of animals racing
+ *  without performance impact.
+ *
+ * The output of this program when running will be something like :
  *
  *   100 animals running....
  *
@@ -21,7 +27,7 @@ import kotlin.random.Random
  *
  *   Final lines:
  *
- *   1st Explicitly Huge Eft in 5.47s
+ *   1st Forcibly Vocal Wasp in 5.47s
  *   2nd Solely Working Guppy in 5.48s
  *   3rd Evenly Factual Cougar in 5.531s
  *   4st Suitably Elegant Piglet in 5.533s
@@ -33,46 +39,73 @@ import kotlin.random.Random
  *
  **/
 
+// Constants
+
+/** How many animals will we have in our race **/
 const val NUM_ANIMALS = 100
+
+/** Minimal Speed of each animal, in ft/s **/
 const val MIN_ANIMAL_SPEED = 30.0f
+/** Max Speed of each animal, ft/s **/
 const val MAX_ANIMAL_SPEED = 55.0f
+
+/** Race length in yards **/
 const val RACE_LENGTH_IN_YARDS = 100.0f
+/** Race length in feet **/
 const val RACE_LENGTH = RACE_LENGTH_IN_YARDS * 3.0f
+
+/** The lure speed, it will reach the end in 5s **/
 const val LURE_SPEED = RACE_LENGTH / 5.0f
 
+// Components
+
+/** A lure component, it has just a name **/
 data class Lure(val name: String)
 
+/** A animal component, it has just a name **/
 data class Animal(val name: String)
 
+/** Movement status, running or stopped **/
 enum class MovementStatus {
     Running,
     Stopped
 }
 
+/** A movement component, it has an speed, in ft/s, and a status **/
 data class Movement(
     val speed: Float,
     var status: MovementStatus = MovementStatus.Running
 )
 
+/** A position component, includes how long has taking to be there **/
 data class Position(var at: Float, var time: Float = 0.0f)
 
+/** A winner component, contains its name **/
 data class Winner(val name: String)
 
+/** Race status, running or ended **/
 enum class RaceStatus {
     Running,
-    End
+    Ended
 }
 
+// Helpers
+
+/** get a random Float in a range **/
 fun ClosedRange<Float>.random() = start + ((endInclusive - start) * Random.nextFloat())
 
+/** get a random capitalized String from a String List **/
 fun List<String>.randomCapitalize(): String {
     return this[Random.nextInt(1, this.size)].capitalize()
 }
 
+/** get a random animal name like : Unlikely Assuring Hagfish **/
 fun randomAnimalName() = "${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${animals.randomCapitalize()}"
 
+/** get a float with 3 decimals positions **/
 fun Float.threeDecimals() = (this * 1000).toInt() / 1000.0f
 
+/** get a string with suffix from a Int like: 1st, 2nd, 3rd.. **/
 fun Int.withSuffix() = "$this" + when (this) {
     1 -> "st"
     2 -> "nd"
@@ -80,24 +113,38 @@ fun Int.withSuffix() = "$this" + when (this) {
     else -> "st"
 }
 
+// our race
+
 fun animalRace() {
+    // we create our world adding 3 systems, each of them it handle only one concern
+    //  - the movement system it take care or moving things, both animals and the lure
+    //  - the winner system will take care or knowing which animal won
+    //  - the race system will take care to know when the race has ended
     val world = ecs {
         +MovementSystem()
         +WinnerSystem()
         +RaceSystem()
     }
 
+    // we create and entity that has the race status to running
     world.add {
         +RaceStatus.Running
     }
 
+    // we create the lure entity, with him name, at the initial position
+    //  and with movement set to the lure speed, we will save the reference
+    //  to use it latter
     val lure = world.add {
         +Lure(name = "Mechanical Rabbit")
         +Position(at = 0.0f)
         +Movement(speed = LURE_SPEED)
     }
 
+    // we will create as many entities as animal we need in the race
     for (x in 1..NUM_ANIMALS) {
+        // we add an entity that is an animal, with a random name
+        //  it will start at the initial position and have a
+        //  random speed between the min and max animal speed
         world.add {
             +Animal(name = randomAnimalName())
             +Position(at = 0.0f)
@@ -107,41 +154,65 @@ fun animalRace() {
 
     println("$NUM_ANIMALS animals running....\n")
 
+    // we will count how many update loops we have done
     var loops = 0
-    while (world.component<RaceStatus>() != RaceStatus.End) {
+    // we will ask the world to return a single component from a single
+    //  entity that has a RaceStatus, and end the loop if the race has
+    //  ended
+    while (world.component<RaceStatus>() != RaceStatus.Ended) {
         loops++
+        // triggers the world update, each time it send the delta time from the
+        //  last update
         world.update()
     }
 
+    // we will print the total loops, this number will be random since we have
+    //  random animal speeds they will take different time to complete the race
     println("Race end after $loops loops\n")
 
+    // we will get from the world the Winner component from a single entity,
+    //  it will contain the name of the animal that has won
     val winner = world.component<Winner>()
     println("The Winner is ${winner.name}!\n")
 
+    // we will get the name and time component from our lure entity using it
+    //  saved reference, surprisingly it will always take 5s
     val lureName = lure.get<Lure>().name
     val lureTime = lure.get<Position>().time
     println("$lureName arrived in ${lureTime.threeDecimals()}s \n")
 
     println("Final lines:\n")
 
+    // we will get all entities that has an Animal and a Position and sorted by
+    //  the time they take to rich that position
     world.view(Animal::class, Position::class).sortedBy {
         it.get<Position>().time
     }.forEachIndexed { place, it ->
+        // get the components of the entity and display it
         val animal = it.get<Animal>()
         val pos = it.get<Position>()
         println("${(place + 1).withSuffix()} ${animal.name} in ${pos.time.threeDecimals()}s")
     }
 }
 
+/** The system that move things, either animals or the lure **/
 class MovementSystem : System() {
     override fun update(delta: Float, total: Float, ecs: KEcs) {
+        // get entities that has position and movement
         ecs.view(Position::class, Movement::class).forEach {
+            // get the movement component
             val movement = it.get<Movement>()
+            // if we are running
             if (movement.status == MovementStatus.Running) {
+                // get the position component
                 val position = it.get<Position>()
+                // calculate the step base on delta time and speed
                 val step = (movement.speed * delta)
-                position.time += delta
+                // calculate new position, without passing the end
                 position.at = min(position.at + step, RACE_LENGTH)
+                // add the time running
+                position.time += delta
+                // if we are at the end stop
                 if (position.at == RACE_LENGTH) {
                     movement.status = MovementStatus.Stopped
                 }
@@ -150,13 +221,19 @@ class MovementSystem : System() {
     }
 }
 
+/** THe System that find a winner, only looking at animals, no lure **/
 class WinnerSystem : System() {
     override fun update(delta: Float, total: Float, ecs: KEcs) {
+        // if we dont have a winner
         if (!ecs.hasComponent<Winner>()) {
+            // get entities that are animal and has position, we
+            // dont need movement, neither the lure
             ecs.view(Position::class, Animal::class).forEach {
                 val position = it.get<Position>()
                 val animal = it.get<Animal>()
+                // if we are at the end
                 if (position.at == RACE_LENGTH) {
+                    // add to the world the winner
                     ecs.add { +Winner(animal.name) }
                     return@update
                 }
@@ -165,20 +242,27 @@ class WinnerSystem : System() {
     }
 }
 
+/** This System will check when to stop the race **/
 class RaceSystem : System() {
     override fun update(delta: Float, total: Float, ecs: KEcs) {
-        if (ecs.component<RaceStatus>() != RaceStatus.End) {
+        // first we will check if we aren't already ended
+        if (ecs.component<RaceStatus>() != RaceStatus.Ended) {
+            // get from all entities that has movement if they
+            //  are all stopped
             val allStopped = ecs.components<Movement>().all {
                 it.status == MovementStatus.Stopped
             }
+            // if all are stopped
             if (allStopped) {
+                // set that the race has ended
                 val status = ecs.entity(RaceStatus::class)
-                status.set(RaceStatus.End)
+                status.set(RaceStatus.Ended)
             }
         }
     }
 }
 
+/** just random animals **/
 val animals: List<String> = listOf(
     "ox", "ant", "ape", "asp", "bat", "bee", "boa", "bug", "cat", "cod", "cow",
     "cub", "doe", "dog", "eel", "eft", "elf", "elk", "emu", "ewe", "fly", "fox",
@@ -244,6 +328,7 @@ val animals: List<String> = listOf(
     "tortoise", "treefrog", "werewolf", "woodcock"
 )
 
+/** just random adjectives **/
 val adjectives: List<String> = listOf(
     "able", "above", "absolute", "accepted", "accurate", "ace", "active",
     "actual", "adapted", "adapting", "adequate", "adjusted", "advanced",
@@ -311,6 +396,7 @@ val adjectives: List<String> = listOf(
     "working", "worthy"
 )
 
+/** just random adverbs **/
 val adverbs: List<String> = listOf(
     "abnormally", "absolutely", "accurately", "actively", "actually",
     "adequately", "admittedly", "adversely", "allegedly", "amazingly",
