@@ -4,6 +4,9 @@ plugins {
 
 version '0.0.1'
 
+def jvmMainClass = 'MainJVMKt'
+def taskGroupRunSample = 'run sample'
+
 kotlin {
     jvm()
     // For ARM, should be changed to iosArm32 or iosArm64
@@ -46,4 +49,32 @@ kotlin {
         linuxTest {
         }
     }
+    targets {
+        jvm()
+        configure([jvm])  {
+            withJava()
+            jvmJar {
+                manifest {
+                    attributes 'Main-Class': jvmMainClass
+                }
+                from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+            }
+        }
+    }
+}
+
+tasks.register("runSampleJvm", JavaExec) {
+    group = taskGroupRunSample
+    main = jvmMainClass
+    classpath = files(tasks.jvmJar)
+}
+
+tasks.register("runSampleLinuxDebug") {
+    group = taskGroupRunSample
+    dependsOn("runDebugExecutableLinux")
+}
+
+tasks.register("runSampleLinuxRelease") {
+    group = taskGroupRunSample
+    dependsOn("runReleaseExecutableLinux")
 }
