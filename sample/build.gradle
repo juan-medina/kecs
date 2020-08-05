@@ -37,16 +37,20 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-jdk8')
             }
+            dependsOn commonMain
         }
         jvmTest {
             dependencies {
                 implementation kotlin('test')
                 implementation kotlin('test-junit')
             }
+            dependsOn commonTest
         }
         linuxMain {
+            dependsOn commonMain
         }
         linuxTest {
+            dependsOn commonTest
         }
     }
     targets {

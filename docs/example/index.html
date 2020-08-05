@@ -1,0 +1,940 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="tbc.">
+      
+      
+        <link rel="canonical" href="https://juan-medina.github.io/kecs/example/">
+      
+      
+        <meta name="author" content="Juan Medina">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.3">
+    
+    
+      
+        <title>Example - Kotlin ECS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.947af8d5.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.7f672a1f.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#03a9f4">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#examples" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://juan-medina.github.io/kecs/" title="Kotlin ECS" class="md-header-nav__button md-logo" aria-label="Kotlin ECS">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Kotlin ECS
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Example
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/juan-medina/kecs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://juan-medina.github.io/kecs/" title="Kotlin ECS" class="md-nav__button md-logo" aria-label="Kotlin ECS">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Kotlin ECS
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/juan-medina/kecs/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Example
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Example" class="md-nav__link md-nav__link--active">
+      Example
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#check-an-url-and-get-the-domain" class="md-nav__link">
+    Check an Url and get the domain
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../packages/kecs/" title="API Documentation" class="md-nav__link">
+      API Documentation
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#check-an-url-and-get-the-domain" class="md-nav__link">
+    Check an Url and get the domain
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/juan-medina/kecs/edit/master/docs/example.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  
+                
+                
+                <h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h1>
+<h3 id="check-an-url-and-get-the-domain">Check an Url and get the domain<a class="headerlink" href="#check-an-url-and-get-the-domain" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nn">kecs.KEcs</span>
+<span class="k">import</span> <span class="nn">kecs.KEcs.dsl.ecs</span>
+<span class="k">import</span> <span class="nn">kecs.system.System</span>
+<span class="k">import</span> <span class="nn">kotlin.math.min</span>
+<span class="k">import</span> <span class="nn">kotlin.random.Random</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Example of a animal race using a ECS, all animals will race following</span>
+<span class="cm"> *  a mechanical rabbit as lure.</span>
+<span class="cm"> *</span>
+<span class="cm"> * This example is has an inspiration of the classical</span>
+<span class="cm"> *  horse race example used to teach concurrency and threads.</span>
+<span class="cm"> *</span>
+<span class="cm"> * However since we use a ECS everything runs concurrently in a</span>
+<span class="cm"> *  single thread so we could have thousands of animals racing</span>
+<span class="cm"> *  without performance impact.</span>
+<span class="cm"> *</span>
+<span class="cm"> * The output of this program when running will be something like :</span>
+<span class="cm"> *</span>
+<span class="cm"> *   100 animals running....</span>
+<span class="cm"> *</span>
+<span class="cm"> *   Race complete: 100 % [██████████████████████████████] 9.976s</span>
+<span class="cm"> *</span>
+<span class="cm"> *   Race end after 52830 loops</span>
+<span class="cm"> *</span>
+<span class="cm"> *   The Winner is Forcibly Vocal Wasp!</span>
+<span class="cm"> *</span>
+<span class="cm"> *   Mechanical Rabbit arrived in 5.0s</span>
+<span class="cm"> *</span>
+<span class="cm"> *   Final lines:</span>
+<span class="cm"> *</span>
+<span class="cm"> *   1st Forcibly Vocal Wasp in 5.47s</span>
+<span class="cm"> *   2nd Solely Working Guppy in 5.48s</span>
+<span class="cm"> *   3rd Evenly Factual Cougar in 5.531s</span>
+<span class="cm"> *   4st Suitably Elegant Piglet in 5.533s</span>
+<span class="cm"> *   ....</span>
+<span class="cm"> *   97st Unlikely Assuring Hagfish in 9.864s</span>
+<span class="cm"> *   98st Extremely Infinite Chipmunk in 9.926s</span>
+<span class="cm"> *   99st Broadly Major Minnow in 9.954s</span>
+<span class="cm"> *   100st Violently Charming Kangaroo in 9.974s9s</span>
+<span class="cm"> *</span>
+<span class="cm"> **/</span>
+
+<span class="c1">// Constants</span>
+
+<span class="cm">/** How many animals will we have in our race **/</span>
+<span class="k">const</span> <span class="k">val</span> <span class="py">NUM_ANIMALS</span> <span class="p">=</span> <span class="m">100</span>
+
+<span class="cm">/** Minimal Speed of each animal, in ft/s **/</span>
+<span class="k">const</span> <span class="k">val</span> <span class="py">MIN_ANIMAL_SPEED</span> <span class="p">=</span> <span class="m">30.0f</span>
+
+<span class="cm">/** Max Speed of each animal, ft/s **/</span>
+<span class="k">const</span> <span class="k">val</span> <span class="py">MAX_ANIMAL_SPEED</span> <span class="p">=</span> <span class="m">55.0f</span>
+
+<span class="cm">/** Race length in yards **/</span>
+<span class="k">const</span> <span class="k">val</span> <span class="py">RACE_LENGTH_IN_YARDS</span> <span class="p">=</span> <span class="m">100.0f</span>
+
+<span class="cm">/** Race length in feet **/</span>
+<span class="k">const</span> <span class="k">val</span> <span class="py">RACE_LENGTH</span> <span class="p">=</span> <span class="n">RACE_LENGTH_IN_YARDS</span> <span class="p">*</span> <span class="m">3.0f</span>
+
+<span class="cm">/** The lure speed, it will reach the end in 5s **/</span>
+<span class="k">const</span> <span class="k">val</span> <span class="py">LURE_SPEED</span> <span class="p">=</span> <span class="n">RACE_LENGTH</span> <span class="p">/</span> <span class="m">5.0f</span>
+
+<span class="cm">/** Number of blocks for our progress bar **/</span>
+<span class="k">const</span> <span class="k">val</span> <span class="py">NUM_BLOCKS</span> <span class="p">=</span> <span class="m">30</span>
+
+<span class="c1">// Components</span>
+
+<span class="cm">/** A lure component, it has just a name **/</span>
+<span class="k">data</span> <span class="k">class</span> <span class="nc">Lure</span><span class="p">(</span><span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
+
+<span class="cm">/** A animal component, it has just a name **/</span>
+<span class="k">data</span> <span class="k">class</span> <span class="nc">Animal</span><span class="p">(</span><span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
+
+<span class="cm">/** Movement status, running or stopped **/</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">MovementStatus</span> <span class="p">{</span>
+    <span class="n">Running</span><span class="p">,</span>
+    <span class="n">Stopped</span>
+<span class="p">}</span>
+
+<span class="cm">/** A movement component, it has an speed, in ft/s, and a status **/</span>
+<span class="k">data</span> <span class="k">class</span> <span class="nc">Movement</span><span class="p">(</span>
+    <span class="k">val</span> <span class="py">speed</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span>
+    <span class="k">var</span> <span class="py">status</span><span class="p">:</span> <span class="n">MovementStatus</span> <span class="p">=</span> <span class="n">MovementStatus</span><span class="p">.</span><span class="n">Running</span>
+<span class="p">)</span>
+
+<span class="cm">/** A position component, includes how long has taking to be there **/</span>
+<span class="k">data</span> <span class="k">class</span> <span class="nc">Position</span><span class="p">(</span><span class="k">var</span> <span class="py">at</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="k">var</span> <span class="py">time</span><span class="p">:</span> <span class="n">Float</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">)</span>
+
+<span class="cm">/** A winner component, contains its name **/</span>
+<span class="k">data</span> <span class="k">class</span> <span class="nc">Winner</span><span class="p">(</span><span class="k">val</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span>
+
+<span class="cm">/** Race status, running or ended **/</span>
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">RaceStatus</span> <span class="p">{</span>
+    <span class="n">Running</span><span class="p">,</span>
+    <span class="n">Ended</span>
+<span class="p">}</span>
+
+<span class="c1">// Helpers</span>
+
+<span class="cm">/** get a random Float in a range **/</span>
+<span class="k">fun</span> <span class="nf">ClosedRange</span><span class="p">&lt;</span><span class="n">Float</span><span class="p">&gt;.</span><span class="n">random</span><span class="p">()</span> <span class="p">=</span> <span class="n">start</span> <span class="p">+</span> <span class="p">((</span><span class="n">endInclusive</span> <span class="p">-</span> <span class="n">start</span><span class="p">)</span> <span class="p">*</span> <span class="n">Random</span><span class="p">.</span><span class="n">nextFloat</span><span class="p">())</span>
+
+<span class="cm">/** get a random capitalized String from a String List **/</span>
+<span class="k">fun</span> <span class="nf">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;.</span><span class="n">randomCapitalize</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">[</span><span class="n">Random</span><span class="p">.</span><span class="n">nextInt</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="n">size</span><span class="p">)].</span><span class="n">capitalize</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="cm">/** get a random animal name like : Unlikely Assuring Hagfish **/</span>
+<span class="k">fun</span> <span class="nf">randomAnimalName</span><span class="p">()</span> <span class="p">=</span> <span class="s">&quot;${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${animals.randomCapitalize()}&quot;</span>
+
+<span class="cm">/** get a float with 3 decimals positions **/</span>
+<span class="k">fun</span> <span class="nc">Float</span><span class="p">.</span><span class="nf">threeDecimals</span><span class="p">()</span> <span class="p">=</span> <span class="p">(</span><span class="k">this</span> <span class="p">*</span> <span class="m">1000</span><span class="p">).</span><span class="n">toInt</span><span class="p">()</span> <span class="p">/</span> <span class="m">1000.0f</span>
+
+<span class="cm">/** get a string with suffix from a Int like: 1st, 2nd, 3rd.. **/</span>
+<span class="k">fun</span> <span class="nc">Int</span><span class="p">.</span><span class="nf">withSuffix</span><span class="p">()</span> <span class="p">=</span> <span class="s">&quot;$this&quot;</span> <span class="p">+</span> <span class="k">when</span> <span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span>
+    <span class="m">1</span> <span class="p">-&gt;</span> <span class="s">&quot;st&quot;</span>
+    <span class="m">2</span> <span class="p">-&gt;</span> <span class="s">&quot;nd&quot;</span>
+    <span class="m">3</span> <span class="p">-&gt;</span> <span class="s">&quot;rd&quot;</span>
+    <span class="k">else</span> <span class="p">-&gt;</span> <span class="s">&quot;st&quot;</span>
+<span class="p">}</span>
+
+<span class="cm">/** format a int in three digits with spaces on the left</span>
+<span class="cm"> *</span>
+<span class="cm"> * _48</span>
+<span class="cm"> *</span>
+<span class="cm"> * __5</span>
+<span class="cm"> *</span>
+<span class="cm"> * 100</span>
+<span class="cm"> *</span>
+<span class="cm"> * **/</span>
+<span class="k">fun</span> <span class="nc">Int</span><span class="p">.</span><span class="nf">threeDigits</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">digits</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">length</span>
+    <span class="k">val</span> <span class="py">remaining</span> <span class="p">=</span> <span class="m">3</span> <span class="p">-</span> <span class="n">digits</span>
+    <span class="k">return</span> <span class="s">&quot; &quot;</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">remaining</span><span class="p">)</span> <span class="p">+</span> <span class="s">&quot;$this&quot;</span>
+<span class="p">}</span>
+
+<span class="c1">// our race</span>
+
+<span class="k">fun</span> <span class="nf">animalRace</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// we create our world adding 4 systems, each of them it handle only one concern</span>
+    <span class="c1">//  - the movement system it take care or moving things, both animals and the lure</span>
+    <span class="c1">//  - the winner system will take care or knowing which animal won</span>
+    <span class="c1">//  - the race system will take care to know when the race has ended</span>
+    <span class="c1">//  - the progress system will draw a progress bar with the overall completion,</span>
+    <span class="c1">//      but it could be removed without affecting the logic</span>
+    <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">ecs</span> <span class="p">{</span>
+        <span class="p">+</span><span class="n">MovementSystem</span><span class="p">()</span>
+        <span class="p">+</span><span class="n">WinnerSystem</span><span class="p">()</span>
+        <span class="p">+</span><span class="n">RaceSystem</span><span class="p">()</span>
+        <span class="p">+</span><span class="n">ProgressSystem</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="c1">// we create and entity that has the race status set to running</span>
+    <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
+        <span class="p">+</span><span class="n">RaceStatus</span><span class="p">.</span><span class="n">Running</span>
+    <span class="p">}</span>
+
+    <span class="c1">// we create the lure entity, with him name, at the initial position</span>
+    <span class="c1">//  and with movement set to the lure speed, we will save the reference</span>
+    <span class="c1">//  to use it latter</span>
+    <span class="k">val</span> <span class="py">lure</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
+        <span class="p">+</span><span class="n">Lure</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Mechanical Rabbit&quot;</span><span class="p">)</span>
+        <span class="p">+</span><span class="n">Position</span><span class="p">(</span><span class="n">at</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">)</span>
+        <span class="p">+</span><span class="n">Movement</span><span class="p">(</span><span class="n">speed</span> <span class="p">=</span> <span class="n">LURE_SPEED</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1">// we will create as many entities as animal we need in the race</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">x</span> <span class="k">in</span> <span class="m">1.</span><span class="p">.</span><span class="n">NUM_ANIMALS</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// we add an entity that is an animal, with a random name</span>
+        <span class="c1">//  it will start at the initial position and have a</span>
+        <span class="c1">//  random speed between the min and max animal speed</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
+            <span class="p">+</span><span class="n">Animal</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="n">randomAnimalName</span><span class="p">())</span>
+            <span class="p">+</span><span class="n">Position</span><span class="p">(</span><span class="n">at</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">)</span>
+            <span class="p">+</span><span class="n">Movement</span><span class="p">(</span><span class="n">speed</span> <span class="p">=</span> <span class="p">(</span><span class="n">MIN_ANIMAL_SPEED</span><span class="p">..</span><span class="n">MAX_ANIMAL_SPEED</span><span class="p">).</span><span class="n">random</span><span class="p">())</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;$NUM_ANIMALS animals running....\n&quot;</span><span class="p">)</span>
+
+    <span class="c1">// we will count how many update loops we have done</span>
+    <span class="k">var</span> <span class="py">loops</span> <span class="p">=</span> <span class="m">0</span>
+    <span class="c1">// we will ask the world to return a single component from a single</span>
+    <span class="c1">//  entity that has a RaceStatus, and end the loop if the race has</span>
+    <span class="c1">//  ended</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">world</span><span class="p">.</span><span class="n">component</span><span class="p">&lt;</span><span class="n">RaceStatus</span><span class="p">&gt;()</span> <span class="p">!=</span> <span class="n">RaceStatus</span><span class="p">.</span><span class="n">Ended</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">loops</span><span class="p">++</span>
+        <span class="c1">// triggers the world update, each time it send the delta time from the</span>
+        <span class="c1">//  last update</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">update</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">)</span>
+
+    <span class="c1">// we will print the total loops, this number will be random since we have</span>
+    <span class="c1">//  random animal speeds they will take different time to complete the race</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Race end after $loops loops\n&quot;</span><span class="p">)</span>
+
+    <span class="c1">// we will get from the world the Winner component from a single entity,</span>
+    <span class="c1">//  it will contain the name of the animal that has won</span>
+    <span class="k">val</span> <span class="py">winner</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">component</span><span class="p">&lt;</span><span class="n">Winner</span><span class="p">&gt;()</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;The Winner is ${winner.name}!\n&quot;</span><span class="p">)</span>
+
+    <span class="c1">// we will get the name and time component from our lure entity using it</span>
+    <span class="c1">//  saved reference, surprisingly it will always take 5s</span>
+    <span class="k">val</span> <span class="py">lureName</span> <span class="p">=</span> <span class="n">lure</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Lure</span><span class="p">&gt;().</span><span class="n">name</span>
+    <span class="k">val</span> <span class="py">lureTime</span> <span class="p">=</span> <span class="n">lure</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;().</span><span class="n">time</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;$lureName arrived in ${lureTime.threeDecimals()}s \n&quot;</span><span class="p">)</span>
+
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Final lines:\n&quot;</span><span class="p">)</span>
+
+    <span class="c1">// we will get all entities that has an Animal and a Position and sorted by</span>
+    <span class="c1">//  the time they take to rich that position</span>
+    <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Animal</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">sortedBy</span> <span class="p">{</span>
+        <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;().</span><span class="n">time</span>
+    <span class="p">}.</span><span class="n">forEachIndexed</span> <span class="p">{</span> <span class="n">place</span><span class="p">,</span> <span class="n">it</span> <span class="p">-&gt;</span>
+        <span class="c1">// get the components of the entity and display it</span>
+        <span class="k">val</span> <span class="py">animal</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">&gt;()</span>
+        <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+        <span class="n">println</span><span class="p">(</span><span class="s">&quot;${(place + 1).withSuffix()} ${animal.name} in ${pos.time.threeDecimals()}s&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/** The system that move things, either animals or the lure **/</span>
+<span class="k">class</span> <span class="nc">MovementSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// get entities that has position and movement</span>
+        <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Movement</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+            <span class="c1">// get the movement component</span>
+            <span class="k">val</span> <span class="py">movement</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Movement</span><span class="p">&gt;()</span>
+            <span class="c1">// if we are running</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">movement</span><span class="p">.</span><span class="n">status</span> <span class="p">==</span> <span class="n">MovementStatus</span><span class="p">.</span><span class="n">Running</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// get the position component</span>
+                <span class="k">val</span> <span class="py">position</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+                <span class="c1">// calculate the step base on delta time and speed</span>
+                <span class="k">val</span> <span class="py">step</span> <span class="p">=</span> <span class="p">(</span><span class="n">movement</span><span class="p">.</span><span class="n">speed</span> <span class="p">*</span> <span class="n">delta</span><span class="p">)</span>
+                <span class="c1">// calculate new position, without passing the end</span>
+                <span class="n">position</span><span class="p">.</span><span class="n">at</span> <span class="p">=</span> <span class="n">min</span><span class="p">(</span><span class="n">position</span><span class="p">.</span><span class="n">at</span> <span class="p">+</span> <span class="n">step</span><span class="p">,</span> <span class="n">RACE_LENGTH</span><span class="p">)</span>
+                <span class="c1">// add the time running</span>
+                <span class="n">position</span><span class="p">.</span><span class="n">time</span> <span class="p">+=</span> <span class="n">delta</span>
+                <span class="c1">// if we are at the end stop</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">position</span><span class="p">.</span><span class="n">at</span> <span class="p">==</span> <span class="n">RACE_LENGTH</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">movement</span><span class="p">.</span><span class="n">status</span> <span class="p">=</span> <span class="n">MovementStatus</span><span class="p">.</span><span class="n">Stopped</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/** THe System that find a winner, only looking at animals, no lure **/</span>
+<span class="k">class</span> <span class="nc">WinnerSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// if we dont have a winner</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">ecs</span><span class="p">.</span><span class="n">hasComponent</span><span class="p">&lt;</span><span class="n">Winner</span><span class="p">&gt;())</span> <span class="p">{</span>
+            <span class="c1">// get entities that are animal and has position, we</span>
+            <span class="c1">// dont need movement, neither the lure</span>
+            <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Animal</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+                <span class="k">val</span> <span class="py">position</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+                <span class="k">val</span> <span class="py">animal</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">&gt;()</span>
+                <span class="c1">// if we are at the end</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">position</span><span class="p">.</span><span class="n">at</span> <span class="p">==</span> <span class="n">RACE_LENGTH</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// add to the world the winner</span>
+                    <span class="n">ecs</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span> <span class="p">+</span><span class="n">Winner</span><span class="p">(</span><span class="n">animal</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}</span>
+                    <span class="k">return</span><span class="n">@update</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/** This System will check when to stop the race **/</span>
+<span class="k">class</span> <span class="nc">RaceSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// first we will check if we aren&#39;t already ended</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ecs</span><span class="p">.</span><span class="n">component</span><span class="p">&lt;</span><span class="n">RaceStatus</span><span class="p">&gt;()</span> <span class="p">!=</span> <span class="n">RaceStatus</span><span class="p">.</span><span class="n">Ended</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// get from all entities that has movement if they</span>
+            <span class="c1">//  are all stopped</span>
+            <span class="k">val</span> <span class="py">allStopped</span> <span class="p">=</span> <span class="n">ecs</span><span class="p">.</span><span class="n">components</span><span class="p">&lt;</span><span class="n">Movement</span><span class="p">&gt;().</span><span class="n">all</span> <span class="p">{</span>
+                <span class="n">it</span><span class="p">.</span><span class="n">status</span> <span class="p">==</span> <span class="n">MovementStatus</span><span class="p">.</span><span class="n">Stopped</span>
+            <span class="p">}</span>
+            <span class="c1">// if all are stopped</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">allStopped</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// set that the race has ended</span>
+                <span class="k">val</span> <span class="py">status</span> <span class="p">=</span> <span class="n">ecs</span><span class="p">.</span><span class="n">entity</span><span class="p">(</span><span class="n">RaceStatus</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+                <span class="n">status</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">RaceStatus</span><span class="p">.</span><span class="n">Ended</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/** This System will draw a progress bar of the race **/</span>
+<span class="k">class</span> <span class="nc">ProgressSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// how much time we have been racing</span>
+    <span class="k">var</span> <span class="py">time</span> <span class="p">=</span> <span class="m">0.0f</span>
+
+    <span class="c1">// last update, we don&#39;t want to update the progress all</span>
+    <span class="c1">//  the time, just when the time change (using 3 decimals)</span>
+    <span class="k">var</span> <span class="py">lastUpdate</span> <span class="p">=</span> <span class="n">Float</span><span class="p">.</span><span class="n">MIN_VALUE</span>
+
+    <span class="cm">/** display a progress bar like:</span>
+<span class="cm">     *</span>
+<span class="cm">     * text  22 % [██████------------------------] 1.592s</span>
+<span class="cm">     *</span>
+<span class="cm">     **/</span>
+    <span class="k">private</span> <span class="k">fun</span> <span class="nf">drawBar</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// get the blocks to fill █</span>
+        <span class="k">val</span> <span class="py">blocksToFill</span> <span class="p">=</span> <span class="p">(</span><span class="n">NUM_BLOCKS</span> <span class="p">*</span> <span class="n">completion</span><span class="p">).</span><span class="n">toInt</span><span class="p">()</span>
+        <span class="k">val</span> <span class="py">filledBlocks</span> <span class="p">=</span> <span class="s">&quot;█&quot;</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">blocksToFill</span><span class="p">)</span>
+
+        <span class="c1">// get the blocks empty |</span>
+        <span class="k">val</span> <span class="py">blocksEmpty</span> <span class="p">=</span> <span class="n">NUM_BLOCKS</span> <span class="p">-</span> <span class="n">blocksToFill</span>
+        <span class="k">val</span> <span class="py">emptyBlocks</span> <span class="p">=</span> <span class="s">&quot;-&quot;</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">blocksEmpty</span><span class="p">)</span>
+
+        <span class="c1">// calculate the percentage</span>
+        <span class="k">val</span> <span class="py">percent</span> <span class="p">=</span> <span class="p">(</span><span class="n">completion</span> <span class="p">*</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">()</span>
+
+        <span class="c1">// compose the bar, we use \r to reset the cursor</span>
+        <span class="n">print</span><span class="p">(</span><span class="s">&quot;\r$text ${percent.threeDigits()} % [$filledBlocks$emptyBlocks] ${time.threeDecimals()}s  &quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// get from all entities that has position the position</span>
+        <span class="k">val</span> <span class="py">positions</span> <span class="p">=</span> <span class="n">ecs</span><span class="p">.</span><span class="n">components</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+
+        <span class="c1">// if we average all that we have run so far and divide by the length of the race</span>
+        <span class="c1">//  we will have the overall completion (0..1) of the race</span>
+        <span class="k">val</span> <span class="py">completion</span> <span class="p">=</span> <span class="n">positions</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">at</span> <span class="p">}.</span><span class="n">average</span><span class="p">().</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">/</span> <span class="n">RACE_LENGTH</span>
+
+        <span class="c1">// We accumulate the race time</span>
+        <span class="n">time</span> <span class="p">+=</span> <span class="n">delta</span>
+
+        <span class="c1">// we round the time to three decimals</span>
+        <span class="k">val</span> <span class="py">update</span> <span class="p">=</span> <span class="n">time</span><span class="p">.</span><span class="n">threeDecimals</span><span class="p">()</span>
+
+        <span class="c1">// if update time has change from the last update</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">update</span> <span class="p">!=</span> <span class="n">lastUpdate</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// draw the bar</span>
+            <span class="n">drawBar</span><span class="p">(</span><span class="n">completion</span><span class="p">,</span> <span class="n">update</span><span class="p">,</span> <span class="s">&quot;Race complete:&quot;</span><span class="p">)</span>
+            <span class="c1">// store last update</span>
+            <span class="n">lastUpdate</span> <span class="p">=</span> <span class="n">update</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/** just random animals **/</span>
+<span class="k">val</span> <span class="py">animals</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span>
+    <span class="s">&quot;ox&quot;</span><span class="p">,</span> <span class="s">&quot;ant&quot;</span><span class="p">,</span> <span class="s">&quot;ape&quot;</span><span class="p">,</span> <span class="s">&quot;asp&quot;</span><span class="p">,</span> <span class="s">&quot;bat&quot;</span><span class="p">,</span> <span class="s">&quot;bee&quot;</span><span class="p">,</span> <span class="s">&quot;boa&quot;</span><span class="p">,</span> <span class="s">&quot;bug&quot;</span><span class="p">,</span> <span class="s">&quot;cat&quot;</span><span class="p">,</span> <span class="s">&quot;cod&quot;</span><span class="p">,</span> <span class="s">&quot;cow&quot;</span><span class="p">,</span>
+    <span class="s">&quot;cub&quot;</span><span class="p">,</span> <span class="s">&quot;doe&quot;</span><span class="p">,</span> <span class="s">&quot;dog&quot;</span><span class="p">,</span> <span class="s">&quot;eel&quot;</span><span class="p">,</span> <span class="s">&quot;eft&quot;</span><span class="p">,</span> <span class="s">&quot;elf&quot;</span><span class="p">,</span> <span class="s">&quot;elk&quot;</span><span class="p">,</span> <span class="s">&quot;emu&quot;</span><span class="p">,</span> <span class="s">&quot;ewe&quot;</span><span class="p">,</span> <span class="s">&quot;fly&quot;</span><span class="p">,</span> <span class="s">&quot;fox&quot;</span><span class="p">,</span>
+    <span class="s">&quot;gar&quot;</span><span class="p">,</span> <span class="s">&quot;gnu&quot;</span><span class="p">,</span> <span class="s">&quot;hen&quot;</span><span class="p">,</span> <span class="s">&quot;hog&quot;</span><span class="p">,</span> <span class="s">&quot;imp&quot;</span><span class="p">,</span> <span class="s">&quot;jay&quot;</span><span class="p">,</span> <span class="s">&quot;kid&quot;</span><span class="p">,</span> <span class="s">&quot;kit&quot;</span><span class="p">,</span> <span class="s">&quot;koi&quot;</span><span class="p">,</span> <span class="s">&quot;lab&quot;</span><span class="p">,</span> <span class="s">&quot;man&quot;</span><span class="p">,</span>
+    <span class="s">&quot;owl&quot;</span><span class="p">,</span> <span class="s">&quot;pig&quot;</span><span class="p">,</span> <span class="s">&quot;pug&quot;</span><span class="p">,</span> <span class="s">&quot;pup&quot;</span><span class="p">,</span> <span class="s">&quot;ram&quot;</span><span class="p">,</span> <span class="s">&quot;rat&quot;</span><span class="p">,</span> <span class="s">&quot;ray&quot;</span><span class="p">,</span> <span class="s">&quot;yak&quot;</span><span class="p">,</span> <span class="s">&quot;bass&quot;</span><span class="p">,</span> <span class="s">&quot;bear&quot;</span><span class="p">,</span>
+    <span class="s">&quot;bird&quot;</span><span class="p">,</span> <span class="s">&quot;boar&quot;</span><span class="p">,</span> <span class="s">&quot;buck&quot;</span><span class="p">,</span> <span class="s">&quot;bull&quot;</span><span class="p">,</span> <span class="s">&quot;calf&quot;</span><span class="p">,</span> <span class="s">&quot;chow&quot;</span><span class="p">,</span> <span class="s">&quot;clam&quot;</span><span class="p">,</span> <span class="s">&quot;colt&quot;</span><span class="p">,</span> <span class="s">&quot;crab&quot;</span><span class="p">,</span>
+    <span class="s">&quot;crow&quot;</span><span class="p">,</span> <span class="s">&quot;dane&quot;</span><span class="p">,</span> <span class="s">&quot;deer&quot;</span><span class="p">,</span> <span class="s">&quot;dodo&quot;</span><span class="p">,</span> <span class="s">&quot;dory&quot;</span><span class="p">,</span> <span class="s">&quot;dove&quot;</span><span class="p">,</span> <span class="s">&quot;drum&quot;</span><span class="p">,</span> <span class="s">&quot;duck&quot;</span><span class="p">,</span> <span class="s">&quot;fawn&quot;</span><span class="p">,</span>
+    <span class="s">&quot;fish&quot;</span><span class="p">,</span> <span class="s">&quot;flea&quot;</span><span class="p">,</span> <span class="s">&quot;foal&quot;</span><span class="p">,</span> <span class="s">&quot;fowl&quot;</span><span class="p">,</span> <span class="s">&quot;frog&quot;</span><span class="p">,</span> <span class="s">&quot;gnat&quot;</span><span class="p">,</span> <span class="s">&quot;goat&quot;</span><span class="p">,</span> <span class="s">&quot;grub&quot;</span><span class="p">,</span> <span class="s">&quot;gull&quot;</span><span class="p">,</span>
+    <span class="s">&quot;hare&quot;</span><span class="p">,</span> <span class="s">&quot;hawk&quot;</span><span class="p">,</span> <span class="s">&quot;ibex&quot;</span><span class="p">,</span> <span class="s">&quot;joey&quot;</span><span class="p">,</span> <span class="s">&quot;kite&quot;</span><span class="p">,</span> <span class="s">&quot;kiwi&quot;</span><span class="p">,</span> <span class="s">&quot;lamb&quot;</span><span class="p">,</span> <span class="s">&quot;lark&quot;</span><span class="p">,</span> <span class="s">&quot;lion&quot;</span><span class="p">,</span>
+    <span class="s">&quot;loon&quot;</span><span class="p">,</span> <span class="s">&quot;lynx&quot;</span><span class="p">,</span> <span class="s">&quot;mako&quot;</span><span class="p">,</span> <span class="s">&quot;mink&quot;</span><span class="p">,</span> <span class="s">&quot;mite&quot;</span><span class="p">,</span> <span class="s">&quot;mole&quot;</span><span class="p">,</span> <span class="s">&quot;moth&quot;</span><span class="p">,</span> <span class="s">&quot;mule&quot;</span><span class="p">,</span> <span class="s">&quot;mutt&quot;</span><span class="p">,</span>
+    <span class="s">&quot;newt&quot;</span><span class="p">,</span> <span class="s">&quot;orca&quot;</span><span class="p">,</span> <span class="s">&quot;oryx&quot;</span><span class="p">,</span> <span class="s">&quot;pika&quot;</span><span class="p">,</span> <span class="s">&quot;pony&quot;</span><span class="p">,</span> <span class="s">&quot;puma&quot;</span><span class="p">,</span> <span class="s">&quot;seal&quot;</span><span class="p">,</span> <span class="s">&quot;shad&quot;</span><span class="p">,</span> <span class="s">&quot;slug&quot;</span><span class="p">,</span>
+    <span class="s">&quot;sole&quot;</span><span class="p">,</span> <span class="s">&quot;stag&quot;</span><span class="p">,</span> <span class="s">&quot;stud&quot;</span><span class="p">,</span> <span class="s">&quot;swan&quot;</span><span class="p">,</span> <span class="s">&quot;tahr&quot;</span><span class="p">,</span> <span class="s">&quot;teal&quot;</span><span class="p">,</span> <span class="s">&quot;tick&quot;</span><span class="p">,</span> <span class="s">&quot;toad&quot;</span><span class="p">,</span> <span class="s">&quot;tuna&quot;</span><span class="p">,</span>
+    <span class="s">&quot;wasp&quot;</span><span class="p">,</span> <span class="s">&quot;wolf&quot;</span><span class="p">,</span> <span class="s">&quot;worm&quot;</span><span class="p">,</span> <span class="s">&quot;wren&quot;</span><span class="p">,</span> <span class="s">&quot;yeti&quot;</span><span class="p">,</span> <span class="s">&quot;adder&quot;</span><span class="p">,</span> <span class="s">&quot;akita&quot;</span><span class="p">,</span> <span class="s">&quot;alien&quot;</span><span class="p">,</span> <span class="s">&quot;aphid&quot;</span><span class="p">,</span>
+    <span class="s">&quot;bison&quot;</span><span class="p">,</span> <span class="s">&quot;boxer&quot;</span><span class="p">,</span> <span class="s">&quot;bream&quot;</span><span class="p">,</span> <span class="s">&quot;bunny&quot;</span><span class="p">,</span> <span class="s">&quot;burro&quot;</span><span class="p">,</span> <span class="s">&quot;camel&quot;</span><span class="p">,</span> <span class="s">&quot;chimp&quot;</span><span class="p">,</span> <span class="s">&quot;civet&quot;</span><span class="p">,</span>
+    <span class="s">&quot;cobra&quot;</span><span class="p">,</span> <span class="s">&quot;coral&quot;</span><span class="p">,</span> <span class="s">&quot;corgi&quot;</span><span class="p">,</span> <span class="s">&quot;crane&quot;</span><span class="p">,</span> <span class="s">&quot;dingo&quot;</span><span class="p">,</span> <span class="s">&quot;drake&quot;</span><span class="p">,</span> <span class="s">&quot;eagle&quot;</span><span class="p">,</span> <span class="s">&quot;egret&quot;</span><span class="p">,</span>
+    <span class="s">&quot;filly&quot;</span><span class="p">,</span> <span class="s">&quot;finch&quot;</span><span class="p">,</span> <span class="s">&quot;gator&quot;</span><span class="p">,</span> <span class="s">&quot;gecko&quot;</span><span class="p">,</span> <span class="s">&quot;ghost&quot;</span><span class="p">,</span> <span class="s">&quot;ghoul&quot;</span><span class="p">,</span> <span class="s">&quot;goose&quot;</span><span class="p">,</span> <span class="s">&quot;guppy&quot;</span><span class="p">,</span>
+    <span class="s">&quot;heron&quot;</span><span class="p">,</span> <span class="s">&quot;hippo&quot;</span><span class="p">,</span> <span class="s">&quot;horse&quot;</span><span class="p">,</span> <span class="s">&quot;hound&quot;</span><span class="p">,</span> <span class="s">&quot;husky&quot;</span><span class="p">,</span> <span class="s">&quot;hyena&quot;</span><span class="p">,</span> <span class="s">&quot;koala&quot;</span><span class="p">,</span> <span class="s">&quot;krill&quot;</span><span class="p">,</span>
+    <span class="s">&quot;leech&quot;</span><span class="p">,</span> <span class="s">&quot;lemur&quot;</span><span class="p">,</span> <span class="s">&quot;liger&quot;</span><span class="p">,</span> <span class="s">&quot;llama&quot;</span><span class="p">,</span> <span class="s">&quot;louse&quot;</span><span class="p">,</span> <span class="s">&quot;macaw&quot;</span><span class="p">,</span> <span class="s">&quot;midge&quot;</span><span class="p">,</span> <span class="s">&quot;molly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;moose&quot;</span><span class="p">,</span> <span class="s">&quot;moray&quot;</span><span class="p">,</span> <span class="s">&quot;mouse&quot;</span><span class="p">,</span> <span class="s">&quot;panda&quot;</span><span class="p">,</span> <span class="s">&quot;perch&quot;</span><span class="p">,</span> <span class="s">&quot;prawn&quot;</span><span class="p">,</span> <span class="s">&quot;quail&quot;</span><span class="p">,</span> <span class="s">&quot;racer&quot;</span><span class="p">,</span>
+    <span class="s">&quot;raven&quot;</span><span class="p">,</span> <span class="s">&quot;rhino&quot;</span><span class="p">,</span> <span class="s">&quot;robin&quot;</span><span class="p">,</span> <span class="s">&quot;satyr&quot;</span><span class="p">,</span> <span class="s">&quot;shark&quot;</span><span class="p">,</span> <span class="s">&quot;sheep&quot;</span><span class="p">,</span> <span class="s">&quot;shrew&quot;</span><span class="p">,</span> <span class="s">&quot;skink&quot;</span><span class="p">,</span>
+    <span class="s">&quot;skunk&quot;</span><span class="p">,</span> <span class="s">&quot;sloth&quot;</span><span class="p">,</span> <span class="s">&quot;snail&quot;</span><span class="p">,</span> <span class="s">&quot;snake&quot;</span><span class="p">,</span> <span class="s">&quot;snipe&quot;</span><span class="p">,</span> <span class="s">&quot;squid&quot;</span><span class="p">,</span> <span class="s">&quot;stork&quot;</span><span class="p">,</span> <span class="s">&quot;swift&quot;</span><span class="p">,</span>
+    <span class="s">&quot;swine&quot;</span><span class="p">,</span> <span class="s">&quot;tapir&quot;</span><span class="p">,</span> <span class="s">&quot;tetra&quot;</span><span class="p">,</span> <span class="s">&quot;tiger&quot;</span><span class="p">,</span> <span class="s">&quot;troll&quot;</span><span class="p">,</span> <span class="s">&quot;trout&quot;</span><span class="p">,</span> <span class="s">&quot;viper&quot;</span><span class="p">,</span> <span class="s">&quot;wahoo&quot;</span><span class="p">,</span>
+    <span class="s">&quot;whale&quot;</span><span class="p">,</span> <span class="s">&quot;zebra&quot;</span><span class="p">,</span> <span class="s">&quot;alpaca&quot;</span><span class="p">,</span> <span class="s">&quot;amoeba&quot;</span><span class="p">,</span> <span class="s">&quot;baboon&quot;</span><span class="p">,</span> <span class="s">&quot;badger&quot;</span><span class="p">,</span> <span class="s">&quot;beagle&quot;</span><span class="p">,</span>
+    <span class="s">&quot;bedbug&quot;</span><span class="p">,</span> <span class="s">&quot;beetle&quot;</span><span class="p">,</span> <span class="s">&quot;bengal&quot;</span><span class="p">,</span> <span class="s">&quot;bobcat&quot;</span><span class="p">,</span> <span class="s">&quot;caiman&quot;</span><span class="p">,</span> <span class="s">&quot;cattle&quot;</span><span class="p">,</span> <span class="s">&quot;cicada&quot;</span><span class="p">,</span>
+    <span class="s">&quot;collie&quot;</span><span class="p">,</span> <span class="s">&quot;condor&quot;</span><span class="p">,</span> <span class="s">&quot;cougar&quot;</span><span class="p">,</span> <span class="s">&quot;coyote&quot;</span><span class="p">,</span> <span class="s">&quot;dassie&quot;</span><span class="p">,</span> <span class="s">&quot;donkey&quot;</span><span class="p">,</span> <span class="s">&quot;dragon&quot;</span><span class="p">,</span>
+    <span class="s">&quot;earwig&quot;</span><span class="p">,</span> <span class="s">&quot;falcon&quot;</span><span class="p">,</span> <span class="s">&quot;feline&quot;</span><span class="p">,</span> <span class="s">&quot;ferret&quot;</span><span class="p">,</span> <span class="s">&quot;gannet&quot;</span><span class="p">,</span> <span class="s">&quot;gibbon&quot;</span><span class="p">,</span> <span class="s">&quot;glider&quot;</span><span class="p">,</span>
+    <span class="s">&quot;goblin&quot;</span><span class="p">,</span> <span class="s">&quot;gopher&quot;</span><span class="p">,</span> <span class="s">&quot;grouse&quot;</span><span class="p">,</span> <span class="s">&quot;guinea&quot;</span><span class="p">,</span> <span class="s">&quot;hermit&quot;</span><span class="p">,</span> <span class="s">&quot;hornet&quot;</span><span class="p">,</span> <span class="s">&quot;iguana&quot;</span><span class="p">,</span>
+    <span class="s">&quot;impala&quot;</span><span class="p">,</span> <span class="s">&quot;insect&quot;</span><span class="p">,</span> <span class="s">&quot;jackal&quot;</span><span class="p">,</span> <span class="s">&quot;jaguar&quot;</span><span class="p">,</span> <span class="s">&quot;jennet&quot;</span><span class="p">,</span> <span class="s">&quot;kitten&quot;</span><span class="p">,</span> <span class="s">&quot;kodiak&quot;</span><span class="p">,</span>
+    <span class="s">&quot;lizard&quot;</span><span class="p">,</span> <span class="s">&quot;locust&quot;</span><span class="p">,</span> <span class="s">&quot;maggot&quot;</span><span class="p">,</span> <span class="s">&quot;magpie&quot;</span><span class="p">,</span> <span class="s">&quot;mammal&quot;</span><span class="p">,</span> <span class="s">&quot;mantis&quot;</span><span class="p">,</span> <span class="s">&quot;marlin&quot;</span><span class="p">,</span>
+    <span class="s">&quot;marmot&quot;</span><span class="p">,</span> <span class="s">&quot;marten&quot;</span><span class="p">,</span> <span class="s">&quot;martin&quot;</span><span class="p">,</span> <span class="s">&quot;mayfly&quot;</span><span class="p">,</span> <span class="s">&quot;minnow&quot;</span><span class="p">,</span> <span class="s">&quot;monkey&quot;</span><span class="p">,</span> <span class="s">&quot;mullet&quot;</span><span class="p">,</span>
+    <span class="s">&quot;muskox&quot;</span><span class="p">,</span> <span class="s">&quot;ocelot&quot;</span><span class="p">,</span> <span class="s">&quot;oriole&quot;</span><span class="p">,</span> <span class="s">&quot;osprey&quot;</span><span class="p">,</span> <span class="s">&quot;oyster&quot;</span><span class="p">,</span> <span class="s">&quot;parrot&quot;</span><span class="p">,</span> <span class="s">&quot;pigeon&quot;</span><span class="p">,</span>
+    <span class="s">&quot;piglet&quot;</span><span class="p">,</span> <span class="s">&quot;poodle&quot;</span><span class="p">,</span> <span class="s">&quot;possum&quot;</span><span class="p">,</span> <span class="s">&quot;python&quot;</span><span class="p">,</span> <span class="s">&quot;quagga&quot;</span><span class="p">,</span> <span class="s">&quot;rabbit&quot;</span><span class="p">,</span> <span class="s">&quot;raptor&quot;</span><span class="p">,</span>
+    <span class="s">&quot;rodent&quot;</span><span class="p">,</span> <span class="s">&quot;roughy&quot;</span><span class="p">,</span> <span class="s">&quot;salmon&quot;</span><span class="p">,</span> <span class="s">&quot;sawfly&quot;</span><span class="p">,</span> <span class="s">&quot;serval&quot;</span><span class="p">,</span> <span class="s">&quot;shiner&quot;</span><span class="p">,</span> <span class="s">&quot;shrimp&quot;</span><span class="p">,</span>
+    <span class="s">&quot;spider&quot;</span><span class="p">,</span> <span class="s">&quot;sponge&quot;</span><span class="p">,</span> <span class="s">&quot;tarpon&quot;</span><span class="p">,</span> <span class="s">&quot;thrush&quot;</span><span class="p">,</span> <span class="s">&quot;tomcat&quot;</span><span class="p">,</span> <span class="s">&quot;toucan&quot;</span><span class="p">,</span> <span class="s">&quot;turkey&quot;</span><span class="p">,</span>
+    <span class="s">&quot;turtle&quot;</span><span class="p">,</span> <span class="s">&quot;urchin&quot;</span><span class="p">,</span> <span class="s">&quot;vervet&quot;</span><span class="p">,</span> <span class="s">&quot;walrus&quot;</span><span class="p">,</span> <span class="s">&quot;weasel&quot;</span><span class="p">,</span> <span class="s">&quot;weevil&quot;</span><span class="p">,</span> <span class="s">&quot;wombat&quot;</span><span class="p">,</span>
+    <span class="s">&quot;anchovy&quot;</span><span class="p">,</span> <span class="s">&quot;anemone&quot;</span><span class="p">,</span> <span class="s">&quot;bluejay&quot;</span><span class="p">,</span> <span class="s">&quot;buffalo&quot;</span><span class="p">,</span> <span class="s">&quot;bulldog&quot;</span><span class="p">,</span> <span class="s">&quot;buzzard&quot;</span><span class="p">,</span> <span class="s">&quot;caribou&quot;</span><span class="p">,</span>
+    <span class="s">&quot;catfish&quot;</span><span class="p">,</span> <span class="s">&quot;chamois&quot;</span><span class="p">,</span> <span class="s">&quot;cheetah&quot;</span><span class="p">,</span> <span class="s">&quot;chicken&quot;</span><span class="p">,</span> <span class="s">&quot;chigger&quot;</span><span class="p">,</span> <span class="s">&quot;cowbird&quot;</span><span class="p">,</span> <span class="s">&quot;crappie&quot;</span><span class="p">,</span>
+    <span class="s">&quot;crawdad&quot;</span><span class="p">,</span> <span class="s">&quot;cricket&quot;</span><span class="p">,</span> <span class="s">&quot;dogfish&quot;</span><span class="p">,</span> <span class="s">&quot;dolphin&quot;</span><span class="p">,</span> <span class="s">&quot;firefly&quot;</span><span class="p">,</span> <span class="s">&quot;garfish&quot;</span><span class="p">,</span> <span class="s">&quot;gazelle&quot;</span><span class="p">,</span>
+    <span class="s">&quot;gelding&quot;</span><span class="p">,</span> <span class="s">&quot;giraffe&quot;</span><span class="p">,</span> <span class="s">&quot;gobbler&quot;</span><span class="p">,</span> <span class="s">&quot;gorilla&quot;</span><span class="p">,</span> <span class="s">&quot;goshawk&quot;</span><span class="p">,</span> <span class="s">&quot;grackle&quot;</span><span class="p">,</span> <span class="s">&quot;griffon&quot;</span><span class="p">,</span>
+    <span class="s">&quot;grizzly&quot;</span><span class="p">,</span> <span class="s">&quot;grouper&quot;</span><span class="p">,</span> <span class="s">&quot;gryphon&quot;</span><span class="p">,</span> <span class="s">&quot;haddock&quot;</span><span class="p">,</span> <span class="s">&quot;hagfish&quot;</span><span class="p">,</span> <span class="s">&quot;halibut&quot;</span><span class="p">,</span> <span class="s">&quot;hamster&quot;</span><span class="p">,</span>
+    <span class="s">&quot;herring&quot;</span><span class="p">,</span> <span class="s">&quot;jackass&quot;</span><span class="p">,</span> <span class="s">&quot;javelin&quot;</span><span class="p">,</span> <span class="s">&quot;jawfish&quot;</span><span class="p">,</span> <span class="s">&quot;jaybird&quot;</span><span class="p">,</span> <span class="s">&quot;katydid&quot;</span><span class="p">,</span> <span class="s">&quot;ladybug&quot;</span><span class="p">,</span>
+    <span class="s">&quot;lamprey&quot;</span><span class="p">,</span> <span class="s">&quot;lemming&quot;</span><span class="p">,</span> <span class="s">&quot;leopard&quot;</span><span class="p">,</span> <span class="s">&quot;lioness&quot;</span><span class="p">,</span> <span class="s">&quot;lobster&quot;</span><span class="p">,</span> <span class="s">&quot;macaque&quot;</span><span class="p">,</span> <span class="s">&quot;mallard&quot;</span><span class="p">,</span>
+    <span class="s">&quot;mammoth&quot;</span><span class="p">,</span> <span class="s">&quot;manatee&quot;</span><span class="p">,</span> <span class="s">&quot;mastiff&quot;</span><span class="p">,</span> <span class="s">&quot;meerkat&quot;</span><span class="p">,</span> <span class="s">&quot;mollusk&quot;</span><span class="p">,</span> <span class="s">&quot;monarch&quot;</span><span class="p">,</span> <span class="s">&quot;mongrel&quot;</span><span class="p">,</span>
+    <span class="s">&quot;monitor&quot;</span><span class="p">,</span> <span class="s">&quot;monster&quot;</span><span class="p">,</span> <span class="s">&quot;mudfish&quot;</span><span class="p">,</span> <span class="s">&quot;muskrat&quot;</span><span class="p">,</span> <span class="s">&quot;mustang&quot;</span><span class="p">,</span> <span class="s">&quot;narwhal&quot;</span><span class="p">,</span> <span class="s">&quot;oarfish&quot;</span><span class="p">,</span>
+    <span class="s">&quot;octopus&quot;</span><span class="p">,</span> <span class="s">&quot;opossum&quot;</span><span class="p">,</span> <span class="s">&quot;ostrich&quot;</span><span class="p">,</span> <span class="s">&quot;panther&quot;</span><span class="p">,</span> <span class="s">&quot;peacock&quot;</span><span class="p">,</span> <span class="s">&quot;pegasus&quot;</span><span class="p">,</span> <span class="s">&quot;pelican&quot;</span><span class="p">,</span>
+    <span class="s">&quot;penguin&quot;</span><span class="p">,</span> <span class="s">&quot;phoenix&quot;</span><span class="p">,</span> <span class="s">&quot;piranha&quot;</span><span class="p">,</span> <span class="s">&quot;polecat&quot;</span><span class="p">,</span> <span class="s">&quot;primate&quot;</span><span class="p">,</span> <span class="s">&quot;quetzal&quot;</span><span class="p">,</span> <span class="s">&quot;raccoon&quot;</span><span class="p">,</span>
+    <span class="s">&quot;rattler&quot;</span><span class="p">,</span> <span class="s">&quot;redbird&quot;</span><span class="p">,</span> <span class="s">&quot;redfish&quot;</span><span class="p">,</span> <span class="s">&quot;reptile&quot;</span><span class="p">,</span> <span class="s">&quot;rooster&quot;</span><span class="p">,</span> <span class="s">&quot;sawfish&quot;</span><span class="p">,</span> <span class="s">&quot;sculpin&quot;</span><span class="p">,</span>
+    <span class="s">&quot;seagull&quot;</span><span class="p">,</span> <span class="s">&quot;skylark&quot;</span><span class="p">,</span> <span class="s">&quot;snapper&quot;</span><span class="p">,</span> <span class="s">&quot;spaniel&quot;</span><span class="p">,</span> <span class="s">&quot;sparrow&quot;</span><span class="p">,</span> <span class="s">&quot;sunbeam&quot;</span><span class="p">,</span> <span class="s">&quot;sunbird&quot;</span><span class="p">,</span>
+    <span class="s">&quot;sunfish&quot;</span><span class="p">,</span> <span class="s">&quot;tadpole&quot;</span><span class="p">,</span> <span class="s">&quot;termite&quot;</span><span class="p">,</span> <span class="s">&quot;terrier&quot;</span><span class="p">,</span> <span class="s">&quot;unicorn&quot;</span><span class="p">,</span> <span class="s">&quot;vulture&quot;</span><span class="p">,</span> <span class="s">&quot;wallaby&quot;</span><span class="p">,</span>
+    <span class="s">&quot;walleye&quot;</span><span class="p">,</span> <span class="s">&quot;warthog&quot;</span><span class="p">,</span> <span class="s">&quot;whippet&quot;</span><span class="p">,</span> <span class="s">&quot;wildcat&quot;</span><span class="p">,</span> <span class="s">&quot;aardvark&quot;</span><span class="p">,</span> <span class="s">&quot;airedale&quot;</span><span class="p">,</span>
+    <span class="s">&quot;albacore&quot;</span><span class="p">,</span> <span class="s">&quot;anteater&quot;</span><span class="p">,</span> <span class="s">&quot;antelope&quot;</span><span class="p">,</span> <span class="s">&quot;arachnid&quot;</span><span class="p">,</span> <span class="s">&quot;barnacle&quot;</span><span class="p">,</span> <span class="s">&quot;basilisk&quot;</span><span class="p">,</span>
+    <span class="s">&quot;blowfish&quot;</span><span class="p">,</span> <span class="s">&quot;bluebird&quot;</span><span class="p">,</span> <span class="s">&quot;bluegill&quot;</span><span class="p">,</span> <span class="s">&quot;bonefish&quot;</span><span class="p">,</span> <span class="s">&quot;bullfrog&quot;</span><span class="p">,</span> <span class="s">&quot;cardinal&quot;</span><span class="p">,</span>
+    <span class="s">&quot;chipmunk&quot;</span><span class="p">,</span> <span class="s">&quot;cockatoo&quot;</span><span class="p">,</span> <span class="s">&quot;crawfish&quot;</span><span class="p">,</span> <span class="s">&quot;crayfish&quot;</span><span class="p">,</span> <span class="s">&quot;dinosaur&quot;</span><span class="p">,</span> <span class="s">&quot;doberman&quot;</span><span class="p">,</span>
+    <span class="s">&quot;duckling&quot;</span><span class="p">,</span> <span class="s">&quot;elephant&quot;</span><span class="p">,</span> <span class="s">&quot;escargot&quot;</span><span class="p">,</span> <span class="s">&quot;flamingo&quot;</span><span class="p">,</span> <span class="s">&quot;flounder&quot;</span><span class="p">,</span> <span class="s">&quot;foxhound&quot;</span><span class="p">,</span>
+    <span class="s">&quot;glowworm&quot;</span><span class="p">,</span> <span class="s">&quot;goldfish&quot;</span><span class="p">,</span> <span class="s">&quot;grubworm&quot;</span><span class="p">,</span> <span class="s">&quot;hedgehog&quot;</span><span class="p">,</span> <span class="s">&quot;honeybee&quot;</span><span class="p">,</span> <span class="s">&quot;hookworm&quot;</span><span class="p">,</span>
+    <span class="s">&quot;humpback&quot;</span><span class="p">,</span> <span class="s">&quot;kangaroo&quot;</span><span class="p">,</span> <span class="s">&quot;killdeer&quot;</span><span class="p">,</span> <span class="s">&quot;kingfish&quot;</span><span class="p">,</span> <span class="s">&quot;labrador&quot;</span><span class="p">,</span> <span class="s">&quot;lacewing&quot;</span><span class="p">,</span>
+    <span class="s">&quot;ladybird&quot;</span><span class="p">,</span> <span class="s">&quot;lionfish&quot;</span><span class="p">,</span> <span class="s">&quot;longhorn&quot;</span><span class="p">,</span> <span class="s">&quot;mackerel&quot;</span><span class="p">,</span> <span class="s">&quot;malamute&quot;</span><span class="p">,</span> <span class="s">&quot;marmoset&quot;</span><span class="p">,</span>
+    <span class="s">&quot;mastodon&quot;</span><span class="p">,</span> <span class="s">&quot;moccasin&quot;</span><span class="p">,</span> <span class="s">&quot;mongoose&quot;</span><span class="p">,</span> <span class="s">&quot;monkfish&quot;</span><span class="p">,</span> <span class="s">&quot;mosquito&quot;</span><span class="p">,</span> <span class="s">&quot;pangolin&quot;</span><span class="p">,</span>
+    <span class="s">&quot;parakeet&quot;</span><span class="p">,</span> <span class="s">&quot;pheasant&quot;</span><span class="p">,</span> <span class="s">&quot;pipefish&quot;</span><span class="p">,</span> <span class="s">&quot;platypus&quot;</span><span class="p">,</span> <span class="s">&quot;polliwog&quot;</span><span class="p">,</span> <span class="s">&quot;porpoise&quot;</span><span class="p">,</span>
+    <span class="s">&quot;reindeer&quot;</span><span class="p">,</span> <span class="s">&quot;ringtail&quot;</span><span class="p">,</span> <span class="s">&quot;sailfish&quot;</span><span class="p">,</span> <span class="s">&quot;scorpion&quot;</span><span class="p">,</span> <span class="s">&quot;seahorse&quot;</span><span class="p">,</span> <span class="s">&quot;seasnail&quot;</span><span class="p">,</span>
+    <span class="s">&quot;sheepdog&quot;</span><span class="p">,</span> <span class="s">&quot;shepherd&quot;</span><span class="p">,</span> <span class="s">&quot;silkworm&quot;</span><span class="p">,</span> <span class="s">&quot;squirrel&quot;</span><span class="p">,</span> <span class="s">&quot;stallion&quot;</span><span class="p">,</span> <span class="s">&quot;starfish&quot;</span><span class="p">,</span>
+    <span class="s">&quot;starling&quot;</span><span class="p">,</span> <span class="s">&quot;stingray&quot;</span><span class="p">,</span> <span class="s">&quot;stinkbug&quot;</span><span class="p">,</span> <span class="s">&quot;sturgeon&quot;</span><span class="p">,</span> <span class="s">&quot;terrapin&quot;</span><span class="p">,</span> <span class="s">&quot;titmouse&quot;</span><span class="p">,</span>
+    <span class="s">&quot;tortoise&quot;</span><span class="p">,</span> <span class="s">&quot;treefrog&quot;</span><span class="p">,</span> <span class="s">&quot;werewolf&quot;</span><span class="p">,</span> <span class="s">&quot;woodcock&quot;</span>
+<span class="p">)</span>
+
+<span class="cm">/** just random adjectives **/</span>
+<span class="k">val</span> <span class="py">adjectives</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span>
+    <span class="s">&quot;able&quot;</span><span class="p">,</span> <span class="s">&quot;above&quot;</span><span class="p">,</span> <span class="s">&quot;absolute&quot;</span><span class="p">,</span> <span class="s">&quot;accepted&quot;</span><span class="p">,</span> <span class="s">&quot;accurate&quot;</span><span class="p">,</span> <span class="s">&quot;ace&quot;</span><span class="p">,</span> <span class="s">&quot;active&quot;</span><span class="p">,</span>
+    <span class="s">&quot;actual&quot;</span><span class="p">,</span> <span class="s">&quot;adapted&quot;</span><span class="p">,</span> <span class="s">&quot;adapting&quot;</span><span class="p">,</span> <span class="s">&quot;adequate&quot;</span><span class="p">,</span> <span class="s">&quot;adjusted&quot;</span><span class="p">,</span> <span class="s">&quot;advanced&quot;</span><span class="p">,</span>
+    <span class="s">&quot;alert&quot;</span><span class="p">,</span> <span class="s">&quot;alive&quot;</span><span class="p">,</span> <span class="s">&quot;allowed&quot;</span><span class="p">,</span> <span class="s">&quot;allowing&quot;</span><span class="p">,</span> <span class="s">&quot;amazed&quot;</span><span class="p">,</span> <span class="s">&quot;amazing&quot;</span><span class="p">,</span> <span class="s">&quot;ample&quot;</span><span class="p">,</span>
+    <span class="s">&quot;amused&quot;</span><span class="p">,</span> <span class="s">&quot;amusing&quot;</span><span class="p">,</span> <span class="s">&quot;apparent&quot;</span><span class="p">,</span> <span class="s">&quot;apt&quot;</span><span class="p">,</span> <span class="s">&quot;arriving&quot;</span><span class="p">,</span> <span class="s">&quot;artistic&quot;</span><span class="p">,</span> <span class="s">&quot;assured&quot;</span><span class="p">,</span>
+    <span class="s">&quot;assuring&quot;</span><span class="p">,</span> <span class="s">&quot;awaited&quot;</span><span class="p">,</span> <span class="s">&quot;awake&quot;</span><span class="p">,</span> <span class="s">&quot;aware&quot;</span><span class="p">,</span> <span class="s">&quot;balanced&quot;</span><span class="p">,</span> <span class="s">&quot;becoming&quot;</span><span class="p">,</span> <span class="s">&quot;beloved&quot;</span><span class="p">,</span>
+    <span class="s">&quot;better&quot;</span><span class="p">,</span> <span class="s">&quot;big&quot;</span><span class="p">,</span> <span class="s">&quot;blessed&quot;</span><span class="p">,</span> <span class="s">&quot;bold&quot;</span><span class="p">,</span> <span class="s">&quot;boss&quot;</span><span class="p">,</span> <span class="s">&quot;brave&quot;</span><span class="p">,</span> <span class="s">&quot;brief&quot;</span><span class="p">,</span> <span class="s">&quot;bright&quot;</span><span class="p">,</span>
+    <span class="s">&quot;bursting&quot;</span><span class="p">,</span> <span class="s">&quot;busy&quot;</span><span class="p">,</span> <span class="s">&quot;calm&quot;</span><span class="p">,</span> <span class="s">&quot;capable&quot;</span><span class="p">,</span> <span class="s">&quot;capital&quot;</span><span class="p">,</span> <span class="s">&quot;careful&quot;</span><span class="p">,</span> <span class="s">&quot;caring&quot;</span><span class="p">,</span>
+    <span class="s">&quot;casual&quot;</span><span class="p">,</span> <span class="s">&quot;causal&quot;</span><span class="p">,</span> <span class="s">&quot;central&quot;</span><span class="p">,</span> <span class="s">&quot;certain&quot;</span><span class="p">,</span> <span class="s">&quot;champion&quot;</span><span class="p">,</span> <span class="s">&quot;charmed&quot;</span><span class="p">,</span> <span class="s">&quot;charming&quot;</span><span class="p">,</span>
+    <span class="s">&quot;cheerful&quot;</span><span class="p">,</span> <span class="s">&quot;chief&quot;</span><span class="p">,</span> <span class="s">&quot;choice&quot;</span><span class="p">,</span> <span class="s">&quot;civil&quot;</span><span class="p">,</span> <span class="s">&quot;classic&quot;</span><span class="p">,</span> <span class="s">&quot;clean&quot;</span><span class="p">,</span> <span class="s">&quot;clear&quot;</span><span class="p">,</span>
+    <span class="s">&quot;clever&quot;</span><span class="p">,</span> <span class="s">&quot;climbing&quot;</span><span class="p">,</span> <span class="s">&quot;close&quot;</span><span class="p">,</span> <span class="s">&quot;closing&quot;</span><span class="p">,</span> <span class="s">&quot;coherent&quot;</span><span class="p">,</span> <span class="s">&quot;comic&quot;</span><span class="p">,</span> <span class="s">&quot;communal&quot;</span><span class="p">,</span>
+    <span class="s">&quot;complete&quot;</span><span class="p">,</span> <span class="s">&quot;composed&quot;</span><span class="p">,</span> <span class="s">&quot;concise&quot;</span><span class="p">,</span> <span class="s">&quot;concrete&quot;</span><span class="p">,</span> <span class="s">&quot;content&quot;</span><span class="p">,</span> <span class="s">&quot;cool&quot;</span><span class="p">,</span> <span class="s">&quot;correct&quot;</span><span class="p">,</span>
+    <span class="s">&quot;cosmic&quot;</span><span class="p">,</span> <span class="s">&quot;crack&quot;</span><span class="p">,</span> <span class="s">&quot;creative&quot;</span><span class="p">,</span> <span class="s">&quot;credible&quot;</span><span class="p">,</span> <span class="s">&quot;crisp&quot;</span><span class="p">,</span> <span class="s">&quot;crucial&quot;</span><span class="p">,</span> <span class="s">&quot;cuddly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;cunning&quot;</span><span class="p">,</span> <span class="s">&quot;curious&quot;</span><span class="p">,</span> <span class="s">&quot;current&quot;</span><span class="p">,</span> <span class="s">&quot;cute&quot;</span><span class="p">,</span> <span class="s">&quot;daring&quot;</span><span class="p">,</span> <span class="s">&quot;darling&quot;</span><span class="p">,</span> <span class="s">&quot;dashing&quot;</span><span class="p">,</span>
+    <span class="s">&quot;dear&quot;</span><span class="p">,</span> <span class="s">&quot;decent&quot;</span><span class="p">,</span> <span class="s">&quot;deciding&quot;</span><span class="p">,</span> <span class="s">&quot;deep&quot;</span><span class="p">,</span> <span class="s">&quot;definite&quot;</span><span class="p">,</span> <span class="s">&quot;delicate&quot;</span><span class="p">,</span> <span class="s">&quot;desired&quot;</span><span class="p">,</span>
+    <span class="s">&quot;destined&quot;</span><span class="p">,</span> <span class="s">&quot;devoted&quot;</span><span class="p">,</span> <span class="s">&quot;direct&quot;</span><span class="p">,</span> <span class="s">&quot;discrete&quot;</span><span class="p">,</span> <span class="s">&quot;distinct&quot;</span><span class="p">,</span> <span class="s">&quot;diverse&quot;</span><span class="p">,</span>
+    <span class="s">&quot;divine&quot;</span><span class="p">,</span> <span class="s">&quot;dominant&quot;</span><span class="p">,</span> <span class="s">&quot;driven&quot;</span><span class="p">,</span> <span class="s">&quot;driving&quot;</span><span class="p">,</span> <span class="s">&quot;dynamic&quot;</span><span class="p">,</span> <span class="s">&quot;eager&quot;</span><span class="p">,</span> <span class="s">&quot;easy&quot;</span><span class="p">,</span>
+    <span class="s">&quot;electric&quot;</span><span class="p">,</span> <span class="s">&quot;elegant&quot;</span><span class="p">,</span> <span class="s">&quot;emerging&quot;</span><span class="p">,</span> <span class="s">&quot;eminent&quot;</span><span class="p">,</span> <span class="s">&quot;enabled&quot;</span><span class="p">,</span> <span class="s">&quot;enabling&quot;</span><span class="p">,</span>
+    <span class="s">&quot;endless&quot;</span><span class="p">,</span> <span class="s">&quot;engaged&quot;</span><span class="p">,</span> <span class="s">&quot;engaging&quot;</span><span class="p">,</span> <span class="s">&quot;enhanced&quot;</span><span class="p">,</span> <span class="s">&quot;enjoyed&quot;</span><span class="p">,</span> <span class="s">&quot;enormous&quot;</span><span class="p">,</span>
+    <span class="s">&quot;enough&quot;</span><span class="p">,</span> <span class="s">&quot;epic&quot;</span><span class="p">,</span> <span class="s">&quot;equal&quot;</span><span class="p">,</span> <span class="s">&quot;equipped&quot;</span><span class="p">,</span> <span class="s">&quot;eternal&quot;</span><span class="p">,</span> <span class="s">&quot;ethical&quot;</span><span class="p">,</span> <span class="s">&quot;evident&quot;</span><span class="p">,</span>
+    <span class="s">&quot;evolved&quot;</span><span class="p">,</span> <span class="s">&quot;evolving&quot;</span><span class="p">,</span> <span class="s">&quot;exact&quot;</span><span class="p">,</span> <span class="s">&quot;excited&quot;</span><span class="p">,</span> <span class="s">&quot;exciting&quot;</span><span class="p">,</span> <span class="s">&quot;exotic&quot;</span><span class="p">,</span> <span class="s">&quot;expert&quot;</span><span class="p">,</span>
+    <span class="s">&quot;factual&quot;</span><span class="p">,</span> <span class="s">&quot;fair&quot;</span><span class="p">,</span> <span class="s">&quot;faithful&quot;</span><span class="p">,</span> <span class="s">&quot;famous&quot;</span><span class="p">,</span> <span class="s">&quot;fancy&quot;</span><span class="p">,</span> <span class="s">&quot;fast&quot;</span><span class="p">,</span> <span class="s">&quot;feasible&quot;</span><span class="p">,</span>
+    <span class="s">&quot;fine&quot;</span><span class="p">,</span> <span class="s">&quot;finer&quot;</span><span class="p">,</span> <span class="s">&quot;firm&quot;</span><span class="p">,</span> <span class="s">&quot;first&quot;</span><span class="p">,</span> <span class="s">&quot;fit&quot;</span><span class="p">,</span> <span class="s">&quot;fitting&quot;</span><span class="p">,</span> <span class="s">&quot;fleet&quot;</span><span class="p">,</span> <span class="s">&quot;flexible&quot;</span><span class="p">,</span>
+    <span class="s">&quot;flowing&quot;</span><span class="p">,</span> <span class="s">&quot;fluent&quot;</span><span class="p">,</span> <span class="s">&quot;flying&quot;</span><span class="p">,</span> <span class="s">&quot;fond&quot;</span><span class="p">,</span> <span class="s">&quot;frank&quot;</span><span class="p">,</span> <span class="s">&quot;free&quot;</span><span class="p">,</span> <span class="s">&quot;fresh&quot;</span><span class="p">,</span> <span class="s">&quot;full&quot;</span><span class="p">,</span>
+    <span class="s">&quot;fun&quot;</span><span class="p">,</span> <span class="s">&quot;funny&quot;</span><span class="p">,</span> <span class="s">&quot;game&quot;</span><span class="p">,</span> <span class="s">&quot;generous&quot;</span><span class="p">,</span> <span class="s">&quot;gentle&quot;</span><span class="p">,</span> <span class="s">&quot;genuine&quot;</span><span class="p">,</span> <span class="s">&quot;giving&quot;</span><span class="p">,</span> <span class="s">&quot;glad&quot;</span><span class="p">,</span>
+    <span class="s">&quot;glorious&quot;</span><span class="p">,</span> <span class="s">&quot;glowing&quot;</span><span class="p">,</span> <span class="s">&quot;golden&quot;</span><span class="p">,</span> <span class="s">&quot;good&quot;</span><span class="p">,</span> <span class="s">&quot;gorgeous&quot;</span><span class="p">,</span> <span class="s">&quot;grand&quot;</span><span class="p">,</span> <span class="s">&quot;grateful&quot;</span><span class="p">,</span>
+    <span class="s">&quot;great&quot;</span><span class="p">,</span> <span class="s">&quot;growing&quot;</span><span class="p">,</span> <span class="s">&quot;grown&quot;</span><span class="p">,</span> <span class="s">&quot;guided&quot;</span><span class="p">,</span> <span class="s">&quot;guiding&quot;</span><span class="p">,</span> <span class="s">&quot;handy&quot;</span><span class="p">,</span> <span class="s">&quot;happy&quot;</span><span class="p">,</span> <span class="s">&quot;hardy&quot;</span><span class="p">,</span>
+    <span class="s">&quot;harmless&quot;</span><span class="p">,</span> <span class="s">&quot;healthy&quot;</span><span class="p">,</span> <span class="s">&quot;helped&quot;</span><span class="p">,</span> <span class="s">&quot;helpful&quot;</span><span class="p">,</span> <span class="s">&quot;helping&quot;</span><span class="p">,</span> <span class="s">&quot;heroic&quot;</span><span class="p">,</span> <span class="s">&quot;hip&quot;</span><span class="p">,</span>
+    <span class="s">&quot;holy&quot;</span><span class="p">,</span> <span class="s">&quot;honest&quot;</span><span class="p">,</span> <span class="s">&quot;hopeful&quot;</span><span class="p">,</span> <span class="s">&quot;hot&quot;</span><span class="p">,</span> <span class="s">&quot;huge&quot;</span><span class="p">,</span> <span class="s">&quot;humane&quot;</span><span class="p">,</span> <span class="s">&quot;humble&quot;</span><span class="p">,</span> <span class="s">&quot;humorous&quot;</span><span class="p">,</span>
+    <span class="s">&quot;ideal&quot;</span><span class="p">,</span> <span class="s">&quot;immense&quot;</span><span class="p">,</span> <span class="s">&quot;immortal&quot;</span><span class="p">,</span> <span class="s">&quot;immune&quot;</span><span class="p">,</span> <span class="s">&quot;improved&quot;</span><span class="p">,</span> <span class="s">&quot;in&quot;</span><span class="p">,</span> <span class="s">&quot;included&quot;</span><span class="p">,</span>
+    <span class="s">&quot;infinite&quot;</span><span class="p">,</span> <span class="s">&quot;informed&quot;</span><span class="p">,</span> <span class="s">&quot;innocent&quot;</span><span class="p">,</span> <span class="s">&quot;inspired&quot;</span><span class="p">,</span> <span class="s">&quot;integral&quot;</span><span class="p">,</span> <span class="s">&quot;intense&quot;</span><span class="p">,</span>
+    <span class="s">&quot;intent&quot;</span><span class="p">,</span> <span class="s">&quot;internal&quot;</span><span class="p">,</span> <span class="s">&quot;intimate&quot;</span><span class="p">,</span> <span class="s">&quot;inviting&quot;</span><span class="p">,</span> <span class="s">&quot;joint&quot;</span><span class="p">,</span> <span class="s">&quot;just&quot;</span><span class="p">,</span> <span class="s">&quot;keen&quot;</span><span class="p">,</span>
+    <span class="s">&quot;key&quot;</span><span class="p">,</span> <span class="s">&quot;kind&quot;</span><span class="p">,</span> <span class="s">&quot;knowing&quot;</span><span class="p">,</span> <span class="s">&quot;known&quot;</span><span class="p">,</span> <span class="s">&quot;large&quot;</span><span class="p">,</span> <span class="s">&quot;lasting&quot;</span><span class="p">,</span> <span class="s">&quot;leading&quot;</span><span class="p">,</span>
+    <span class="s">&quot;learning&quot;</span><span class="p">,</span> <span class="s">&quot;legal&quot;</span><span class="p">,</span> <span class="s">&quot;legible&quot;</span><span class="p">,</span> <span class="s">&quot;lenient&quot;</span><span class="p">,</span> <span class="s">&quot;liberal&quot;</span><span class="p">,</span> <span class="s">&quot;light&quot;</span><span class="p">,</span> <span class="s">&quot;liked&quot;</span><span class="p">,</span>
+    <span class="s">&quot;literate&quot;</span><span class="p">,</span> <span class="s">&quot;live&quot;</span><span class="p">,</span> <span class="s">&quot;living&quot;</span><span class="p">,</span> <span class="s">&quot;logical&quot;</span><span class="p">,</span> <span class="s">&quot;loved&quot;</span><span class="p">,</span> <span class="s">&quot;loving&quot;</span><span class="p">,</span> <span class="s">&quot;loyal&quot;</span><span class="p">,</span>
+    <span class="s">&quot;lucky&quot;</span><span class="p">,</span> <span class="s">&quot;magical&quot;</span><span class="p">,</span> <span class="s">&quot;magnetic&quot;</span><span class="p">,</span> <span class="s">&quot;main&quot;</span><span class="p">,</span> <span class="s">&quot;major&quot;</span><span class="p">,</span> <span class="s">&quot;many&quot;</span><span class="p">,</span> <span class="s">&quot;massive&quot;</span><span class="p">,</span>
+    <span class="s">&quot;master&quot;</span><span class="p">,</span> <span class="s">&quot;mature&quot;</span><span class="p">,</span> <span class="s">&quot;maximum&quot;</span><span class="p">,</span> <span class="s">&quot;measured&quot;</span><span class="p">,</span> <span class="s">&quot;meet&quot;</span><span class="p">,</span> <span class="s">&quot;merry&quot;</span><span class="p">,</span> <span class="s">&quot;mighty&quot;</span><span class="p">,</span>
+    <span class="s">&quot;mint&quot;</span><span class="p">,</span> <span class="s">&quot;model&quot;</span><span class="p">,</span> <span class="s">&quot;modern&quot;</span><span class="p">,</span> <span class="s">&quot;modest&quot;</span><span class="p">,</span> <span class="s">&quot;moral&quot;</span><span class="p">,</span> <span class="s">&quot;more&quot;</span><span class="p">,</span> <span class="s">&quot;moved&quot;</span><span class="p">,</span> <span class="s">&quot;moving&quot;</span><span class="p">,</span>
+    <span class="s">&quot;musical&quot;</span><span class="p">,</span> <span class="s">&quot;mutual&quot;</span><span class="p">,</span> <span class="s">&quot;national&quot;</span><span class="p">,</span> <span class="s">&quot;native&quot;</span><span class="p">,</span> <span class="s">&quot;natural&quot;</span><span class="p">,</span> <span class="s">&quot;nearby&quot;</span><span class="p">,</span> <span class="s">&quot;neat&quot;</span><span class="p">,</span>
+    <span class="s">&quot;needed&quot;</span><span class="p">,</span> <span class="s">&quot;neutral&quot;</span><span class="p">,</span> <span class="s">&quot;new&quot;</span><span class="p">,</span> <span class="s">&quot;next&quot;</span><span class="p">,</span> <span class="s">&quot;nice&quot;</span><span class="p">,</span> <span class="s">&quot;noble&quot;</span><span class="p">,</span> <span class="s">&quot;normal&quot;</span><span class="p">,</span> <span class="s">&quot;notable&quot;</span><span class="p">,</span>
+    <span class="s">&quot;noted&quot;</span><span class="p">,</span> <span class="s">&quot;novel&quot;</span><span class="p">,</span> <span class="s">&quot;obliging&quot;</span><span class="p">,</span> <span class="s">&quot;on&quot;</span><span class="p">,</span> <span class="s">&quot;one&quot;</span><span class="p">,</span> <span class="s">&quot;open&quot;</span><span class="p">,</span> <span class="s">&quot;optimal&quot;</span><span class="p">,</span> <span class="s">&quot;optimum&quot;</span><span class="p">,</span>
+    <span class="s">&quot;organic&quot;</span><span class="p">,</span> <span class="s">&quot;oriented&quot;</span><span class="p">,</span> <span class="s">&quot;outgoing&quot;</span><span class="p">,</span> <span class="s">&quot;patient&quot;</span><span class="p">,</span> <span class="s">&quot;peaceful&quot;</span><span class="p">,</span> <span class="s">&quot;perfect&quot;</span><span class="p">,</span> <span class="s">&quot;pet&quot;</span><span class="p">,</span>
+    <span class="s">&quot;picked&quot;</span><span class="p">,</span> <span class="s">&quot;pleasant&quot;</span><span class="p">,</span> <span class="s">&quot;pleased&quot;</span><span class="p">,</span> <span class="s">&quot;pleasing&quot;</span><span class="p">,</span> <span class="s">&quot;poetic&quot;</span><span class="p">,</span> <span class="s">&quot;polished&quot;</span><span class="p">,</span> <span class="s">&quot;polite&quot;</span><span class="p">,</span>
+    <span class="s">&quot;popular&quot;</span><span class="p">,</span> <span class="s">&quot;positive&quot;</span><span class="p">,</span> <span class="s">&quot;possible&quot;</span><span class="p">,</span> <span class="s">&quot;powerful&quot;</span><span class="p">,</span> <span class="s">&quot;precious&quot;</span><span class="p">,</span> <span class="s">&quot;precise&quot;</span><span class="p">,</span>
+    <span class="s">&quot;premium&quot;</span><span class="p">,</span> <span class="s">&quot;prepared&quot;</span><span class="p">,</span> <span class="s">&quot;present&quot;</span><span class="p">,</span> <span class="s">&quot;pretty&quot;</span><span class="p">,</span> <span class="s">&quot;primary&quot;</span><span class="p">,</span> <span class="s">&quot;prime&quot;</span><span class="p">,</span> <span class="s">&quot;pro&quot;</span><span class="p">,</span>
+    <span class="s">&quot;probable&quot;</span><span class="p">,</span> <span class="s">&quot;profound&quot;</span><span class="p">,</span> <span class="s">&quot;promoted&quot;</span><span class="p">,</span> <span class="s">&quot;prompt&quot;</span><span class="p">,</span> <span class="s">&quot;proper&quot;</span><span class="p">,</span> <span class="s">&quot;proud&quot;</span><span class="p">,</span> <span class="s">&quot;proven&quot;</span><span class="p">,</span>
+    <span class="s">&quot;pumped&quot;</span><span class="p">,</span> <span class="s">&quot;pure&quot;</span><span class="p">,</span> <span class="s">&quot;quality&quot;</span><span class="p">,</span> <span class="s">&quot;quick&quot;</span><span class="p">,</span> <span class="s">&quot;quiet&quot;</span><span class="p">,</span> <span class="s">&quot;rapid&quot;</span><span class="p">,</span> <span class="s">&quot;rare&quot;</span><span class="p">,</span> <span class="s">&quot;rational&quot;</span><span class="p">,</span>
+    <span class="s">&quot;ready&quot;</span><span class="p">,</span> <span class="s">&quot;real&quot;</span><span class="p">,</span> <span class="s">&quot;refined&quot;</span><span class="p">,</span> <span class="s">&quot;regular&quot;</span><span class="p">,</span> <span class="s">&quot;related&quot;</span><span class="p">,</span> <span class="s">&quot;relative&quot;</span><span class="p">,</span> <span class="s">&quot;relaxed&quot;</span><span class="p">,</span>
+    <span class="s">&quot;relaxing&quot;</span><span class="p">,</span> <span class="s">&quot;relevant&quot;</span><span class="p">,</span> <span class="s">&quot;relieved&quot;</span><span class="p">,</span> <span class="s">&quot;renewed&quot;</span><span class="p">,</span> <span class="s">&quot;renewing&quot;</span><span class="p">,</span> <span class="s">&quot;resolved&quot;</span><span class="p">,</span>
+    <span class="s">&quot;rested&quot;</span><span class="p">,</span> <span class="s">&quot;rich&quot;</span><span class="p">,</span> <span class="s">&quot;right&quot;</span><span class="p">,</span> <span class="s">&quot;robust&quot;</span><span class="p">,</span> <span class="s">&quot;romantic&quot;</span><span class="p">,</span> <span class="s">&quot;ruling&quot;</span><span class="p">,</span> <span class="s">&quot;sacred&quot;</span><span class="p">,</span> <span class="s">&quot;safe&quot;</span><span class="p">,</span>
+    <span class="s">&quot;saved&quot;</span><span class="p">,</span> <span class="s">&quot;saving&quot;</span><span class="p">,</span> <span class="s">&quot;secure&quot;</span><span class="p">,</span> <span class="s">&quot;select&quot;</span><span class="p">,</span> <span class="s">&quot;selected&quot;</span><span class="p">,</span> <span class="s">&quot;sensible&quot;</span><span class="p">,</span> <span class="s">&quot;set&quot;</span><span class="p">,</span>
+    <span class="s">&quot;settled&quot;</span><span class="p">,</span> <span class="s">&quot;settling&quot;</span><span class="p">,</span> <span class="s">&quot;sharing&quot;</span><span class="p">,</span> <span class="s">&quot;sharp&quot;</span><span class="p">,</span> <span class="s">&quot;shining&quot;</span><span class="p">,</span> <span class="s">&quot;simple&quot;</span><span class="p">,</span> <span class="s">&quot;sincere&quot;</span><span class="p">,</span>
+    <span class="s">&quot;singular&quot;</span><span class="p">,</span> <span class="s">&quot;skilled&quot;</span><span class="p">,</span> <span class="s">&quot;smart&quot;</span><span class="p">,</span> <span class="s">&quot;smashing&quot;</span><span class="p">,</span> <span class="s">&quot;smiling&quot;</span><span class="p">,</span> <span class="s">&quot;smooth&quot;</span><span class="p">,</span> <span class="s">&quot;social&quot;</span><span class="p">,</span>
+    <span class="s">&quot;solid&quot;</span><span class="p">,</span> <span class="s">&quot;sought&quot;</span><span class="p">,</span> <span class="s">&quot;sound&quot;</span><span class="p">,</span> <span class="s">&quot;special&quot;</span><span class="p">,</span> <span class="s">&quot;splendid&quot;</span><span class="p">,</span> <span class="s">&quot;square&quot;</span><span class="p">,</span> <span class="s">&quot;stable&quot;</span><span class="p">,</span>
+    <span class="s">&quot;star&quot;</span><span class="p">,</span> <span class="s">&quot;steady&quot;</span><span class="p">,</span> <span class="s">&quot;sterling&quot;</span><span class="p">,</span> <span class="s">&quot;still&quot;</span><span class="p">,</span> <span class="s">&quot;stirred&quot;</span><span class="p">,</span> <span class="s">&quot;stirring&quot;</span><span class="p">,</span> <span class="s">&quot;striking&quot;</span><span class="p">,</span>
+    <span class="s">&quot;strong&quot;</span><span class="p">,</span> <span class="s">&quot;stunning&quot;</span><span class="p">,</span> <span class="s">&quot;subtle&quot;</span><span class="p">,</span> <span class="s">&quot;suitable&quot;</span><span class="p">,</span> <span class="s">&quot;suited&quot;</span><span class="p">,</span> <span class="s">&quot;summary&quot;</span><span class="p">,</span> <span class="s">&quot;sunny&quot;</span><span class="p">,</span>
+    <span class="s">&quot;super&quot;</span><span class="p">,</span> <span class="s">&quot;superb&quot;</span><span class="p">,</span> <span class="s">&quot;supreme&quot;</span><span class="p">,</span> <span class="s">&quot;sure&quot;</span><span class="p">,</span> <span class="s">&quot;sweeping&quot;</span><span class="p">,</span> <span class="s">&quot;sweet&quot;</span><span class="p">,</span> <span class="s">&quot;talented&quot;</span><span class="p">,</span>
+    <span class="s">&quot;teaching&quot;</span><span class="p">,</span> <span class="s">&quot;tender&quot;</span><span class="p">,</span> <span class="s">&quot;thankful&quot;</span><span class="p">,</span> <span class="s">&quot;thorough&quot;</span><span class="p">,</span> <span class="s">&quot;tidy&quot;</span><span class="p">,</span> <span class="s">&quot;tight&quot;</span><span class="p">,</span> <span class="s">&quot;together&quot;</span><span class="p">,</span>
+    <span class="s">&quot;tolerant&quot;</span><span class="p">,</span> <span class="s">&quot;top&quot;</span><span class="p">,</span> <span class="s">&quot;topical&quot;</span><span class="p">,</span> <span class="s">&quot;tops&quot;</span><span class="p">,</span> <span class="s">&quot;touched&quot;</span><span class="p">,</span> <span class="s">&quot;touching&quot;</span><span class="p">,</span> <span class="s">&quot;tough&quot;</span><span class="p">,</span>
+    <span class="s">&quot;true&quot;</span><span class="p">,</span> <span class="s">&quot;trusted&quot;</span><span class="p">,</span> <span class="s">&quot;trusting&quot;</span><span class="p">,</span> <span class="s">&quot;trusty&quot;</span><span class="p">,</span> <span class="s">&quot;ultimate&quot;</span><span class="p">,</span> <span class="s">&quot;unbiased&quot;</span><span class="p">,</span> <span class="s">&quot;uncommon&quot;</span><span class="p">,</span>
+    <span class="s">&quot;unified&quot;</span><span class="p">,</span> <span class="s">&quot;unique&quot;</span><span class="p">,</span> <span class="s">&quot;united&quot;</span><span class="p">,</span> <span class="s">&quot;up&quot;</span><span class="p">,</span> <span class="s">&quot;upright&quot;</span><span class="p">,</span> <span class="s">&quot;upward&quot;</span><span class="p">,</span> <span class="s">&quot;usable&quot;</span><span class="p">,</span>
+    <span class="s">&quot;useful&quot;</span><span class="p">,</span> <span class="s">&quot;valid&quot;</span><span class="p">,</span> <span class="s">&quot;valued&quot;</span><span class="p">,</span> <span class="s">&quot;vast&quot;</span><span class="p">,</span> <span class="s">&quot;verified&quot;</span><span class="p">,</span> <span class="s">&quot;viable&quot;</span><span class="p">,</span> <span class="s">&quot;vital&quot;</span><span class="p">,</span> <span class="s">&quot;vocal&quot;</span><span class="p">,</span>
+    <span class="s">&quot;wanted&quot;</span><span class="p">,</span> <span class="s">&quot;warm&quot;</span><span class="p">,</span> <span class="s">&quot;wealthy&quot;</span><span class="p">,</span> <span class="s">&quot;welcome&quot;</span><span class="p">,</span> <span class="s">&quot;welcomed&quot;</span><span class="p">,</span> <span class="s">&quot;well&quot;</span><span class="p">,</span> <span class="s">&quot;whole&quot;</span><span class="p">,</span>
+    <span class="s">&quot;willing&quot;</span><span class="p">,</span> <span class="s">&quot;winning&quot;</span><span class="p">,</span> <span class="s">&quot;wired&quot;</span><span class="p">,</span> <span class="s">&quot;wise&quot;</span><span class="p">,</span> <span class="s">&quot;witty&quot;</span><span class="p">,</span> <span class="s">&quot;wondrous&quot;</span><span class="p">,</span> <span class="s">&quot;workable&quot;</span><span class="p">,</span>
+    <span class="s">&quot;working&quot;</span><span class="p">,</span> <span class="s">&quot;worthy&quot;</span>
+<span class="p">)</span>
+
+<span class="cm">/** just random adverbs **/</span>
+<span class="k">val</span> <span class="py">adverbs</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span>
+    <span class="s">&quot;abnormally&quot;</span><span class="p">,</span> <span class="s">&quot;absolutely&quot;</span><span class="p">,</span> <span class="s">&quot;accurately&quot;</span><span class="p">,</span> <span class="s">&quot;actively&quot;</span><span class="p">,</span> <span class="s">&quot;actually&quot;</span><span class="p">,</span>
+    <span class="s">&quot;adequately&quot;</span><span class="p">,</span> <span class="s">&quot;admittedly&quot;</span><span class="p">,</span> <span class="s">&quot;adversely&quot;</span><span class="p">,</span> <span class="s">&quot;allegedly&quot;</span><span class="p">,</span> <span class="s">&quot;amazingly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;annually&quot;</span><span class="p">,</span> <span class="s">&quot;apparently&quot;</span><span class="p">,</span> <span class="s">&quot;arguably&quot;</span><span class="p">,</span> <span class="s">&quot;awfully&quot;</span><span class="p">,</span> <span class="s">&quot;badly&quot;</span><span class="p">,</span> <span class="s">&quot;barely&quot;</span><span class="p">,</span>
+    <span class="s">&quot;basically&quot;</span><span class="p">,</span> <span class="s">&quot;blatantly&quot;</span><span class="p">,</span> <span class="s">&quot;blindly&quot;</span><span class="p">,</span> <span class="s">&quot;briefly&quot;</span><span class="p">,</span> <span class="s">&quot;brightly&quot;</span><span class="p">,</span> <span class="s">&quot;broadly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;carefully&quot;</span><span class="p">,</span> <span class="s">&quot;centrally&quot;</span><span class="p">,</span> <span class="s">&quot;certainly&quot;</span><span class="p">,</span> <span class="s">&quot;cheaply&quot;</span><span class="p">,</span> <span class="s">&quot;cleanly&quot;</span><span class="p">,</span> <span class="s">&quot;clearly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;closely&quot;</span><span class="p">,</span> <span class="s">&quot;commonly&quot;</span><span class="p">,</span> <span class="s">&quot;completely&quot;</span><span class="p">,</span> <span class="s">&quot;constantly&quot;</span><span class="p">,</span> <span class="s">&quot;conversely&quot;</span><span class="p">,</span>
+    <span class="s">&quot;correctly&quot;</span><span class="p">,</span> <span class="s">&quot;curiously&quot;</span><span class="p">,</span> <span class="s">&quot;currently&quot;</span><span class="p">,</span> <span class="s">&quot;daily&quot;</span><span class="p">,</span> <span class="s">&quot;deadly&quot;</span><span class="p">,</span> <span class="s">&quot;deeply&quot;</span><span class="p">,</span>
+    <span class="s">&quot;definitely&quot;</span><span class="p">,</span> <span class="s">&quot;directly&quot;</span><span class="p">,</span> <span class="s">&quot;distinctly&quot;</span><span class="p">,</span> <span class="s">&quot;duly&quot;</span><span class="p">,</span> <span class="s">&quot;eagerly&quot;</span><span class="p">,</span> <span class="s">&quot;early&quot;</span><span class="p">,</span>
+    <span class="s">&quot;easily&quot;</span><span class="p">,</span> <span class="s">&quot;eminently&quot;</span><span class="p">,</span> <span class="s">&quot;endlessly&quot;</span><span class="p">,</span> <span class="s">&quot;enormously&quot;</span><span class="p">,</span> <span class="s">&quot;entirely&quot;</span><span class="p">,</span> <span class="s">&quot;equally&quot;</span><span class="p">,</span>
+    <span class="s">&quot;especially&quot;</span><span class="p">,</span> <span class="s">&quot;evenly&quot;</span><span class="p">,</span> <span class="s">&quot;evidently&quot;</span><span class="p">,</span> <span class="s">&quot;exactly&quot;</span><span class="p">,</span> <span class="s">&quot;explicitly&quot;</span><span class="p">,</span> <span class="s">&quot;externally&quot;</span><span class="p">,</span>
+    <span class="s">&quot;extremely&quot;</span><span class="p">,</span> <span class="s">&quot;factually&quot;</span><span class="p">,</span> <span class="s">&quot;fairly&quot;</span><span class="p">,</span> <span class="s">&quot;finally&quot;</span><span class="p">,</span> <span class="s">&quot;firmly&quot;</span><span class="p">,</span> <span class="s">&quot;firstly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;forcibly&quot;</span><span class="p">,</span> <span class="s">&quot;formally&quot;</span><span class="p">,</span> <span class="s">&quot;formerly&quot;</span><span class="p">,</span> <span class="s">&quot;frankly&quot;</span><span class="p">,</span> <span class="s">&quot;freely&quot;</span><span class="p">,</span> <span class="s">&quot;frequently&quot;</span><span class="p">,</span>
+    <span class="s">&quot;friendly&quot;</span><span class="p">,</span> <span class="s">&quot;fully&quot;</span><span class="p">,</span> <span class="s">&quot;generally&quot;</span><span class="p">,</span> <span class="s">&quot;gently&quot;</span><span class="p">,</span> <span class="s">&quot;genuinely&quot;</span><span class="p">,</span> <span class="s">&quot;ghastly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;gladly&quot;</span><span class="p">,</span> <span class="s">&quot;globally&quot;</span><span class="p">,</span> <span class="s">&quot;gradually&quot;</span><span class="p">,</span> <span class="s">&quot;gratefully&quot;</span><span class="p">,</span> <span class="s">&quot;greatly&quot;</span><span class="p">,</span> <span class="s">&quot;grossly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;happily&quot;</span><span class="p">,</span> <span class="s">&quot;hardly&quot;</span><span class="p">,</span> <span class="s">&quot;heartily&quot;</span><span class="p">,</span> <span class="s">&quot;heavily&quot;</span><span class="p">,</span> <span class="s">&quot;hideously&quot;</span><span class="p">,</span> <span class="s">&quot;highly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;honestly&quot;</span><span class="p">,</span> <span class="s">&quot;hopefully&quot;</span><span class="p">,</span> <span class="s">&quot;hopelessly&quot;</span><span class="p">,</span> <span class="s">&quot;horribly&quot;</span><span class="p">,</span> <span class="s">&quot;hugely&quot;</span><span class="p">,</span> <span class="s">&quot;humbly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;ideally&quot;</span><span class="p">,</span> <span class="s">&quot;illegally&quot;</span><span class="p">,</span> <span class="s">&quot;immensely&quot;</span><span class="p">,</span> <span class="s">&quot;implicitly&quot;</span><span class="p">,</span> <span class="s">&quot;incredibly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;indirectly&quot;</span><span class="p">,</span> <span class="s">&quot;infinitely&quot;</span><span class="p">,</span> <span class="s">&quot;informally&quot;</span><span class="p">,</span> <span class="s">&quot;inherently&quot;</span><span class="p">,</span> <span class="s">&quot;initially&quot;</span><span class="p">,</span>
+    <span class="s">&quot;instantly&quot;</span><span class="p">,</span> <span class="s">&quot;intensely&quot;</span><span class="p">,</span> <span class="s">&quot;internally&quot;</span><span class="p">,</span> <span class="s">&quot;jointly&quot;</span><span class="p">,</span> <span class="s">&quot;jolly&quot;</span><span class="p">,</span> <span class="s">&quot;kindly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;largely&quot;</span><span class="p">,</span> <span class="s">&quot;lately&quot;</span><span class="p">,</span> <span class="s">&quot;legally&quot;</span><span class="p">,</span> <span class="s">&quot;lightly&quot;</span><span class="p">,</span> <span class="s">&quot;likely&quot;</span><span class="p">,</span> <span class="s">&quot;literally&quot;</span><span class="p">,</span> <span class="s">&quot;lively&quot;</span><span class="p">,</span>
+    <span class="s">&quot;locally&quot;</span><span class="p">,</span> <span class="s">&quot;logically&quot;</span><span class="p">,</span> <span class="s">&quot;loosely&quot;</span><span class="p">,</span> <span class="s">&quot;loudly&quot;</span><span class="p">,</span> <span class="s">&quot;lovely&quot;</span><span class="p">,</span> <span class="s">&quot;luckily&quot;</span><span class="p">,</span> <span class="s">&quot;mainly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;manually&quot;</span><span class="p">,</span> <span class="s">&quot;marginally&quot;</span><span class="p">,</span> <span class="s">&quot;mentally&quot;</span><span class="p">,</span> <span class="s">&quot;merely&quot;</span><span class="p">,</span> <span class="s">&quot;mildly&quot;</span><span class="p">,</span> <span class="s">&quot;miserably&quot;</span><span class="p">,</span>
+    <span class="s">&quot;mistakenly&quot;</span><span class="p">,</span> <span class="s">&quot;moderately&quot;</span><span class="p">,</span> <span class="s">&quot;monthly&quot;</span><span class="p">,</span> <span class="s">&quot;morally&quot;</span><span class="p">,</span> <span class="s">&quot;mostly&quot;</span><span class="p">,</span> <span class="s">&quot;multiply&quot;</span><span class="p">,</span>
+    <span class="s">&quot;mutually&quot;</span><span class="p">,</span> <span class="s">&quot;namely&quot;</span><span class="p">,</span> <span class="s">&quot;nationally&quot;</span><span class="p">,</span> <span class="s">&quot;naturally&quot;</span><span class="p">,</span> <span class="s">&quot;nearly&quot;</span><span class="p">,</span> <span class="s">&quot;neatly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;needlessly&quot;</span><span class="p">,</span> <span class="s">&quot;newly&quot;</span><span class="p">,</span> <span class="s">&quot;nicely&quot;</span><span class="p">,</span> <span class="s">&quot;nominally&quot;</span><span class="p">,</span> <span class="s">&quot;normally&quot;</span><span class="p">,</span> <span class="s">&quot;notably&quot;</span><span class="p">,</span>
+    <span class="s">&quot;noticeably&quot;</span><span class="p">,</span> <span class="s">&quot;obviously&quot;</span><span class="p">,</span> <span class="s">&quot;oddly&quot;</span><span class="p">,</span> <span class="s">&quot;officially&quot;</span><span class="p">,</span> <span class="s">&quot;only&quot;</span><span class="p">,</span> <span class="s">&quot;openly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;optionally&quot;</span><span class="p">,</span> <span class="s">&quot;overly&quot;</span><span class="p">,</span> <span class="s">&quot;painfully&quot;</span><span class="p">,</span> <span class="s">&quot;partially&quot;</span><span class="p">,</span> <span class="s">&quot;partly&quot;</span><span class="p">,</span> <span class="s">&quot;perfectly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;personally&quot;</span><span class="p">,</span> <span class="s">&quot;physically&quot;</span><span class="p">,</span> <span class="s">&quot;plainly&quot;</span><span class="p">,</span> <span class="s">&quot;pleasantly&quot;</span><span class="p">,</span> <span class="s">&quot;poorly&quot;</span><span class="p">,</span> <span class="s">&quot;positively&quot;</span><span class="p">,</span>
+    <span class="s">&quot;possibly&quot;</span><span class="p">,</span> <span class="s">&quot;precisely&quot;</span><span class="p">,</span> <span class="s">&quot;preferably&quot;</span><span class="p">,</span> <span class="s">&quot;presently&quot;</span><span class="p">,</span> <span class="s">&quot;presumably&quot;</span><span class="p">,</span>
+    <span class="s">&quot;previously&quot;</span><span class="p">,</span> <span class="s">&quot;primarily&quot;</span><span class="p">,</span> <span class="s">&quot;privately&quot;</span><span class="p">,</span> <span class="s">&quot;probably&quot;</span><span class="p">,</span> <span class="s">&quot;promptly&quot;</span><span class="p">,</span> <span class="s">&quot;properly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;publicly&quot;</span><span class="p">,</span> <span class="s">&quot;purely&quot;</span><span class="p">,</span> <span class="s">&quot;quickly&quot;</span><span class="p">,</span> <span class="s">&quot;quietly&quot;</span><span class="p">,</span> <span class="s">&quot;radically&quot;</span><span class="p">,</span> <span class="s">&quot;randomly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;rapidly&quot;</span><span class="p">,</span> <span class="s">&quot;rarely&quot;</span><span class="p">,</span> <span class="s">&quot;rationally&quot;</span><span class="p">,</span> <span class="s">&quot;readily&quot;</span><span class="p">,</span> <span class="s">&quot;really&quot;</span><span class="p">,</span> <span class="s">&quot;reasonably&quot;</span><span class="p">,</span>
+    <span class="s">&quot;recently&quot;</span><span class="p">,</span> <span class="s">&quot;regularly&quot;</span><span class="p">,</span> <span class="s">&quot;reliably&quot;</span><span class="p">,</span> <span class="s">&quot;remarkably&quot;</span><span class="p">,</span> <span class="s">&quot;remotely&quot;</span><span class="p">,</span> <span class="s">&quot;repeatedly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;rightly&quot;</span><span class="p">,</span> <span class="s">&quot;roughly&quot;</span><span class="p">,</span> <span class="s">&quot;routinely&quot;</span><span class="p">,</span> <span class="s">&quot;sadly&quot;</span><span class="p">,</span> <span class="s">&quot;safely&quot;</span><span class="p">,</span> <span class="s">&quot;scarcely&quot;</span><span class="p">,</span>
+    <span class="s">&quot;secondly&quot;</span><span class="p">,</span> <span class="s">&quot;secretly&quot;</span><span class="p">,</span> <span class="s">&quot;seemingly&quot;</span><span class="p">,</span> <span class="s">&quot;sensibly&quot;</span><span class="p">,</span> <span class="s">&quot;separately&quot;</span><span class="p">,</span> <span class="s">&quot;seriously&quot;</span><span class="p">,</span>
+    <span class="s">&quot;severely&quot;</span><span class="p">,</span> <span class="s">&quot;sharply&quot;</span><span class="p">,</span> <span class="s">&quot;shortly&quot;</span><span class="p">,</span> <span class="s">&quot;similarly&quot;</span><span class="p">,</span> <span class="s">&quot;simply&quot;</span><span class="p">,</span> <span class="s">&quot;sincerely&quot;</span><span class="p">,</span>
+    <span class="s">&quot;singularly&quot;</span><span class="p">,</span> <span class="s">&quot;slightly&quot;</span><span class="p">,</span> <span class="s">&quot;slowly&quot;</span><span class="p">,</span> <span class="s">&quot;smoothly&quot;</span><span class="p">,</span> <span class="s">&quot;socially&quot;</span><span class="p">,</span> <span class="s">&quot;solely&quot;</span><span class="p">,</span>
+    <span class="s">&quot;specially&quot;</span><span class="p">,</span> <span class="s">&quot;steadily&quot;</span><span class="p">,</span> <span class="s">&quot;strangely&quot;</span><span class="p">,</span> <span class="s">&quot;strictly&quot;</span><span class="p">,</span> <span class="s">&quot;strongly&quot;</span><span class="p">,</span> <span class="s">&quot;subtly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;suddenly&quot;</span><span class="p">,</span> <span class="s">&quot;suitably&quot;</span><span class="p">,</span> <span class="s">&quot;supposedly&quot;</span><span class="p">,</span> <span class="s">&quot;surely&quot;</span><span class="p">,</span> <span class="s">&quot;terminally&quot;</span><span class="p">,</span> <span class="s">&quot;terribly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;thankfully&quot;</span><span class="p">,</span> <span class="s">&quot;thoroughly&quot;</span><span class="p">,</span> <span class="s">&quot;tightly&quot;</span><span class="p">,</span> <span class="s">&quot;totally&quot;</span><span class="p">,</span> <span class="s">&quot;trivially&quot;</span><span class="p">,</span> <span class="s">&quot;truly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;typically&quot;</span><span class="p">,</span> <span class="s">&quot;ultimately&quot;</span><span class="p">,</span> <span class="s">&quot;unduly&quot;</span><span class="p">,</span> <span class="s">&quot;uniformly&quot;</span><span class="p">,</span> <span class="s">&quot;uniquely&quot;</span><span class="p">,</span> <span class="s">&quot;unlikely&quot;</span><span class="p">,</span>
+    <span class="s">&quot;urgently&quot;</span><span class="p">,</span> <span class="s">&quot;usefully&quot;</span><span class="p">,</span> <span class="s">&quot;usually&quot;</span><span class="p">,</span> <span class="s">&quot;utterly&quot;</span><span class="p">,</span> <span class="s">&quot;vaguely&quot;</span><span class="p">,</span> <span class="s">&quot;vastly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;verbally&quot;</span><span class="p">,</span> <span class="s">&quot;vertically&quot;</span><span class="p">,</span> <span class="s">&quot;vigorously&quot;</span><span class="p">,</span> <span class="s">&quot;violently&quot;</span><span class="p">,</span> <span class="s">&quot;virtually&quot;</span><span class="p">,</span>
+    <span class="s">&quot;visually&quot;</span><span class="p">,</span> <span class="s">&quot;weekly&quot;</span><span class="p">,</span> <span class="s">&quot;wholly&quot;</span><span class="p">,</span> <span class="s">&quot;widely&quot;</span><span class="p">,</span> <span class="s">&quot;wildly&quot;</span><span class="p">,</span> <span class="s">&quot;willingly&quot;</span><span class="p">,</span> <span class="s">&quot;wrongly&quot;</span><span class="p">,</span>
+    <span class="s">&quot;yearly&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Running Linux Sample&quot;</span><span class="p">)</span>
+    <span class="n">animalRace</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href=".." title="Home" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../packages/kecs/" title="API Documentation" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                API Documentation
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            © 2020 Juan Medina
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.c3dc8c49.min.js"></script>
+      <script src="../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.8e2cddea.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

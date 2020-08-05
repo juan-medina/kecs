@@ -1,3 +1,10 @@
 project.name = 'kecs'
 
 enableFeaturePreview('GRADLE_METADATA')
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        jcenter()
+    }
+}

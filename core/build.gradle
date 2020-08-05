@@ -1,10 +1,17 @@
 plugins {
     id 'org.jetbrains.kotlin.multiplatform'
+    id 'org.jetbrains.dokka' version "0.10.0"
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
 }
 
 version '0.0.1'
 
 apply plugin: 'maven-publish'
+apply plugin: 'org.jetbrains.dokka'
 
 kotlin {
     jvm()
@@ -29,16 +36,25 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-jdk8')
             }
+            dependsOn commonMain
         }
         jvmTest {
             dependencies {
                 implementation kotlin('test')
                 implementation kotlin('test-junit')
             }
+            dependsOn commonTest
         }
         linuxMain {
+            dependsOn commonMain
         }
         linuxTest {
+            dependsOn commonTest
         }
     }
+}
+
+dokka {
+    outputDirectory = "${project.rootDir}/api/packages"
+    outputFormat = "gfm"
 }
