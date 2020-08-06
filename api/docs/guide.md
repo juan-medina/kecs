@@ -194,11 +194,11 @@ view.forEach {
 ...
 }
 
-view.Sort {
+view.sort {
 ...
 }
 
-view.Group {
+view.groupBy {
 ...
 }
 ```
