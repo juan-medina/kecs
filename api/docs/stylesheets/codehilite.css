@@ -1,0 +1,4 @@
+:root > * {
+    --md-code-hl-comment-color: #777777;
+    --md-code-hl-punctuation-color: #777777;
+}
