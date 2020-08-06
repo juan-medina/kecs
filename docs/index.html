@@ -239,6 +239,47 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-platform-gradle-project" class="md-nav__link">
+    Multi-platform gradle project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-platform-gradle-project" class="md-nav__link">
+    Single-platform gradle project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maven-project" class="md-nav__link">
+    Maven project
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    Basic Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#license" class="md-nav__link">
     License
   </a>
@@ -270,8 +311,20 @@
 
 
   <li class="md-nav__item">
-    <a href="example/" title="Example" class="md-nav__link">
-      Example
+    <a href="guide/" title="User Guide" class="md-nav__link">
+      User Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="example/" title="Advance Example" class="md-nav__link">
+      Advance Example
     </a>
   </li>
 
@@ -328,6 +381,47 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    Installation
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-platform-gradle-project" class="md-nav__link">
+    Multi-platform gradle project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#single-platform-gradle-project" class="md-nav__link">
+    Single-platform gradle project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maven-project" class="md-nav__link">
+    Maven project
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-usage" class="md-nav__link">
+    Basic Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#license" class="md-nav__link">
     License
   </a>
@@ -355,7 +449,7 @@
                 
                 
                 <h1 id="kotlin-entity-component-system">Kotlin Entity Component System<a class="headerlink" href="#kotlin-entity-component-system" title="Permanent link">&para;</a></h1>
-<p>Kotlin Cross Platform Entity Component System</p>
+<p>Kotlin Cross-platform Entity Component System</p>
 <p><a href="/LICENSE"><img alt="License: Apache2" src="https://img.shields.io/badge/license-Apache%202-blue.svg" /></a>
 <a href="https://juan-medina.github.io/kecs/"><img alt="Docs" src="https://img.shields.io/badge/docs-latest-brightgreen.svg" /></a></p>
 <h2 id="platforms">Platforms<a class="headerlink" href="#platforms" title="Permanent link">&para;</a></h2>
@@ -365,12 +459,103 @@
 <img alt="Platform: Windows" src="https://img.shields.io/badge/platform%3A%20Windows-Stand%20By-red" />
 <img alt="Platform: MAC" src="https://img.shields.io/badge/platform%3A%20Mac-Stand%20By-red" /></p>
 <h2 id="info">Info<a class="headerlink" href="#info" title="Permanent link">&para;</a></h2>
-<p>KECS is a Cross Platform Entity Component System design to create concurrent application, such games,
+<p>KECS is a Cross-platform Entity Component System design to create concurrent applications, such games,
 more simple and without the need of using multiple threads neither fibers nor corutines.</p>
 <p>It allows separating data from behavior and get rid of deep object oriented inheritance.</p>
 <p>Due to data-oriented design allow modern processors to highly optimize it for an over perform of more traditional
 systems.</p>
-<p>If you like to learn more about what is an ECS we try to give some clarification on <a href="ecs/">this section</a>.</p>
+<p>If you like to learn more about what is an ECS we try to give some clarification on <a href="https://juan-medina.github.io/kecs/ecs/">this section</a>.</p>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<p>Currently, KECS is not available in any distribution system, you need to clone and install it locally.</p>
+<div class="highlight"><pre><span></span><code>&gt; git clone git@github.com:juan-medina/kecs.git
+&gt; <span class="nb">cd</span> keces
+&gt; gradlew publishToMavenLocal
+</code></pre></div>
+
+<p>This will install the multi-platform module for all the platforms in your system.</p>
+<h3 id="multi-platform-gradle-project">Multi-platform gradle project<a class="headerlink" href="#multi-platform-gradle-project" title="Permanent link">&para;</a></h3>
+<p>If you are building a multi-platform gradle project you could add the overall module
+that will include all the dependencies for your specific platforms.</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">kotlin</span> <span class="o">{</span>
+    <span class="n">sourceSets</span> <span class="o">{</span>
+        <span class="n">commonMain</span> <span class="o">{</span>
+            <span class="n">dependencies</span> <span class="o">{</span>
+                <span class="n">implementation</span> <span class="nf">kotlin</span><span class="o">(</span><span class="s1">&#39;stdlib-common&#39;</span><span class="o">)</span>
+                <span class="n">api</span><span class="o">(</span><span class="s1">&#39;com.juanmedina:kecs:0.0.1&#39;</span><span class="o">)</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+For this to work you need to enable the gradle metadata module adding to the settings.gradle</p>
+<div class="highlight"><pre><span></span><code><span class="n">enableFeaturePreview</span><span class="o">(</span><span class="s1">&#39;GRADLE_METADATA&#39;</span><span class="o">)</span>
+</code></pre></div>
+
+<h3 id="single-platform-gradle-project">Single-platform gradle project<a class="headerlink" href="#single-platform-gradle-project" title="Permanent link">&para;</a></h3>
+<p>For just adding as dependency for a simple platform you could do this in gradle:</p>
+<div class="highlight"><pre><span></span><code><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">api</span><span class="o">(</span><span class="s1">&#39;com.juanmedina:kecs-jvm:0.0.1&#39;</span><span class="o">)</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="maven-project">Maven project<a class="headerlink" href="#maven-project" title="Permanent link">&para;</a></h3>
+<p>If you use maven you need to include the dependencies of the platforms that you target:
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
+    <span class="nt">&lt;groupId&gt;</span>com.juanmedina<span class="nt">&lt;/groupId&gt;</span>
+    <span class="nt">&lt;artifactId&gt;</span>kecs-jvm<span class="nt">&lt;/artifactId&gt;</span>
+    <span class="nt">&lt;version&gt;</span>0.0.1<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div></p>
+<h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>
+<p>This is a basic example, check the <a href="https://juan-medina.github.io/kecs/guide/">usage guide</a>, the <a href="https://juan-medina.github.io/kecs/example/">advance example</a>, or the <a href="https://juan-medina.github.io/kecs/packages/kecs/">API Documentation</a>
+for learning more about using KECS.</p>
+<div class="highlight"><pre><span></span><code><span class="k">data</span> <span class="k">class</span> <span class="nc">Velocity</span><span class="p">(</span><span class="k">val</span> <span class="py">x</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="k">val</span> <span class="py">y</span><span class="p">:</span> <span class="n">Float</span><span class="p">)</span>
+
+<span class="k">data</span> <span class="k">class</span> <span class="nc">Position</span><span class="p">(</span><span class="k">var</span> <span class="py">x</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="k">var</span> <span class="py">y</span><span class="p">:</span> <span class="n">Float</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">operator</span> <span class="k">fun</span> <span class="nf">plusAssign</span><span class="p">(</span><span class="n">velocity</span><span class="p">:</span> <span class="n">Velocity</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">x</span> <span class="p">+=</span> <span class="n">velocity</span><span class="p">.</span><span class="n">x</span>
+        <span class="n">y</span> <span class="p">+=</span> <span class="n">velocity</span><span class="p">.</span><span class="n">y</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">MoveSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Velocity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">vel</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Velocity</span><span class="p">&gt;()</span>
+            <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;().</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="n">pos</span> <span class="p">+=</span> <span class="n">vel</span>
+
+            <span class="n">it</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fun</span> <span class="nf">example</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">kecs</span> <span class="p">{</span>
+        <span class="p">+</span><span class="n">MoveSystem</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">val</span> <span class="py">ent1</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
+        <span class="p">+</span><span class="n">Position</span><span class="p">(</span><span class="m">0.0f</span><span class="p">,</span> <span class="m">0.0f</span><span class="p">)</span>
+        <span class="p">+</span><span class="n">Velocity</span><span class="p">(</span><span class="m">1.0f</span><span class="p">,</span> <span class="m">2.0f</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">val</span> <span class="py">ent2</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
+        <span class="p">+</span><span class="n">Position</span><span class="p">(</span><span class="m">0.0f</span><span class="p">,</span> <span class="m">0.0f</span><span class="p">)</span>
+        <span class="p">+</span><span class="n">Velocity</span><span class="p">(</span><span class="m">1.5f</span><span class="p">,</span> <span class="m">2.5f</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">val</span> <span class="py">ent3</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
+        <span class="p">+</span><span class="n">Position</span><span class="p">(</span><span class="m">0.0f</span><span class="p">,</span> <span class="m">0.0f</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span><span class="p">(...)</span> <span class="p">{</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">update</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>    Copyright (C) 2020 Juan Medina
 

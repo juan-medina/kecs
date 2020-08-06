@@ -11,23 +11,23 @@
         <meta name="description" content="tbc.">
       
       
-        <link rel="canonical" href="https://juan-medina.github.io/kecs/packages/kecs/kecs.entity/-view/retain-all/">
+        <link rel="canonical" href="https://juan-medina.github.io/kecs/guide/">
       
       
         <meta name="author" content="Juan Medina">
       
-      <link rel="shortcut icon" href="../../../../../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.3">
     
     
       
-        <title>Retain all - Kotlin ECS</title>
+        <title>User Guide - Kotlin ECS</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.947af8d5.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.947af8d5.min.css">
       
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.7f672a1f.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.7f672a1f.min.css">
       
       
     
@@ -41,7 +41,7 @@
     
     
     
-      <link rel="stylesheet" href="../../../../../stylesheets/codehilite.css">
+      <link rel="stylesheet" href="../stylesheets/codehilite.css">
     
     
       
@@ -60,11 +60,6 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
-      
-        
-        <a href="#retainall" class="md-skip">
-          Skip to content
-        </a>
       
     </div>
     <div data-md-component="announce">
@@ -90,7 +85,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Retain all
+              User Guide
             
           </span>
         </div>
@@ -190,7 +185,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../.." title="Home" class="md-nav__link">
+    <a href=".." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -202,7 +197,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../../ecs/" title="What is a ECS" class="md-nav__link">
+    <a href="../ecs/" title="What is a ECS" class="md-nav__link">
       What is a ECS
     </a>
   </li>
@@ -212,11 +207,18 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../../../../guide/" title="User Guide" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" title="User Guide" class="md-nav__link md-nav__link--active">
       User Guide
     </a>
+    
   </li>
 
     
@@ -226,7 +228,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../../example/" title="Advance Example" class="md-nav__link">
+    <a href="../example/" title="Advance Example" class="md-nav__link">
       Advance Example
     </a>
   </li>
@@ -238,7 +240,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../" title="API Documentation" class="md-nav__link">
+    <a href="../packages/kecs/" title="API Documentation" class="md-nav__link">
       API Documentation
     </a>
   </li>
@@ -251,27 +253,12 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/juan-medina/kecs/blob/main/api/docs/packages/kecs/kecs.entity/-view/retain-all.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/juan-medina/kecs/blob/main/api/docs/guide.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -279,9 +266,9 @@
                   
                 
                 
-                <p><a href="../../../">kecs</a> / <a href="../../">kecs.entity</a> / <a href="../">View</a> / <a href="./">retainAll</a></p>
-<h1 id="retainall">retainAll<a class="headerlink" href="#retainall" title="Permanent link">&para;</a></h1>
-<p><code>open fun retainAll(elements:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-collection/index.html"><code>Collection</code></a><code>&lt;</code><a href="../../-entity/"><code>Entity</code></a><code>&gt;):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><code>Boolean</code></a></p>
+                  <h1>User Guide</h1>
+                
+                
                 
               
               
@@ -296,6 +283,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../ecs/" title="What is a ECS" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                What is a ECS
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../example/" title="Advance Example" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Advance Example
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -317,15 +339,15 @@
       
     </div>
     
-      <script src="../../../../../assets/javascripts/vendor.c3dc8c49.min.js"></script>
-      <script src="../../../../../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="../assets/javascripts/vendor.c3dc8c49.min.js"></script>
+      <script src="../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
       
       <script>
         app = initialize({
-          base: "../../../../..",
+          base: "..",
           features: [],
           search: Object.assign({
-            worker: "../../../../../assets/javascripts/worker/search.8e2cddea.min.js"
+            worker: "../assets/javascripts/worker/search.8e2cddea.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
