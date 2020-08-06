@@ -1,4 +1,29 @@
 :root > * {
-    --md-code-hl-comment-color: #777777;
-    --md-code-hl-punctuation-color: #777777;
+    --md-code-hl-comment-color: #75715e;
+    --md-code-hl-punctuation-color: #f8f8f2;
+    --md-code-hl-operator-color: #f92672;
+    --md-code-hl-keyword-color: #ae81ff;
+    --md-code-hl-name-color: #d9d9d9;
+    --md-code-hl-constant-color: #ae81ff;
+    --md-code-hl-string-color: #e6db74;
+    --md-code-hl-number-color: #ae81ff;
+    --md-code-hl-function-color: #a6e22e;
+}
+
+.video-wrapper {
+    position: relative;
+    display: block;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    padding-bottom: 56.25%;
+}
+.video-wrapper > iframe {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
 }

@@ -11,23 +11,23 @@
         <meta name="description" content="tbc.">
       
       
-        <link rel="canonical" href="https://juan-medina.github.io/kecs/packages/kecs/kecs.entity/-entity/has-components/">
+        <link rel="canonical" href="https://juan-medina.github.io/kecs/ecs/">
       
       
         <meta name="author" content="Juan Medina">
       
-      <link rel="shortcut icon" href="../../../../../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.3">
     
     
       
-        <title>Has components - Kotlin ECS</title>
+        <title>What is a ECS - Kotlin ECS</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.947af8d5.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.947af8d5.min.css">
       
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.7f672a1f.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.7f672a1f.min.css">
       
       
     
@@ -41,7 +41,7 @@
     
     
     
-      <link rel="stylesheet" href="../../../../../stylesheets/codehilite.css">
+      <link rel="stylesheet" href="../stylesheets/codehilite.css">
     
     
       
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hascomponents" class="md-skip">
+        <a href="#entities-components-and-systems" class="md-skip">
           Skip to content
         </a>
       
@@ -90,7 +90,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              Has components
+              What is a ECS
             
           </span>
         </div>
@@ -190,7 +190,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../.." title="Home" class="md-nav__link">
+    <a href=".." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -200,11 +200,63 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../../../../ecs/" title="What is a ECS" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        What is a ECS
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="What is a ECS" class="md-nav__link md-nav__link--active">
       What is a ECS
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entities-components-and-systems" class="md-nav__link">
+    Entities, components and systems
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-oriented-design" class="md-nav__link">
+    Data-oriented Design
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-data-oriented-design-for-ecs" class="md-nav__link">
+    Understanding Data-oriented design for ECS
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
     
@@ -214,7 +266,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../../../example/" title="Example" class="md-nav__link">
+    <a href="../example/" title="Example" class="md-nav__link">
       Example
     </a>
   </li>
@@ -226,7 +278,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../" title="API Documentation" class="md-nav__link">
+    <a href="../packages/kecs/" title="API Documentation" class="md-nav__link">
       API Documentation
     </a>
   </li>
@@ -246,8 +298,37 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#entities-components-and-systems" class="md-nav__link">
+    Entities, components and systems
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-oriented-design" class="md-nav__link">
+    Data-oriented Design
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-data-oriented-design-for-ecs" class="md-nav__link">
+    Understanding Data-oriented design for ECS
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -259,7 +340,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/juan-medina/kecs/blob/main/api/docs/packages/kecs/kecs.entity/-entity/has-components.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/juan-medina/kecs/blob/main/api/docs/ecs.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -267,9 +348,25 @@
                   
                 
                 
-                <p><a href="../../../">kecs</a> / <a href="../../">kecs.entity</a> / <a href="../">Entity</a> / <a href="./">hasComponents</a></p>
-<h1 id="hascomponents">hasComponents<a class="headerlink" href="#hascomponents" title="Permanent link">&para;</a></h1>
-<p><code>fun hasComponents(vararg types:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html"><code>KClass</code></a><code>&lt;out</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><code>Any</code></a><code>&gt;):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><code>Boolean</code></a></p>
+                  <h1>What is a ECS</h1>
+                
+                <h2 id="entities-components-and-systems">Entities, components and systems<a class="headerlink" href="#entities-components-and-systems" title="Permanent link">&para;</a></h2>
+<p>Entity–component–system (ECS) is an architectural patter that follows the composition over inheritance principle that allows greater flexibility in defining entities
+where every object in a world.</p>
+<p>Every entity consists of one or more components which contains data or state. Therefore, the behavior of an entity can be changed at runtime by systems that add, remove or mutate components.</p>
+<p>This eliminates the ambiguity problems of deep and wide inheritance hierarchies that are difficult to understand, maintain and extend.</p>
+<p>Common ECS approaches are highly compatible and often combined with data-oriented design techniques.</p>
+<p>For a more in deep read on this topic I could recommend <a href="https://medium.com/ingeniouslysimple/entities-components-and-systems-89c31464240d" target="_blank">this article</a>.</p>
+<h2 id="data-oriented-design">Data-oriented Design<a class="headerlink" href="#data-oriented-design" title="Permanent link">&para;</a></h2>
+<p>A data oriented design is a design in which the logic of the application is built up of data sets, instead of procedural algorithms,
+they are highly optimized, specially because how computer organize data.</p>
+<p>For a more in deep read on this topic I could recommend <a href="http://gamesfromwithin.com/data-oriented-design" target="_blank">this article</a>.</p>
+<h2 id="understanding-data-oriented-design-for-ecs">Understanding Data-oriented design for ECS<a class="headerlink" href="#understanding-data-oriented-design-for-ecs" title="Permanent link">&para;</a></h2>
+<p>On <a href="https://gdconf.com/" target="_blank">GDC</a> 2019 <a href="https://unity.com/" target="_blank">Unity</a> make a fascinating video about data-oriented design and ECS,
+and how this has a huge impact on performance, I strongly recommend watching this video.</p>
+<div class="video-wrapper">
+  <iframe width="1280" height="720" src="https://www.youtube.com/embed/0_Byw9UMn9g" frameborder="0" allowfullscreen></iframe>
+</div>
                 
               
               
@@ -284,6 +381,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href=".." title="Home" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../example/" title="Example" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Example
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -305,15 +437,15 @@
       
     </div>
     
-      <script src="../../../../../assets/javascripts/vendor.c3dc8c49.min.js"></script>
-      <script src="../../../../../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      <script src="../assets/javascripts/vendor.c3dc8c49.min.js"></script>
+      <script src="../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
       
       <script>
         app = initialize({
-          base: "../../../../..",
+          base: "..",
           features: [],
           search: Object.assign({
-            worker: "../../../../../assets/javascripts/worker/search.8e2cddea.min.js"
+            worker: "../assets/javascripts/worker/search.8e2cddea.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

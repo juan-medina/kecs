@@ -9,6 +9,7 @@ repo_name: 'GitHub'
 edit_uri: '/juan-medina/kecs/blob/main/api/docs'
 pages:
     - Home: 'index.md'
+    - What is a ECS: 'ecs.md'
     - Example : 'example.md'
     - API Documentation: 'packages/kecs/index.md'
 theme:
