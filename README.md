@@ -21,7 +21,7 @@ It allows separating data from behavior and get rid of deep object oriented inhe
 Due to data-oriented design allow modern processors to highly optimize it for an over perform of more traditional
 systems.
 
-If you like to learn more about what is an ECS we try to give some clarification on [this section](ecs.md).
+If you like to learn more about what is an ECS we try to give some clarification on [this section](https://juan-medina.github.io/kecs/ecs/).
 
 
 ## License
