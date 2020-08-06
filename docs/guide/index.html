@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#basics" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -215,9 +220,204 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        User Guide
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
     <a href="./" title="User Guide" class="md-nav__link md-nav__link--active">
       User Guide
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    Basics
+  </a>
+  
+    <nav class="md-nav" aria-label="Basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-our-world" class="md-nav__link">
+    Creating our world
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-entities" class="md-nav__link">
+    Adding entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-components" class="md-nav__link">
+    Adding components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-a-component" class="md-nav__link">
+    Getting a component
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-the-entity-to-our-world" class="md-nav__link">
+    Adding the entity to our world
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-system" class="md-nav__link">
+    Creating a system
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-our-world" class="md-nav__link">
+    Update our world
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-kecs-dsl" class="md-nav__link">
+    Using KECS DSL
+  </a>
+  
+    <nav class="md-nav" aria-label="Using KECS DSL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-our-world_1" class="md-nav__link">
+    Creating our world
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-entities" class="md-nav__link">
+    Creating entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-entity-creation" class="md-nav__link">
+    Quick entity creation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-systems" class="md-nav__link">
+    Creating Systems
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#independently-time-update" class="md-nav__link">
+    Independently time update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-anonymous-systems" class="md-nav__link">
+    Creating Anonymous Systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-views" class="md-nav__link">
+    Using Views
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-views" class="md-nav__link">
+    Creating Views
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterating-views" class="md-nav__link">
+    Iterating views
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-a-single-entity" class="md-nav__link">
+    Obtaining a single Entity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-a-set-of-components" class="md-nav__link">
+    Obtaining a set of components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-a-single-component" class="md-nav__link">
+    Obtaining a single component
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -253,6 +453,200 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    Basics
+  </a>
+  
+    <nav class="md-nav" aria-label="Basics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-our-world" class="md-nav__link">
+    Creating our world
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-entities" class="md-nav__link">
+    Adding entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-components" class="md-nav__link">
+    Adding components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#getting-a-component" class="md-nav__link">
+    Getting a component
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adding-the-entity-to-our-world" class="md-nav__link">
+    Adding the entity to our world
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-a-system" class="md-nav__link">
+    Creating a system
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-our-world" class="md-nav__link">
+    Update our world
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-kecs-dsl" class="md-nav__link">
+    Using KECS DSL
+  </a>
+  
+    <nav class="md-nav" aria-label="Using KECS DSL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-our-world_1" class="md-nav__link">
+    Creating our world
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-entities" class="md-nav__link">
+    Creating entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-entity-creation" class="md-nav__link">
+    Quick entity creation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-systems" class="md-nav__link">
+    Creating Systems
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#independently-time-update" class="md-nav__link">
+    Independently time update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-anonymous-systems" class="md-nav__link">
+    Creating Anonymous Systems
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-views" class="md-nav__link">
+    Using Views
+  </a>
+  
+    <nav class="md-nav" aria-label="Using Views">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-views" class="md-nav__link">
+    Creating Views
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iterating-views" class="md-nav__link">
+    Iterating views
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-a-single-entity" class="md-nav__link">
+    Obtaining a single Entity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-a-set-of-components" class="md-nav__link">
+    Obtaining a set of components
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-a-single-component" class="md-nav__link">
+    Obtaining a single component
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -268,7 +662,175 @@
                 
                   <h1>User Guide</h1>
                 
-                
+                <h2 id="basics">Basics<a class="headerlink" href="#basics" title="Permanent link">&para;</a></h2>
+<p>To learn how to use KECS let&rsquo;s start with the basics.</p>
+<h3 id="creating-our-world">Creating our world<a class="headerlink" href="#creating-our-world" title="Permanent link">&para;</a></h3>
+<p>The first thing that we need for using KECS is to create our world, a object
+that will hold all of our entities, with their components, and systems.</p>
+<p>For this we could just do :</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">KEcs</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="adding-entities">Adding entities<a class="headerlink" href="#adding-entities" title="Permanent link">&para;</a></h3>
+<p>Now we need to add entities to our world.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">myEntity</span> <span class="p">=</span> <span class="n">Entity</span><span class="p">()</span>
+</code></pre></div>
+
+<h3 id="adding-components">Adding components<a class="headerlink" href="#adding-components" title="Permanent link">&para;</a></h3>
+<p>An entity is just an instance in our world, but we need to add components to it that
+represent what that entity contains.</p>
+<p>For example if we have this components.</p>
+<div class="highlight"><pre><span></span><code><span class="k">data</span> <span class="k">class</span> <span class="nc">Position</span><span class="p">(</span><span class="k">var</span> <span class="py">x</span> <span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="k">var</span> <span class="py">y</span><span class="p">:</span> <span class="n">Float</span><span class="p">)</span>
+
+<span class="k">data</span> <span class="k">class</span> <span class="nc">Player</span><span class="p">(</span><span class="k">val</span> <span class="py">name</span> <span class="p">:</span> <span class="n">String</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Now we could add to our entity the components that represent it.</p>
+<div class="highlight"><pre><span></span><code><span class="n">myEntity</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Postion</span><span class="p">(</span><span class="n">x</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">,</span> <span class="n">y</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">))</span>
+<span class="n">myEntity</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Player</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Jon&quot;</span><span class="p">))</span>
+</code></pre></div>
+
+<h3 id="getting-a-component">Getting a component<a class="headerlink" href="#getting-a-component" title="Permanent link">&para;</a></h3>
+<p>When we have a component we could get a component it has using their type.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">player</span> <span class="p">=</span> <span class="n">myEntity</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">&gt;()</span>
+<span class="n">println</span><span class="p">(</span><span class="s">&quot;the player is ${player.name}&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="adding-the-entity-to-our-world">Adding the entity to our world<a class="headerlink" href="#adding-the-entity-to-our-world" title="Permanent link">&para;</a></h3>
+<p>Now that our entity has what we need we could add it to our world.</p>
+<div class="highlight"><pre><span></span><code><span class="n">world</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">myEntity</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="creating-a-system">Creating a system<a class="headerlink" href="#creating-a-system" title="Permanent link">&para;</a></h3>
+<p>Now that we have an entity in our world we need to add system that add behavior to them,
+in this example we will just move the position base on the delta time happen between updates.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MoveSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+
+            <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
+            <span class="n">pos</span><span class="p">.</span><span class="n">y</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="update-our-world">Update our world<a class="headerlink" href="#update-our-world" title="Permanent link">&para;</a></h3>
+<p>Now that we have our entities, components and systems we could ask for our world to update.</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="p">(...)</span> <span class="p">{</span>
+    <span class="n">world</span><span class="p">.</span><span class="n">update</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>This will invoke our System and update our entities according the logic it has.</p>
+<h2 id="using-kecs-dsl">Using KECS DSL<a class="headerlink" href="#using-kecs-dsl" title="Permanent link">&para;</a></h2>
+<p>Since we are using Kotlin we could provide a DSL that simplify some steps that
+we did before.</p>
+<h3 id="creating-our-world_1">Creating our world<a class="headerlink" href="#creating-our-world_1" title="Permanent link">&para;</a></h3>
+<p>With the dsl we could create a world and add system to it.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">kecs</span> <span class="p">{</span>
+    <span class="p">+</span><span class="n">MoveSystem</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="creating-entities">Creating entities<a class="headerlink" href="#creating-entities" title="Permanent link">&para;</a></h3>
+<p>We could as well create entities with their components.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">myEntity</span> <span class="p">=</span> <span class="n">entity</span> <span class="p">{</span>
+    <span class="p">+</span><span class="n">Postion</span><span class="p">(</span><span class="n">x</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">,</span> <span class="n">y</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">)</span>
+    <span class="p">+</span><span class="n">Player</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Jon&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">world</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">myEntity</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="quick-entity-creation">Quick entity creation<a class="headerlink" href="#quick-entity-creation" title="Permanent link">&para;</a></h3>
+<p>However, we could create entities and add them to our world with in one step.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">myEntity</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
+    <span class="p">+</span><span class="n">Postion</span><span class="p">(</span><span class="n">x</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">,</span> <span class="n">y</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">)</span>
+    <span class="p">+</span><span class="n">Player</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Jon&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="creating-systems">Creating Systems<a class="headerlink" href="#creating-systems" title="Permanent link">&para;</a></h2>
+<p>We look at before at creating a System, but we didn&rsquo;t get in the details of how they work.</p>
+<h3 id="independently-time-update">Independently time update<a class="headerlink" href="#independently-time-update" title="Permanent link">&para;</a></h3>
+<p>If we look at the code of the System that we create before we could see the update function.</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MoveSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+
+            <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
+            <span class="n">pos</span><span class="p">.</span><span class="n">y</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+When KECS is invoking the system update it will send to them the delta time from last update, and
+how long this has been running, this could be used to implement logic that is independent
+of the time that has passed, such moving an object independently of the frame rate.</p>
+<p>In this example we will move 5 units on x and y per second independently of how often / late
+our system get called.</p>
+<h3 id="creating-anonymous-systems">Creating Anonymous Systems<a class="headerlink" href="#creating-anonymous-systems" title="Permanent link">&para;</a></h3>
+<p>So far we have created a System using a class, however we could creat Anonymous Systems.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">kecs</span> <span class="p">{</span>
+    <span class="p">+</span><span class="k">object</span> <span class="p">:</span> <span class="nc">System</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+                <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+
+                <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
+                <span class="n">pos</span><span class="p">.</span><span class="n">y</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="using-views">Using Views<a class="headerlink" href="#using-views" title="Permanent link">&para;</a></h2>
+<p>Our KECS world is actually a View, a class that hold entities and provide methods to use them.</p>
+<h3 id="creating-views">Creating Views<a class="headerlink" href="#creating-views" title="Permanent link">&para;</a></h3>
+<p>We could get a subview of a view just using the view function, giving the components that
+we are interested on.
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">view</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Velocity</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+</code></pre></div></p>
+<p>This view will contain all the entities that has a Position and  Velocity component.</p>
+<h3 id="iterating-views">Iterating views<a class="headerlink" href="#iterating-views" title="Permanent link">&para;</a></h3>
+<p>Views implement the Iterable<Entity> interface, so we could use normal Iterators functions.</p>
+<div class="highlight"><pre><span></span><code><span class="n">view</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span>
+<span class="p">...</span>
+<span class="p">}</span>
+
+<span class="n">view</span><span class="p">.</span><span class="n">Sort</span> <span class="p">{</span>
+<span class="p">...</span>
+<span class="p">}</span>
+
+<span class="n">view</span><span class="p">.</span><span class="n">Group</span> <span class="p">{</span>
+<span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="obtaining-a-single-entity">Obtaining a single Entity<a class="headerlink" href="#obtaining-a-single-entity" title="Permanent link">&para;</a></h3>
+<p>Some times we may want to obtain a single Entity from a view.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">entity1</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">entity</span><span class="p">(</span><span class="n">Player</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+</code></pre></div>
+
+<p>This will return the entity that has a Player component, it will fail if we have more than one.</p>
+<h3 id="obtaining-a-set-of-components">Obtaining a set of components<a class="headerlink" href="#obtaining-a-set-of-components" title="Permanent link">&para;</a></h3>
+<p>Other times we may want to get just the components from a set of entities, we could easily do that with.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">components</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">components</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+</code></pre></div>
+
+<p>This will return all the components on the view of that class. However, if you update
+the components they will be not update since you are not modifying the entity.</p>
+<h3 id="obtaining-a-single-component">Obtaining a single component<a class="headerlink" href="#obtaining-a-single-component" title="Permanent link">&para;</a></h3>
+<p>In a very edge case scenario you may just want to get a single component, and you could
+that with.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">component</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">component</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">&gt;()</span>
+</code></pre></div>
+
+<p>Note that this will fail if you have more than one entity with that component.</p>
                 
               
               
