@@ -55,6 +55,6 @@ kotlin {
 }
 
 dokka {
-    outputDirectory = "${project.rootDir}/api/packages"
+    outputDirectory = "${project.rootDir}/api/docs/packages"
     outputFormat = "gfm"
 }

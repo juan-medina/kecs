@@ -30,10 +30,6 @@
         <link rel="stylesheet" href="../assets/stylesheets/palette.7f672a1f.min.css">
       
       
-        
-        
-        <meta name="theme-color" content="#03a9f4">
-      
     
     
     
@@ -45,6 +41,8 @@
     
     
     
+      <link rel="stylesheet" href="../stylesheets/codehilite.css">
+    
     
       
     
@@ -55,7 +53,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="light-blue" data-md-color-accent="">
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent="">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -308,7 +306,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/juan-medina/kecs/edit/master/docs/example.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/juan-medina/kecs/blob/main/api/docs/example.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -419,7 +417,10 @@
 <span class="c1">// Helpers</span>
 
 <span class="cm">/** get a random Float in a range **/</span>
-<span class="k">fun</span> <span class="nf">ClosedRange</span><span class="p">&lt;</span><span class="n">Float</span><span class="p">&gt;.</span><span class="n">random</span><span class="p">()</span> <span class="p">=</span> <span class="n">start</span> <span class="p">+</span> <span class="p">((</span><span class="n">endInclusive</span> <span class="p">-</span> <span class="n">start</span><span class="p">)</span> <span class="p">*</span> <span class="n">Random</span><span class="p">.</span><span class="n">nextFloat</span><span class="p">())</span>
+<span class="k">fun</span> <span class="nf">ClosedRange</span><span class="p">&lt;</span><span class="n">Float</span><span class="p">&gt;.</span><span class="n">random</span><span class="p">()</span> <span class="p">=</span> <span class="n">start</span> <span class="p">+</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">endInclusive</span> <span class="p">-</span> <span class="n">start</span><span class="p">)</span> <span class="p">*</span>
+        <span class="n">Random</span><span class="p">.</span><span class="n">nextFloat</span><span class="p">()</span>
+    <span class="p">)</span>
 
 <span class="cm">/** get a random capitalized String from a String List **/</span>
 <span class="k">fun</span> <span class="nf">List</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;.</span><span class="n">randomCapitalize</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
@@ -427,7 +428,8 @@
 <span class="p">}</span>
 
 <span class="cm">/** get a random animal name like : Unlikely Assuring Hagfish **/</span>
-<span class="k">fun</span> <span class="nf">randomAnimalName</span><span class="p">()</span> <span class="p">=</span> <span class="s">&quot;${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${animals.randomCapitalize()}&quot;</span>
+<span class="k">fun</span> <span class="nf">randomAnimalName</span><span class="p">()</span> <span class="p">=</span> <span class="s">&quot;${adverbs.randomCapitalize()} &quot;</span> <span class="p">+</span>
+    <span class="s">&quot;${adjectives.randomCapitalize()} ${animals.randomCapitalize()}&quot;</span>
 
 <span class="cm">/** get a float with 3 decimals positions **/</span>
 <span class="k">fun</span> <span class="nc">Float</span><span class="p">.</span><span class="nf">threeDecimals</span><span class="p">()</span> <span class="p">=</span> <span class="p">(</span><span class="k">this</span> <span class="p">*</span> <span class="m">1000</span><span class="p">).</span><span class="n">toInt</span><span class="p">()</span> <span class="p">/</span> <span class="m">1000.0f</span>
@@ -440,15 +442,7 @@
     <span class="k">else</span> <span class="p">-&gt;</span> <span class="s">&quot;st&quot;</span>
 <span class="p">}</span>
 
-<span class="cm">/** format a int in three digits with spaces on the left</span>
-<span class="cm"> *</span>
-<span class="cm"> * _48</span>
-<span class="cm"> *</span>
-<span class="cm"> * __5</span>
-<span class="cm"> *</span>
-<span class="cm"> * 100</span>
-<span class="cm"> *</span>
-<span class="cm"> * **/</span>
+<span class="cm">/** format a int in three digits with spaces on the left **/</span>
 <span class="k">fun</span> <span class="nc">Int</span><span class="p">.</span><span class="nf">threeDigits</span><span class="p">():</span> <span class="n">String</span> <span class="p">{</span>
     <span class="k">val</span> <span class="py">digits</span> <span class="p">=</span> <span class="k">this</span><span class="p">.</span><span class="n">toString</span><span class="p">().</span><span class="n">length</span>
     <span class="k">val</span> <span class="py">remaining</span> <span class="p">=</span> <span class="m">3</span> <span class="p">-</span> <span class="n">digits</span>
@@ -458,12 +452,14 @@
 <span class="c1">// our race</span>
 
 <span class="k">fun</span> <span class="nf">animalRace</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// we create our world adding 4 systems, each of them it handle only one concern</span>
-    <span class="c1">//  - the movement system it take care or moving things, both animals and the lure</span>
+    <span class="c1">// we will create our world adding 4 systems, each of them takes care of</span>
+    <span class="c1">// only one concern</span>
+    <span class="c1">//  - the movement system it take care or moving things, both animals</span>
+    <span class="c1">//      and the lure</span>
     <span class="c1">//  - the winner system will take care or knowing which animal won</span>
     <span class="c1">//  - the race system will take care to know when the race has ended</span>
-    <span class="c1">//  - the progress system will draw a progress bar with the overall completion,</span>
-    <span class="c1">//      but it could be removed without affecting the logic</span>
+    <span class="c1">//  - the progress system will draw a progress bar with the overall</span>
+    <span class="c1">//      completion, but it could be removed without affecting the logic</span>
     <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">ecs</span> <span class="p">{</span>
         <span class="p">+</span><span class="n">MovementSystem</span><span class="p">()</span>
         <span class="p">+</span><span class="n">WinnerSystem</span><span class="p">()</span>
@@ -538,7 +534,10 @@
         <span class="c1">// get the components of the entity and display it</span>
         <span class="k">val</span> <span class="py">animal</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">&gt;()</span>
         <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
-        <span class="n">println</span><span class="p">(</span><span class="s">&quot;${(place + 1).withSuffix()} ${animal.name} in ${pos.time.threeDecimals()}s&quot;</span><span class="p">)</span>
+        <span class="n">println</span><span class="p">(</span>
+            <span class="s">&quot;${(place + 1).withSuffix()} ${animal.name} in &quot;</span> <span class="p">+</span>
+                <span class="s">&quot;${pos.time.threeDecimals()}s&quot;</span>
+        <span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -620,7 +619,7 @@
 
     <span class="cm">/** display a progress bar like:</span>
 <span class="cm">     *</span>
-<span class="cm">     * text  22 % [██████------------------------] 1.592s</span>
+<span class="cm">     * text  22 % [██████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒] 1.592s</span>
 <span class="cm">     *</span>
 <span class="cm">     **/</span>
     <span class="k">private</span> <span class="k">fun</span> <span class="nf">drawBar</span><span class="p">(</span><span class="n">completion</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
@@ -630,22 +629,28 @@
 
         <span class="c1">// get the blocks empty |</span>
         <span class="k">val</span> <span class="py">blocksEmpty</span> <span class="p">=</span> <span class="n">NUM_BLOCKS</span> <span class="p">-</span> <span class="n">blocksToFill</span>
-        <span class="k">val</span> <span class="py">emptyBlocks</span> <span class="p">=</span> <span class="s">&quot;-&quot;</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">blocksEmpty</span><span class="p">)</span>
+        <span class="k">val</span> <span class="py">emptyBlocks</span> <span class="p">=</span> <span class="s">&quot;▒&quot;</span><span class="p">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">blocksEmpty</span><span class="p">)</span>
 
         <span class="c1">// calculate the percentage</span>
         <span class="k">val</span> <span class="py">percent</span> <span class="p">=</span> <span class="p">(</span><span class="n">completion</span> <span class="p">*</span> <span class="m">100</span><span class="p">).</span><span class="n">toInt</span><span class="p">()</span>
 
         <span class="c1">// compose the bar, we use \r to reset the cursor</span>
-        <span class="n">print</span><span class="p">(</span><span class="s">&quot;\r$text ${percent.threeDigits()} % [$filledBlocks$emptyBlocks] ${time.threeDecimals()}s  &quot;</span><span class="p">)</span>
+        <span class="n">print</span><span class="p">(</span>
+            <span class="s">&quot;\r$text ${percent.threeDigits()} % &quot;</span> <span class="p">+</span>
+                <span class="s">&quot;[$filledBlocks$emptyBlocks] &quot;</span> <span class="p">+</span>
+                <span class="s">&quot;${time.threeDecimals()}s  &quot;</span>
+        <span class="p">)</span>
     <span class="p">}</span>
 
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// get from all entities that has position the position</span>
         <span class="k">val</span> <span class="py">positions</span> <span class="p">=</span> <span class="n">ecs</span><span class="p">.</span><span class="n">components</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
 
-        <span class="c1">// if we average all that we have run so far and divide by the length of the race</span>
-        <span class="c1">//  we will have the overall completion (0..1) of the race</span>
-        <span class="k">val</span> <span class="py">completion</span> <span class="p">=</span> <span class="n">positions</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">at</span> <span class="p">}.</span><span class="n">average</span><span class="p">().</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">/</span> <span class="n">RACE_LENGTH</span>
+        <span class="c1">// if we average all that we have run so far and divide by the</span>
+        <span class="c1">//  length of the race we will have the overall completion (0..1) of</span>
+        <span class="c1">//  the race</span>
+        <span class="k">val</span> <span class="py">completion</span> <span class="p">=</span> <span class="n">positions</span><span class="p">.</span><span class="n">map</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">at</span> <span class="p">}.</span><span class="n">average</span><span class="p">().</span><span class="n">toFloat</span><span class="p">()</span> <span class="p">/</span>
+            <span class="n">RACE_LENGTH</span>
 
         <span class="c1">// We accumulate the race time</span>
         <span class="n">time</span> <span class="p">+=</span> <span class="n">delta</span>

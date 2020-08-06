@@ -6,7 +6,7 @@ copyright: '© 2020 Juan Medina'
 
 repo_url: https://github.com/juan-medina/kecs
 repo_name: 'GitHub'
-
+edit_uri: '/juan-medina/kecs/blob/main/api/docs'
 pages:
     - Home: 'index.md'
     - Example : 'example.md'
@@ -15,8 +15,9 @@ theme:
     name: material
     palette:
         scheme: slate
-        primary: light blue
-docs_dir: api
+extra_css:
+    - stylesheets/codehilite.css
+docs_dir: api/docs
 site_dir: docs/
 markdown_extensions:
     - codehilite

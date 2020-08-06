@@ -99,7 +99,10 @@ enum class RaceStatus {
 // Helpers
 
 /** get a random Float in a range **/
-fun ClosedRange<Float>.random() = start + ((endInclusive - start) * Random.nextFloat())
+fun ClosedRange<Float>.random() = start + (
+    (endInclusive - start) *
+        Random.nextFloat()
+    )
 
 /** get a random capitalized String from a String List **/
 fun List<String>.randomCapitalize(): String {
@@ -107,7 +110,8 @@ fun List<String>.randomCapitalize(): String {
 }
 
 /** get a random animal name like : Unlikely Assuring Hagfish **/
-fun randomAnimalName() = "${adverbs.randomCapitalize()} ${adjectives.randomCapitalize()} ${animals.randomCapitalize()}"
+fun randomAnimalName() = "${adverbs.randomCapitalize()} " +
+    "${adjectives.randomCapitalize()} ${animals.randomCapitalize()}"
 
 /** get a float with 3 decimals positions **/
 fun Float.threeDecimals() = (this * 1000).toInt() / 1000.0f
@@ -120,15 +124,7 @@ fun Int.withSuffix() = "$this" + when (this) {
     else -> "st"
 }
 
-/** format a int in three digits with spaces on the left
- *
- * _48
- *
- * __5
- *
- * 100
- *
- * **/
+/** format a int in three digits with spaces on the left **/
 fun Int.threeDigits(): String {
     val digits = this.toString().length
     val remaining = 3 - digits
@@ -138,12 +134,14 @@ fun Int.threeDigits(): String {
 // our race
 
 fun animalRace() {
-    // we create our world adding 4 systems, each of them it handle only one concern
-    //  - the movement system it take care or moving things, both animals and the lure
+    // we will create our world adding 4 systems, each of them takes care of
+    // only one concern
+    //  - the movement system it take care or moving things, both animals
+    //      and the lure
     //  - the winner system will take care or knowing which animal won
     //  - the race system will take care to know when the race has ended
-    //  - the progress system will draw a progress bar with the overall completion,
-    //      but it could be removed without affecting the logic
+    //  - the progress system will draw a progress bar with the overall
+    //      completion, but it could be removed without affecting the logic
     val world = ecs {
         +MovementSystem()
         +WinnerSystem()
@@ -218,7 +216,10 @@ fun animalRace() {
         // get the components of the entity and display it
         val animal = it.get<Animal>()
         val pos = it.get<Position>()
-        println("${(place + 1).withSuffix()} ${animal.name} in ${pos.time.threeDecimals()}s")
+        println(
+            "${(place + 1).withSuffix()} ${animal.name} in " +
+                "${pos.time.threeDecimals()}s"
+        )
     }
 }
 
@@ -300,7 +301,7 @@ class ProgressSystem : System() {
 
     /** display a progress bar like:
      *
-     * text  22 % [██████------------------------] 1.592s
+     * text  22 % [██████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒] 1.592s
      *
      **/
     private fun drawBar(completion: Float, time: Float, text: String) {
@@ -310,22 +311,28 @@ class ProgressSystem : System() {
 
         // get the blocks empty |
         val blocksEmpty = NUM_BLOCKS - blocksToFill
-        val emptyBlocks = "-".repeat(blocksEmpty)
+        val emptyBlocks = "▒".repeat(blocksEmpty)
 
         // calculate the percentage
         val percent = (completion * 100).toInt()
 
         // compose the bar, we use \r to reset the cursor
-        print("\r$text ${percent.threeDigits()} % [$filledBlocks$emptyBlocks] ${time.threeDecimals()}s  ")
+        print(
+            "\r$text ${percent.threeDigits()} % " +
+                "[$filledBlocks$emptyBlocks] " +
+                "${time.threeDecimals()}s  "
+        )
     }
 
     override fun update(delta: Float, total: Float, ecs: KEcs) {
         // get from all entities that has position the position
         val positions = ecs.components<Position>()
 
-        // if we average all that we have run so far and divide by the length of the race
-        //  we will have the overall completion (0..1) of the race
-        val completion = positions.map { it.at }.average().toFloat() / RACE_LENGTH
+        // if we average all that we have run so far and divide by the
+        //  length of the race we will have the overall completion (0..1) of
+        //  the race
+        val completion = positions.map { it.at }.average().toFloat() /
+            RACE_LENGTH
 
         // We accumulate the race time
         time += delta
