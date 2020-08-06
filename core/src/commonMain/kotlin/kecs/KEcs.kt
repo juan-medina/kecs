@@ -1,16 +1,10 @@
 package kecs
 
-import kecs.dsl.KEcsDsl
 import kecs.entity.View
 import kecs.platform.Platform
 import kecs.system.System
 
 class KEcs : View() {
-    @Suppress("ClassName")
-    companion object dsl {
-        fun ecs(init: KEcsDsl.() -> Unit) = KEcsDsl().apply(init).ecs()
-    }
-
     private val systems = arrayListOf<System>()
     private var current = 0L
     private var total = 0.0f

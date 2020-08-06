@@ -1,6 +1,8 @@
 package keces.dsl
 
 import kecs.KEcs
+import kecs.dsl.add
+import kecs.dsl.kecs
 import kecs.system.System
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -30,7 +32,7 @@ class DslTests {
 
     @Test
     fun `we could use the DSL with a created systems`() {
-        val world = KEcs.ecs {
+        val world = kecs {
             +MoveSystem()
         }
 
@@ -63,7 +65,7 @@ class DslTests {
 
     @Test
     fun `we could use the DSL with an anonymous system`() {
-        val world = KEcs.ecs {
+        val world = kecs {
             +object : System() {
                 override fun update(delta: Float, total: Float, ecs: KEcs) {
                     val vel = Velocity(1.0f, 1.0f)

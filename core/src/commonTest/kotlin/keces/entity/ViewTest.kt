@@ -1,6 +1,7 @@
 package keces.entity
 
-import kecs.entity.Entity.dsl.entity
+import kecs.dsl.add
+import kecs.dsl.entity
 import kecs.entity.View
 import kotlin.test.Test
 import kotlin.test.assertEquals

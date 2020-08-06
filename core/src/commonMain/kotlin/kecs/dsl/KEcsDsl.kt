@@ -11,3 +11,5 @@ class KEcsDsl {
         ecs.add(this)
     }
 }
+
+fun kecs(init: KEcsDsl.() -> Unit) = KEcsDsl().apply(init).ecs()

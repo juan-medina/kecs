@@ -1,14 +1,8 @@
 package kecs.entity
 
-import kecs.dsl.EntityDsl
 import kotlin.reflect.KClass
 
 class Entity {
-    @Suppress("ClassName")
-    companion object dsl {
-        fun entity(init: EntityDsl.() -> Unit) = EntityDsl().apply(init).entity()
-    }
-
     val components = hashMapOf<KClass<*>, Any>()
 
     inline infix fun <reified T : Any> add(component: T) {

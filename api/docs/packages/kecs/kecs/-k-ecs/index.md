@@ -17,8 +17,8 @@
 | [add](add.md) | `fun add(system: `[`System`](../../kecs.system/-system/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [update](update.md) | `fun update(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
-### Companion Object Functions
+### Extension Functions
 
 | Name | Summary |
 |---|---|
-| [ecs](ecs.md) | `fun ecs(init: `[`KEcsDsl`](../../kecs.dsl/-k-ecs-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`KEcs`](./index.md) |
+| [add](../../kecs.dsl/add.md) | `fun `[`View`](../../kecs.entity/-view/index.md)`.add(init: `[`EntityDsl`](../../kecs.dsl/-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../../kecs.entity/-entity/index.md) |

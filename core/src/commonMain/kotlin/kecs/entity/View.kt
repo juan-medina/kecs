@@ -1,6 +1,5 @@
 package kecs.entity
 
-import kecs.dsl.EntityDsl
 import kotlin.reflect.KClass
 
 open class View() : MutableCollection<Entity> {
@@ -22,11 +21,6 @@ open class View() : MutableCollection<Entity> {
 
     override val size: Int
         get() = entities.size
-
-    fun add(init: EntityDsl.() -> Unit) = Entity.entity(init).let {
-        add(it)
-        it
-    }
 
     override fun add(element: Entity) = entities.add(element)
 

@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#examples" class="md-skip">
+        <a href="#example" class="md-skip">
           Skip to content
         </a>
       
@@ -237,8 +237,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#check-an-url-and-get-the-domain" class="md-nav__link">
-    Check an Url and get the domain
+  <a href="#an-animal-race" class="md-nav__link">
+    An animal race
   </a>
   
 </li>
@@ -288,8 +288,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#check-an-url-and-get-the-domain" class="md-nav__link">
-    Check an Url and get the domain
+  <a href="#an-animal-race" class="md-nav__link">
+    An animal race
   </a>
   
 </li>
@@ -314,10 +314,21 @@
                   
                 
                 
-                <h1 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h1>
-<h3 id="check-an-url-and-get-the-domain">Check an Url and get the domain<a class="headerlink" href="#check-an-url-and-get-the-domain" title="Permanent link">&para;</a></h3>
+                <h1 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h1>
+<h3 id="an-animal-race">An animal race<a class="headerlink" href="#an-animal-race" title="Permanent link">&para;</a></h3>
+<p>Bellow we could see a complex example that tries to illustrate how to use an ECS to perform a concurrent task, in this
+example an animal race.</p>
+<p>This separate our <em>entities</em> <em>components</em> and <em>systems</em>.</p>
+<p>If you like to test this example, from the root path of this project you could run the gradle task for your platform:</p>
+<div class="highlight"><pre><span></span><code>&gt; graddlew runSampleJvm
+&gt; graddlew runSampleLinuxDebug
+&gt; graddlew runSampleLinuxRelease
+</code></pre></div>
+
+<p>You could as well <a href="https://github.com/juan-medina/kecs/blob/main/sample/src/commonMain/kotlin/animalrace.kt" target="_blank">check out the code</a>.</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="nn">kecs.KEcs</span>
-<span class="k">import</span> <span class="nn">kecs.KEcs.dsl.ecs</span>
+<span class="k">import</span> <span class="nn">kecs.dsl.add</span>
+<span class="k">import</span> <span class="nn">kecs.dsl.kecs</span>
 <span class="k">import</span> <span class="nn">kecs.system.System</span>
 <span class="k">import</span> <span class="nn">kotlin.math.min</span>
 <span class="k">import</span> <span class="nn">kotlin.random.Random</span>
@@ -460,7 +471,7 @@
     <span class="c1">//  - the race system will take care to know when the race has ended</span>
     <span class="c1">//  - the progress system will draw a progress bar with the overall</span>
     <span class="c1">//      completion, but it could be removed without affecting the logic</span>
-    <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">ecs</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">kecs</span> <span class="p">{</span>
         <span class="p">+</span><span class="n">MovementSystem</span><span class="p">()</span>
         <span class="p">+</span><span class="n">WinnerSystem</span><span class="p">()</span>
         <span class="p">+</span><span class="n">RaceSystem</span><span class="p">()</span>
@@ -850,10 +861,8 @@
     <span class="s">&quot;visually&quot;</span><span class="p">,</span> <span class="s">&quot;weekly&quot;</span><span class="p">,</span> <span class="s">&quot;wholly&quot;</span><span class="p">,</span> <span class="s">&quot;widely&quot;</span><span class="p">,</span> <span class="s">&quot;wildly&quot;</span><span class="p">,</span> <span class="s">&quot;willingly&quot;</span><span class="p">,</span> <span class="s">&quot;wrongly&quot;</span><span class="p">,</span>
     <span class="s">&quot;yearly&quot;</span>
 <span class="p">)</span>
-</code></pre></div>
 
-<div class="highlight"><pre><span></span><code><span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">println</span><span class="p">(</span><span class="s">&quot;Running Linux Sample&quot;</span><span class="p">)</span>
+<span class="k">fun</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">animalRace</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre></div>

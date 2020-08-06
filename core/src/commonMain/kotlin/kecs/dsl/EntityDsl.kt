@@ -10,3 +10,5 @@ class EntityDsl {
         entity.add(this)
     }
 }
+
+fun entity(init: EntityDsl.() -> Unit) = EntityDsl().apply(init).entity()

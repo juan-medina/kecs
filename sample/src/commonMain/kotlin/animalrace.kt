@@ -1,5 +1,6 @@
 import kecs.KEcs
-import kecs.KEcs.dsl.ecs
+import kecs.dsl.add
+import kecs.dsl.kecs
 import kecs.system.System
 import kotlin.math.min
 import kotlin.random.Random
@@ -142,7 +143,7 @@ fun animalRace() {
     //  - the race system will take care to know when the race has ended
     //  - the progress system will draw a progress bar with the overall
     //      completion, but it could be removed without affecting the logic
-    val world = ecs {
+    val world = kecs {
         +MovementSystem()
         +WinnerSystem()
         +RaceSystem()
