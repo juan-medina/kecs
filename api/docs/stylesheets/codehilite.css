@@ -27,3 +27,7 @@
     height: 100%;
     border: 0;
 }
+
+.md-typeset h5 {
+    text-transform: none;
+}

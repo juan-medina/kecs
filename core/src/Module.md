@@ -8,22 +8,22 @@ It allows separating data from behavior and get rid of deep object oriented inhe
 Due to data-oriented design allow modern processors to highly optimize it for an over perform of more traditional
 systems.
 
-# Package kecs
+# Package com.juanmedina.kecs
 
 root package for KECS
 
-# Package kecs.entity
+# Package com.juanmedina.kecs.entity
 
 classes for creating entities and views
 
-# Package kecs.system
+# Package com.juanmedina.kecs.system
 
 classes for creating systems
 
-# Package kecs.dsl
+# Package com.juanmedina.kecs.dsl
 
 kotlin dsl for idiomatic creation of objects
 
-# Package kecs.platform
+# Package com.juanmedina.kecs.platform
 
 platform specific classes

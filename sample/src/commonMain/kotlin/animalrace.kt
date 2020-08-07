@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-import kecs.KEcs
-import kecs.dsl.add
-import kecs.dsl.kecs
-import kecs.system.System
+import com.juanmedina.kecs.KEcs
+import com.juanmedina.kecs.dsl.add
+import com.juanmedina.kecs.dsl.kecs
+import com.juanmedina.kecs.system.System
 import kotlin.math.min
 import kotlin.random.Random
 

@@ -12,11 +12,11 @@ systems.
 
 | Name | Summary |
 |---|---|
-| [kecs](kecs/index.md) | root package for KECS |
-| [kecs.dsl](kecs.dsl/index.md) | kotlin dsl for idiomatic creation of objects |
-| [kecs.entity](kecs.entity/index.md) | classes for creating entities and views |
-| [kecs.platform](kecs.platform/index.md) | platform specific classes |
-| [kecs.system](kecs.system/index.md) | classes for creating systems |
+| [com.juanmedina.kecs](com.juanmedina.kecs/index.md) | root package for KECS |
+| [com.juanmedina.kecs.dsl](com.juanmedina.kecs.dsl/index.md) | kotlin dsl for idiomatic creation of objects |
+| [com.juanmedina.kecs.entity](com.juanmedina.kecs.entity/index.md) | classes for creating entities and views |
+| [com.juanmedina.kecs.platform](com.juanmedina.kecs.platform/index.md) | platform specific classes |
+| [com.juanmedina.kecs.system](com.juanmedina.kecs.system/index.md) | classes for creating systems |
 
 ### Index
 
