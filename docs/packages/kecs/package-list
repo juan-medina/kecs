@@ -1,8 +1,8 @@
 $dokka.format:gfm
 $dokka.linkExtension:md
 
-com.juanmedina.kecs
 com.juanmedina.kecs.dsl
 com.juanmedina.kecs.entity
 com.juanmedina.kecs.platform
 com.juanmedina.kecs.system
+com.juanmedina.kecs.world

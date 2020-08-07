@@ -23,4 +23,4 @@ kotlin dsl for idiomatic creation of objects
 |---|---|
 | [add](add.md) | `fun `[`View`](../com.juanmedina.kecs.entity/-view/index.md)`.add(init: `[`EntityDsl`](-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../com.juanmedina.kecs.entity/-entity/index.md) |
 | [entity](entity.md) | `fun entity(init: `[`EntityDsl`](-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../com.juanmedina.kecs.entity/-entity/index.md) |
-| [world](world.md) | `fun world(init: `[`WorldDsl`](-world-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`World`](../com.juanmedina.kecs/-world/index.md) |
+| [world](world.md) | `fun world(init: `[`WorldDsl`](-world-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`World`](../com.juanmedina.kecs.world/-world/index.md) |

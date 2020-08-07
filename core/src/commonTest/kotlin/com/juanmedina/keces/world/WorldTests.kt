@@ -13,11 +13,11 @@
  * limitations under the License.
  */
 
-package com.juanmedina.keces
+package com.juanmedina.keces.world
 
 import com.juanmedina.keces.platform.test.TestUtils
-import com.juanmedina.kecs.World
 import com.juanmedina.kecs.system.System
+import com.juanmedina.kecs.world.World
 import kotlin.math.truncate
 import kotlin.test.Test
 import kotlin.test.assertEquals

@@ -15,8 +15,8 @@
 
 package com.juanmedina.kecs.dsl
 
-import com.juanmedina.kecs.World
 import com.juanmedina.kecs.system.System
+import com.juanmedina.kecs.world.World
 
 @Dsl
 class WorldDsl {

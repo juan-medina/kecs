@@ -46,4 +46,4 @@
 
 | Name | Summary |
 |---|---|
-| [World](../../com.juanmedina.kecs/-world/index.md) | `class World : `[`View`](./index.md) |
+| [World](../../com.juanmedina.kecs.world/-world/index.md) | `class World : `[`View`](./index.md) |

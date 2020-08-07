@@ -15,7 +15,7 @@
 
 package com.juanmedina.kecs.system
 
-import com.juanmedina.kecs.World
+import com.juanmedina.kecs.world.World
 
 abstract class System {
     abstract fun update(delta: Float, total: Float, world: World)

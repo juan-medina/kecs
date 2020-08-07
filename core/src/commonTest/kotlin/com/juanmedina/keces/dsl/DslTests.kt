@@ -15,10 +15,10 @@
 
 package com.juanmedina.keces.dsl
 
-import com.juanmedina.kecs.World
 import com.juanmedina.kecs.dsl.add
 import com.juanmedina.kecs.dsl.world
 import com.juanmedina.kecs.system.System
+import com.juanmedina.kecs.world.World
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

@@ -1,8 +1,8 @@
-[kecs](../index.md) / [com.juanmedina.kecs](./index.md)
+[kecs](../index.md) / [com.juanmedina.kecs.world](./index.md)
 
-## Package com.juanmedina.kecs
+## Package com.juanmedina.kecs.world
 
-root package for KECS
+classes for managing our ECS world
 
 ### Types
 

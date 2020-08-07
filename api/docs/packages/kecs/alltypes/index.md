@@ -39,7 +39,7 @@ more simple and without the need of using multiple threads neither fibers nor co
 
 |
 
-##### [com.juanmedina.kecs.World](../com.juanmedina.kecs/-world/index.md)
+##### [com.juanmedina.kecs.world.World](../com.juanmedina.kecs.world/-world/index.md)
 
 
 |

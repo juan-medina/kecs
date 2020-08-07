@@ -2,7 +2,7 @@
 
 ## Package com.juanmedina.kecs.entity
 
-classes for creating entities and views
+classes for using entities and views
 
 ### Types
 

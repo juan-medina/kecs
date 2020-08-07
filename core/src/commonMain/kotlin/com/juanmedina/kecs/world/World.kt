@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.juanmedina.kecs
+package com.juanmedina.kecs.world
 
 import com.juanmedina.kecs.entity.View
 import com.juanmedina.kecs.platform.Platform
