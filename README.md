@@ -80,7 +80,7 @@ If you use maven you need to include the dependencies of the platforms that you 
 
 ## Basic Usage
 
-This is a basic example, check the [user guide](https://juan-medina.github.io/kecs/guide/), the [advance example](https://juan-medina.github.io/kecs/example/), or the [API Documentation](https://juan-medina.github.io/kecs/packages/kecs/)
+This is a basic example, check the [user guide](https://juan-medina.github.io/kecs/guide/), the [advance example](https://juan-medina.github.io/kecs/example/), or the [API Documentation](https://juan-medina.github.io/kecs/packages/-k-e-c-s/)
 for learning more about using KECS.
 
 ```Kotlin
