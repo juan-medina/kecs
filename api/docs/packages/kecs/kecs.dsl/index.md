@@ -2,6 +2,8 @@
 
 ## Package kecs.dsl
 
+kotlin dsl for idiomatic creation of objects
+
 ### Types
 
 | Name | Summary |

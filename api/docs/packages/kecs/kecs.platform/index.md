@@ -2,6 +2,8 @@
 
 ## Package kecs.platform
 
+platform specific classes
+
 ### Types
 
 | Name | Summary |

@@ -2,6 +2,8 @@
 
 ## Package kecs.system
 
+classes for creating systems
+
 ### Types
 
 | Name | Summary |

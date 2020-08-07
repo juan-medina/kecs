@@ -2,6 +2,8 @@
 
 ## Package kecs
 
+root package for KECS
+
 ### Types
 
 | Name | Summary |

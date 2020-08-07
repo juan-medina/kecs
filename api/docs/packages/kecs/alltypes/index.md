@@ -1,5 +1,8 @@
 
 
+KECS is a Cross-platform Entity Component System design to create concurrent applications, such games,
+more simple and without the need of using multiple threads neither fibers nor corutines.
+
 ### All Types
 
 | Name | Summary |

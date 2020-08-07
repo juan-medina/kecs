@@ -2,6 +2,8 @@
 
 ## Package kecs.entity
 
+classes for creating entities and views
+
 ### Types
 
 | Name | Summary |
