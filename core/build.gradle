@@ -58,6 +58,7 @@ dokka {
     outputDirectory = "${project.rootDir}/api/docs/packages"
     outputFormat = "gfm"
     configuration {
+        moduleName = 'KECS'
         includes = ["${projectDir}/src/Module.md".toString()]
     }
 }

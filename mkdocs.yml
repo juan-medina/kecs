@@ -12,7 +12,7 @@ pages:
     - What is a ECS: 'ecs.md'
     - User Guide: 'guide.md'
     - Advance Example : 'example.md'
-    - API Documentation: 'packages/kecs/index.md'
+    - API Documentation: 'packages/-k-e-c-s/index.md'
 theme:
     name: material
     palette:
