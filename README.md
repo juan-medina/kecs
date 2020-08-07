@@ -94,8 +94,8 @@ data class Position(var x: Float, var y: Float) {
 }
 
 class MoveSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
-        ecs.view(Velocity::class, Position::class).forEach {
+    override fun update(delta: Float, total: Float, world: World) {
+        world.view(Velocity::class, Position::class).forEach {
             val vel = it.get<Velocity>()
             val pos = it.get<Position>().copy()
 
@@ -107,7 +107,7 @@ class MoveSystem : System() {
 }
 
 fun example() {
-    val world = kecs {
+    val world = world {
         +MoveSystem()
     }
 

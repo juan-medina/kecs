@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-import com.juanmedina.kecs.KEcs
+import com.juanmedina.kecs.World
 import com.juanmedina.kecs.dsl.add
-import com.juanmedina.kecs.dsl.kecs
+import com.juanmedina.kecs.dsl.world
 import com.juanmedina.kecs.system.System
 import kotlin.math.min
 import kotlin.random.Random
@@ -158,7 +158,7 @@ fun animalRace() {
     //  - the race system will take care to know when the race has ended
     //  - the progress system will draw a progress bar with the overall
     //      completion, but it could be removed without affecting the logic
-    val world = kecs {
+    val world = world {
         +MovementSystem()
         +WinnerSystem()
         +RaceSystem()
@@ -241,9 +241,9 @@ fun animalRace() {
 
 /** The system that move things, either animals or the lure **/
 class MovementSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
+    override fun update(delta: Float, total: Float, world: World) {
         // get entities that has position and movement
-        ecs.view(Position::class, Movement::class).forEach {
+        world.view(Position::class, Movement::class).forEach {
             // get the movement component
             val movement = it.get<Movement>()
             // if we are running
@@ -267,18 +267,18 @@ class MovementSystem : System() {
 
 /** THe System that find a winner, only looking at animals, no lure **/
 class WinnerSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
+    override fun update(delta: Float, total: Float, world: World) {
         // if we dont have a winner
-        if (!ecs.hasComponent<Winner>()) {
+        if (!world.hasComponent<Winner>()) {
             // get entities that are animal and has position, we
             // dont need movement, neither the lure
-            ecs.view(Position::class, Animal::class).forEach {
+            world.view(Position::class, Animal::class).forEach {
                 val position = it.get<Position>()
                 val animal = it.get<Animal>()
                 // if we are at the end
                 if (position.at == RACE_LENGTH) {
                     // add to the world the winner
-                    ecs.add { +Winner(animal.name) }
+                    world.add { +Winner(animal.name) }
                     return@update
                 }
             }
@@ -288,18 +288,18 @@ class WinnerSystem : System() {
 
 /** This System will check when to stop the race **/
 class RaceSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
+    override fun update(delta: Float, total: Float, world: World) {
         // first we will check if we aren't already ended
-        if (ecs.component<RaceStatus>() != RaceStatus.Ended) {
+        if (world.component<RaceStatus>() != RaceStatus.Ended) {
             // get from all entities that has movement if they
             //  are all stopped
-            val allStopped = ecs.components<Movement>().all {
+            val allStopped = world.components<Movement>().all {
                 it.status == MovementStatus.Stopped
             }
             // if all are stopped
             if (allStopped) {
                 // set that the race has ended
-                val status = ecs.entity(RaceStatus::class)
+                val status = world.entity(RaceStatus::class)
                 status.set(RaceStatus.Ended)
             }
         }
@@ -340,9 +340,9 @@ class ProgressSystem : System() {
         )
     }
 
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
+    override fun update(delta: Float, total: Float, world: World) {
         // get from all entities that has position the position
-        val positions = ecs.components<Position>()
+        val positions = world.components<Position>()
 
         // if we average all that we have run so far and divide by the
         //  length of the race we will have the overall completion (0..1) of

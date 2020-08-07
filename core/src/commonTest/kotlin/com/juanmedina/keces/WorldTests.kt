@@ -16,21 +16,21 @@
 package com.juanmedina.keces
 
 import com.juanmedina.keces.platform.test.TestUtils
-import com.juanmedina.kecs.KEcs
+import com.juanmedina.kecs.World
 import com.juanmedina.kecs.system.System
 import kotlin.math.truncate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
-class KEcsTests {
+class WorldTests {
     class RecordTimeSystem : System() {
         val deltas = arrayListOf<Float>()
         var updates = 0
         var average = 0.0f
         var total = 0.0f
 
-        override fun update(delta: Float, total: Float, ecs: KEcs) {
+        override fun update(delta: Float, total: Float, world: World) {
             updates++
             deltas.add(delta)
             this.total = total
@@ -40,7 +40,7 @@ class KEcsTests {
 
     @Test
     fun `we should record time correctly`() {
-        val ecs = KEcs()
+        val ecs = World()
         val rts = RecordTimeSystem()
         ecs.add(rts)
 

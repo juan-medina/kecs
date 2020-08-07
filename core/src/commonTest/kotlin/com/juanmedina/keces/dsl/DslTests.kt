@@ -15,9 +15,9 @@
 
 package com.juanmedina.keces.dsl
 
-import com.juanmedina.kecs.KEcs
+import com.juanmedina.kecs.World
 import com.juanmedina.kecs.dsl.add
-import com.juanmedina.kecs.dsl.kecs
+import com.juanmedina.kecs.dsl.world
 import com.juanmedina.kecs.system.System
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -33,8 +33,8 @@ class DslTests {
     }
 
     class MoveSystem : System() {
-        override fun update(delta: Float, total: Float, ecs: KEcs) {
-            ecs.view(Velocity::class, Position::class).forEach {
+        override fun update(delta: Float, total: Float, world: World) {
+            world.view(Velocity::class, Position::class).forEach {
                 val vel = it.get<Velocity>()
                 val pos = it.get<Position>().copy()
 
@@ -47,7 +47,7 @@ class DslTests {
 
     @Test
     fun `we could use the DSL with a created systems`() {
-        val world = kecs {
+        val world = world {
             +MoveSystem()
         }
 
@@ -80,11 +80,11 @@ class DslTests {
 
     @Test
     fun `we could use the DSL with an anonymous system`() {
-        val world = kecs {
+        val world = world {
             +object : System() {
-                override fun update(delta: Float, total: Float, ecs: KEcs) {
+                override fun update(delta: Float, total: Float, world: World) {
                     val vel = Velocity(1.0f, 1.0f)
-                    ecs.components<Position>().forEach {
+                    world.components<Position>().forEach {
                         it += vel
                     }
                 }

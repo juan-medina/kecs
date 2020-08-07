@@ -8,4 +8,4 @@ root package for KECS
 
 | Name | Summary |
 |---|---|
-| [KEcs](-k-ecs/index.md) | `class KEcs : `[`View`](../com.juanmedina.kecs.entity/-view/index.md) |
+| [World](-world/index.md) | `class World : `[`View`](../com.juanmedina.kecs.entity/-view/index.md) |

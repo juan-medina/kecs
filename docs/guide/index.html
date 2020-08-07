@@ -668,7 +668,7 @@
 <p>The first thing that we need for using KECS is to create our world, a object
 that will hold all of our entities, with their components, and systems.</p>
 <p>For this we could just do :</p>
-<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">KEcs</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">World</span><span class="p">()</span>
 </code></pre></div>
 
 <h3 id="adding-entities">Adding entities<a class="headerlink" href="#adding-entities" title="Permanent link">&para;</a></h3>
@@ -705,8 +705,8 @@ represent what that entity contains.</p>
 <p>Now that we have an entity in our world we need to add system that add behavior to them,
 in this example we will just move the position base on the delta time happen between updates.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MoveSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
             <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
 
             <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
@@ -729,7 +729,7 @@ in this example we will just move the position base on the delta time happen bet
 we did before.</p>
 <h3 id="creating-our-world_1">Creating our world<a class="headerlink" href="#creating-our-world_1" title="Permanent link">&para;</a></h3>
 <p>With the dsl we could create a world and add system to it.</p>
-<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">kecs</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">world</span> <span class="p">{</span>
     <span class="p">+</span><span class="n">MoveSystem</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -757,8 +757,8 @@ we did before.</p>
 <h3 id="independently-time-update">Independently time update<a class="headerlink" href="#independently-time-update" title="Permanent link">&para;</a></h3>
 <p>If we look at the code of the System that we create before we could see the update function.</p>
 <p><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MoveSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
             <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
 
             <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
@@ -774,10 +774,10 @@ of the time that has passed, such moving an object independently of the frame ra
 our system get called.</p>
 <h3 id="creating-anonymous-systems">Creating Anonymous Systems<a class="headerlink" href="#creating-anonymous-systems" title="Permanent link">&para;</a></h3>
 <p>So far we have created a System using a class, however we could creat Anonymous Systems.</p>
-<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">kecs</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">world</span> <span class="p">{</span>
     <span class="p">+</span><span class="k">object</span> <span class="p">:</span> <span class="nc">System</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+        <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
                 <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
 
                 <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>

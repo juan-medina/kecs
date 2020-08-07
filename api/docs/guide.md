@@ -10,7 +10,7 @@ that will hold all of our entities, with their components, and systems.
 For this we could just do :
 
 ```kotlin
-val world = KEcs()
+val world = World()
 ```
 
 ### Adding entities
@@ -63,8 +63,8 @@ in this example we will just move the position base on the delta time happen bet
 
 ```kotlin
 class MoveSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
-        ecs.view(Position::class).forEach {
+    override fun update(delta: Float, total: Float, world: World) {
+        world.view(Position::class).forEach {
             val pos = it.get<Position>()
 
             pos.x += 5.0f * delta
@@ -96,7 +96,7 @@ we did before.
 With the dsl we could create a world and add system to it.
 
 ```kotlin
-val world = kecs {
+val world = world {
     +MoveSystem()
 }
 ```
@@ -135,8 +135,8 @@ If we look at the code of the System that we create before we could see the upda
 
 ```kotlin
 class MoveSystem : System() {
-    override fun update(delta: Float, total: Float, ecs: KEcs) {
-        ecs.view(Position::class).forEach {
+    override fun update(delta: Float, total: Float, world: World) {
+        world.view(Position::class).forEach {
             val pos = it.get<Position>()
 
             pos.x += 5.0f * delta
@@ -157,10 +157,10 @@ our system get called.
 So far we have created a System using a class, however we could creat Anonymous Systems.
 
 ```kotlin
-val world = kecs {
+val world = world {
     +object : System() {
-        override fun update(delta: Float, total: Float, ecs: KEcs) {
-            ecs.view(Position::class).forEach {
+        override fun update(delta: Float, total: Float, world: World) {
+            world.view(Position::class).forEach {
                 val pos = it.get<Position>()
 
                 pos.x += 5.0f * delta

@@ -19,7 +19,7 @@ import com.juanmedina.kecs.entity.View
 import com.juanmedina.kecs.platform.Platform
 import com.juanmedina.kecs.system.System
 
-class KEcs : View() {
+class World : View() {
     private val systems = arrayListOf<System>()
     private var current = 0L
     private var total = 0.0f

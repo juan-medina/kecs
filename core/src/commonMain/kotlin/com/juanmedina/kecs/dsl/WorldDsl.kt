@@ -15,16 +15,16 @@
 
 package com.juanmedina.kecs.dsl
 
-import com.juanmedina.kecs.KEcs
+import com.juanmedina.kecs.World
 import com.juanmedina.kecs.system.System
 
 @Dsl
-class KEcsDsl {
-    val ecs = KEcs()
+class WorldDsl {
+    val ecs = World()
     fun ecs() = ecs
     inline operator fun <reified T : System> T.unaryPlus() {
         ecs.add(this)
     }
 }
 
-fun kecs(init: KEcsDsl.() -> Unit) = KEcsDsl().apply(init).ecs()
+fun world(init: WorldDsl.() -> Unit) = WorldDsl().apply(init).ecs()

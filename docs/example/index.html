@@ -390,9 +390,9 @@ example an animal race.</p>
 <span class="cm"> * limitations under the License.</span>
 <span class="cm"> */</span>
 
-<span class="k">import</span> <span class="nn">com.juanmedina.kecs.KEcs</span>
+<span class="k">import</span> <span class="nn">com.juanmedina.kecs.World</span>
 <span class="k">import</span> <span class="nn">com.juanmedina.kecs.dsl.add</span>
-<span class="k">import</span> <span class="nn">com.juanmedina.kecs.dsl.kecs</span>
+<span class="k">import</span> <span class="nn">com.juanmedina.kecs.dsl.world</span>
 <span class="k">import</span> <span class="nn">com.juanmedina.kecs.system.System</span>
 <span class="k">import</span> <span class="nn">kotlin.math.min</span>
 <span class="k">import</span> <span class="nn">kotlin.random.Random</span>
@@ -535,7 +535,7 @@ example an animal race.</p>
     <span class="c1">//  - the race system will take care to know when the race has ended</span>
     <span class="c1">//  - the progress system will draw a progress bar with the overall</span>
     <span class="c1">//      completion, but it could be removed without affecting the logic</span>
-    <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">kecs</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">world</span> <span class="p">{</span>
         <span class="p">+</span><span class="n">MovementSystem</span><span class="p">()</span>
         <span class="p">+</span><span class="n">WinnerSystem</span><span class="p">()</span>
         <span class="p">+</span><span class="n">RaceSystem</span><span class="p">()</span>
@@ -618,9 +618,9 @@ example an animal race.</p>
 
 <span class="cm">/** The system that move things, either animals or the lure **/</span>
 <span class="k">class</span> <span class="nc">MovementSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// get entities that has position and movement</span>
-        <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Movement</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Movement</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
             <span class="c1">// get the movement component</span>
             <span class="k">val</span> <span class="py">movement</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Movement</span><span class="p">&gt;()</span>
             <span class="c1">// if we are running</span>
@@ -644,18 +644,18 @@ example an animal race.</p>
 
 <span class="cm">/** THe System that find a winner, only looking at animals, no lure **/</span>
 <span class="k">class</span> <span class="nc">WinnerSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// if we dont have a winner</span>
-        <span class="k">if</span> <span class="p">(!</span><span class="n">ecs</span><span class="p">.</span><span class="n">hasComponent</span><span class="p">&lt;</span><span class="n">Winner</span><span class="p">&gt;())</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(!</span><span class="n">world</span><span class="p">.</span><span class="n">hasComponent</span><span class="p">&lt;</span><span class="n">Winner</span><span class="p">&gt;())</span> <span class="p">{</span>
             <span class="c1">// get entities that are animal and has position, we</span>
             <span class="c1">// dont need movement, neither the lure</span>
-            <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Animal</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+            <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Animal</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
                 <span class="k">val</span> <span class="py">position</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
                 <span class="k">val</span> <span class="py">animal</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">&gt;()</span>
                 <span class="c1">// if we are at the end</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">position</span><span class="p">.</span><span class="n">at</span> <span class="p">==</span> <span class="n">RACE_LENGTH</span><span class="p">)</span> <span class="p">{</span>
                     <span class="c1">// add to the world the winner</span>
-                    <span class="n">ecs</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span> <span class="p">+</span><span class="n">Winner</span><span class="p">(</span><span class="n">animal</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}</span>
+                    <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span> <span class="p">+</span><span class="n">Winner</span><span class="p">(</span><span class="n">animal</span><span class="p">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}</span>
                     <span class="k">return</span><span class="n">@update</span>
                 <span class="p">}</span>
             <span class="p">}</span>
@@ -665,18 +665,18 @@ example an animal race.</p>
 
 <span class="cm">/** This System will check when to stop the race **/</span>
 <span class="k">class</span> <span class="nc">RaceSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// first we will check if we aren&#39;t already ended</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">ecs</span><span class="p">.</span><span class="n">component</span><span class="p">&lt;</span><span class="n">RaceStatus</span><span class="p">&gt;()</span> <span class="p">!=</span> <span class="n">RaceStatus</span><span class="p">.</span><span class="n">Ended</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">world</span><span class="p">.</span><span class="n">component</span><span class="p">&lt;</span><span class="n">RaceStatus</span><span class="p">&gt;()</span> <span class="p">!=</span> <span class="n">RaceStatus</span><span class="p">.</span><span class="n">Ended</span><span class="p">)</span> <span class="p">{</span>
             <span class="c1">// get from all entities that has movement if they</span>
             <span class="c1">//  are all stopped</span>
-            <span class="k">val</span> <span class="py">allStopped</span> <span class="p">=</span> <span class="n">ecs</span><span class="p">.</span><span class="n">components</span><span class="p">&lt;</span><span class="n">Movement</span><span class="p">&gt;().</span><span class="n">all</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">allStopped</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">components</span><span class="p">&lt;</span><span class="n">Movement</span><span class="p">&gt;().</span><span class="n">all</span> <span class="p">{</span>
                 <span class="n">it</span><span class="p">.</span><span class="n">status</span> <span class="p">==</span> <span class="n">MovementStatus</span><span class="p">.</span><span class="n">Stopped</span>
             <span class="p">}</span>
             <span class="c1">// if all are stopped</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">allStopped</span><span class="p">)</span> <span class="p">{</span>
                 <span class="c1">// set that the race has ended</span>
-                <span class="k">val</span> <span class="py">status</span> <span class="p">=</span> <span class="n">ecs</span><span class="p">.</span><span class="n">entity</span><span class="p">(</span><span class="n">RaceStatus</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+                <span class="k">val</span> <span class="py">status</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">entity</span><span class="p">(</span><span class="n">RaceStatus</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
                 <span class="n">status</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">RaceStatus</span><span class="p">.</span><span class="n">Ended</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="p">}</span>
@@ -717,9 +717,9 @@ example an animal race.</p>
         <span class="p">)</span>
     <span class="p">}</span>
 
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// get from all entities that has position the position</span>
-        <span class="k">val</span> <span class="py">positions</span> <span class="p">=</span> <span class="n">ecs</span><span class="p">.</span><span class="n">components</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
+        <span class="k">val</span> <span class="py">positions</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">components</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
 
         <span class="c1">// if we average all that we have run so far and divide by the</span>
         <span class="c1">//  length of the race we will have the overall completion (0..1) of</span>

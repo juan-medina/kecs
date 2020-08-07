@@ -519,8 +519,8 @@ for learning more about using KECS.</p>
 <span class="p">}</span>
 
 <span class="k">class</span> <span class="nc">MoveSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">ecs</span><span class="p">:</span> <span class="n">KEcs</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">ecs</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Velocity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Velocity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
             <span class="k">val</span> <span class="py">vel</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Velocity</span><span class="p">&gt;()</span>
             <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;().</span><span class="n">copy</span><span class="p">()</span>
 
@@ -532,7 +532,7 @@ for learning more about using KECS.</p>
 <span class="p">}</span>
 
 <span class="k">fun</span> <span class="nf">example</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">kecs</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">world</span> <span class="p">{</span>
         <span class="p">+</span><span class="n">MoveSystem</span><span class="p">()</span>
     <span class="p">}</span>
 

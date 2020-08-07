@@ -9,7 +9,7 @@ kotlin dsl for idiomatic creation of objects
 | Name | Summary |
 |---|---|
 | [EntityDsl](-entity-dsl/index.md) | `class EntityDsl` |
-| [KEcsDsl](-k-ecs-dsl/index.md) | `class KEcsDsl` |
+| [WorldDsl](-world-dsl/index.md) | `class WorldDsl` |
 
 ### Annotations
 
@@ -23,4 +23,4 @@ kotlin dsl for idiomatic creation of objects
 |---|---|
 | [add](add.md) | `fun `[`View`](../com.juanmedina.kecs.entity/-view/index.md)`.add(init: `[`EntityDsl`](-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../com.juanmedina.kecs.entity/-entity/index.md) |
 | [entity](entity.md) | `fun entity(init: `[`EntityDsl`](-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../com.juanmedina.kecs.entity/-entity/index.md) |
-| [kecs](kecs.md) | `fun kecs(init: `[`KEcsDsl`](-k-ecs-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`KEcs`](../com.juanmedina.kecs/-k-ecs/index.md) |
+| [world](world.md) | `fun world(init: `[`WorldDsl`](-world-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`World`](../com.juanmedina.kecs/-world/index.md) |
