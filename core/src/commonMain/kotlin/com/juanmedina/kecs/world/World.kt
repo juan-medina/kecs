@@ -19,11 +19,24 @@ import com.juanmedina.kecs.entity.View
 import com.juanmedina.kecs.platform.Platform
 import com.juanmedina.kecs.system.System
 
+/**
+ * Contains all the [entities][com.juanmedina.kecs.entity.Entity] and [systems][com.juanmedina.kecs.system.System] on
+ *  our *ECS*.
+ *
+ * When we ask to the world to [update][com.juanmedina.kecs.world.World.update] all the [systems][com.juanmedina.kecs.system.System]
+ *  get notified with the state of our world.
+ *
+ * Since it extend from [View][com.juanmedina.kecs.entity.View] allow to flexible query our [entities][com.juanmedina.kecs.entity.Entity].
+ */
 class World : View() {
     private val systems = arrayListOf<System>()
     private var current = 0L
     private var total = 0.0f
 
+    /**
+     * Perform a [world][com.juanmedina.kecs.world] update, triggering the [update][com.juanmedina.kecs.system.System.update] method
+     * in each of the [systems][com.juanmedina.kecs.system.System] added to the [world][com.juanmedina.kecs.world].
+     */
     fun update() {
         val new = Platform.getSystemMillis()
         if (current == 0L) {
@@ -37,6 +50,9 @@ class World : View() {
         }
     }
 
+    /**
+     * Adds a [systems][com.juanmedina.kecs.system.System] to our [world][com.juanmedina.kecs.world]
+     */
     fun add(system: System) {
         systems.add(system)
     }

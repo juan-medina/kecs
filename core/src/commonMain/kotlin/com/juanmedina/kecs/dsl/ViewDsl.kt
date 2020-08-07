@@ -17,6 +17,12 @@ package com.juanmedina.kecs.dsl
 
 import com.juanmedina.kecs.entity.View
 
+/**
+ * DSL for adding [entities][com.juanmedina.kecs.entity.Entity] using [EntityDsl][com.juanmedina.kecs.dsl.EntityDsl]
+ *
+ * @param init A lambda receiver that will get a [EntityDsl][com.juanmedina.kecs.dsl.EntityDsl]
+ * @return a new created [Entity][com.juanmedina.kecs.entity.Entity]
+ */
 fun View.add(init: EntityDsl.() -> Unit) = entity(init).let {
     add(it)
     it

@@ -40,10 +40,10 @@
 
 | Name | Summary |
 |---|---|
-| [add](../../com.juanmedina.kecs.dsl/add.md) | `fun `[`View`](./index.md)`.add(init: `[`EntityDsl`](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../-entity/index.md) |
+| [add](../../com.juanmedina.kecs.dsl/add.md) | DSL for adding [entities](../-entity/index.md) using [EntityDsl](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`fun `[`View`](./index.md)`.add(init: `[`EntityDsl`](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../-entity/index.md) |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [World](../../com.juanmedina.kecs.world/-world/index.md) | `class World : `[`View`](./index.md) |
+| [World](../../com.juanmedina.kecs.world/-world/index.md) | Contains all the [entities](../-entity/index.md) and [systems](../../com.juanmedina.kecs.system/-system/index.md) on our *ECS*.`class World : `[`View`](./index.md) |

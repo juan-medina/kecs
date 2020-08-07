@@ -8,4 +8,4 @@ classes for managing our ECS world
 
 | Name | Summary |
 |---|---|
-| [World](-world/index.md) | `class World : `[`View`](../com.juanmedina.kecs.entity/-view/index.md) |
+| [World](-world/index.md) | Contains all the [entities](../com.juanmedina.kecs.entity/-entity/index.md) and [systems](../com.juanmedina.kecs.system/-system/index.md) on our *ECS*.`class World : `[`View`](../com.juanmedina.kecs.entity/-view/index.md) |

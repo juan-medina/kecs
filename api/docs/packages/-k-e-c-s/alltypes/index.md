@@ -41,6 +41,9 @@ more simple and without the need of using multiple threads neither fibers nor co
 
 ##### [com.juanmedina.kecs.world.World](../com.juanmedina.kecs.world/-world/index.md)
 
+Contains all the [entities](../com.juanmedina.kecs.entity/-entity/index.md) and [systems](../com.juanmedina.kecs.system/-system/index.md) on
+our *ECS*.
+
 
 |
 
