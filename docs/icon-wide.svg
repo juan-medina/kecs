@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   width="493.39819"
+   height="134.02579"
+   viewBox="0 0 130.54493 35.46099"
+   version="1.1"
+   id="svg8">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient885">
+      <stop
+         style="stop-color:#0f8fd9;stop-opacity:1"
+         offset="0"
+         id="stop881" />
+      <stop
+         style="stop-color:#6e75e2;stop-opacity:1"
+         offset="0.20044845"
+         id="stop909" />
+      <stop
+         style="stop-color:#d76684;stop-opacity:1"
+         offset="0.79056132"
+         id="stop893" />
+      <stop
+         style="stop-color:#f88a02;stop-opacity:1"
+         offset="1"
+         id="stop883" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient885"
+       id="linearGradient891"
+       x1="34.881443"
+       y1="105.43011"
+       x2="191.7597"
+       y2="153.49442"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.75409892,0,0,0.75409893,-13.014494,-76.136147)" />
+  </defs>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:11.0528px;line-height:1.25;font-family:sans-serif;display:inline;fill:url(#linearGradient891);fill-opacity:1;stroke:none;stroke-width:0.276322"
+     x="-3.766834"
+     y="39.1008"
+     id="text24"
+     transform="scale(1.1310689,0.88411944)"
+     clip-path="none"><tspan
+       id="tspan22"
+       x="-3.766834"
+       y="39.1008"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:53.054px;font-family:'Nimbus Sans Narrow';-inkscape-font-specification:'Nimbus Sans Narrow, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:url(#linearGradient891);fill-opacity:1;stroke-width:0.276322">KECS</tspan></text>
+</svg>
