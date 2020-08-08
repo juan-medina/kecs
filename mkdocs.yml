@@ -16,6 +16,7 @@ pages:
 theme:
     name: material
     logo: 'icon.svg'
+    favicon: 'icon.svg'
     palette:
         scheme: slate
 extra_css:
