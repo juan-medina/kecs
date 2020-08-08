@@ -16,6 +16,8 @@ more simple and without the need of using multiple threads neither fibers nor co
 
 ##### [com.juanmedina.kecs.entity.Entity](../com.juanmedina.kecs.entity/-entity/index.md)
 
+An Entity represent a instance of an object in our world.
+
 
 |
 

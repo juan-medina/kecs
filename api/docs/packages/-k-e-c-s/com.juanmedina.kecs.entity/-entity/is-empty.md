@@ -3,3 +3,6 @@
 # isEmpty
 
 `fun isEmpty(): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)
+
+Checks if a entity is empty, so it has not component.
+
