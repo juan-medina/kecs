@@ -4,8 +4,8 @@
 
 platform specific classes
 
-### Types
+### Functions
 
 | Name | Summary |
 |---|---|
-| [Platform](-platform/index.md) | `class Platform` |
+| [getSystemMillis](get-system-millis.md) | Return the system time in milliseconds, delta between two subsequent calls are use to update the [Systems](../com.juanmedina.kecs.system/-system/index.md) calling it [update](../com.juanmedina.kecs.system/-system/update.md) method.`fun getSystemMillis(): `[`Long`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html) |

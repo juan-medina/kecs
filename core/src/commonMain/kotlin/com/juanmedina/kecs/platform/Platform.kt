@@ -15,8 +15,8 @@
 
 package com.juanmedina.kecs.platform
 
-expect class Platform {
-    companion object {
-        fun getSystemMillis(): Long
-    }
-}
+/**
+ * Return the system time in milliseconds, delta between two subsequent calls are use to update the
+ *  [Systems][com.juanmedina.kecs.system.System] calling it [update][com.juanmedina.kecs.system.System.update] method.
+ */
+expect fun getSystemMillis(): Long

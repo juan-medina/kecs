@@ -16,7 +16,7 @@
 package com.juanmedina.kecs.world
 
 import com.juanmedina.kecs.entity.View
-import com.juanmedina.kecs.platform.Platform
+import com.juanmedina.kecs.platform.getSystemMillis
 import com.juanmedina.kecs.system.System
 
 /**
@@ -42,7 +42,7 @@ class World : View() {
      *  [systems][com.juanmedina.kecs.system.System] added to the world.
      */
     fun update() {
-        val new = Platform.getSystemMillis()
+        val new = getSystemMillis()
         if (current == 0L) {
             current = new
         }

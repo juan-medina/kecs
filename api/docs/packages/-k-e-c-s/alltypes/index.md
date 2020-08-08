@@ -26,11 +26,6 @@ An Entity represent a instance of an object in our world.
 
 |
 
-##### [com.juanmedina.kecs.platform.Platform](../com.juanmedina.kecs.platform/-platform/index.md)
-
-
-|
-
 ##### [com.juanmedina.kecs.system.System](../com.juanmedina.kecs.system/-system/index.md)
 
 A system take care of update our world base on the entities of the our world.
