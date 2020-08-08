@@ -49,7 +49,8 @@ open class View() : MutableCollection<Entity> {
     inline fun <reified T : Any> components() = filter { it.hasComponent<T>() }.map { it.get<T>() }
 
     /**
-     * Return a single component from a single [Entity][com.juanmedina.kecs.entity.Entity] that has a component of the giving type, or throws exception if there is more than one.
+     * Return a single component from a single [Entity][com.juanmedina.kecs.entity.Entity] that has a component of
+     *  the giving type, or throws exception if there is more than one.
      */
     inline fun <reified T : Any> component() = filter { it.hasComponent<T>() }.map { it.get<T>() }.single()
 
@@ -59,7 +60,8 @@ open class View() : MutableCollection<Entity> {
     inline fun <reified T : Any> hasComponent() = any { it.hasComponent<T>() }
 
     /**
-     * Return a single [Entity][com.juanmedina.kecs.entity.Entity] that has a component of the giving types, or throws exception if there is more than one.
+     * Return a single [Entity][com.juanmedina.kecs.entity.Entity] that has a component of the giving types, or
+     *  throws exception if there is more than one.
      *
      * @param types Component classes such Position::class
      */

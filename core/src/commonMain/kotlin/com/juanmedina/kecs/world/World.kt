@@ -23,10 +23,11 @@ import com.juanmedina.kecs.system.System
  * Contains all the [entities][com.juanmedina.kecs.entity.Entity] and [systems][com.juanmedina.kecs.system.System] on
  *  our *ECS*.
  *
- * When we ask to the world to [update][com.juanmedina.kecs.world.World.update] all the [systems][com.juanmedina.kecs.system.System]
- *  get notified with the state of our world.
+ * When we ask to the world to [update][com.juanmedina.kecs.world.World.update] all the
+ *  [systems][com.juanmedina.kecs.system.System] get notified with the state of our world.
  *
- * Since it extend from [View][com.juanmedina.kecs.entity.View] allow to flexible query our [entities][com.juanmedina.kecs.entity.Entity].
+ * Since it extend from [View][com.juanmedina.kecs.entity.View] allow to flexible query our
+ *  [entities][com.juanmedina.kecs.entity.Entity].
  *
  * @constructor Creates an empty World.
  */
@@ -36,8 +37,9 @@ class World : View() {
     private var total = 0.0f
 
     /**
-     * Perform a [world][com.juanmedina.kecs.world] update, triggering the [update][com.juanmedina.kecs.system.System.update] method
-     * in each of the [systems][com.juanmedina.kecs.system.System] added to the world.
+     * Perform a [world][com.juanmedina.kecs.world] update, triggering the
+     *  [update][com.juanmedina.kecs.system.System.update] method in each of the
+     *  [systems][com.juanmedina.kecs.system.System] added to the world.
      */
     fun update() {
         val new = Platform.getSystemMillis()

@@ -4,5 +4,6 @@
 
 `fun <reified T : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> component(): T`
 
-Return a single component from a single [Entity](../-entity/index.md) that has a component of the giving type, or throws exception if there is more than one.
+Return a single component from a single [Entity](../-entity/index.md) that has a component of
+the giving type, or throws exception if there is more than one.
 

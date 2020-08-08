@@ -4,7 +4,8 @@
 
 `fun entity(vararg types: `[`KClass`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-class/index.html)`<out `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`>): `[`Entity`](../-entity/index.md)
 
-Return a single [Entity](../-entity/index.md) that has a component of the giving types, or throws exception if there is more than one.
+Return a single [Entity](../-entity/index.md) that has a component of the giving types, or
+throws exception if there is more than one.
 
 ### Parameters
 
