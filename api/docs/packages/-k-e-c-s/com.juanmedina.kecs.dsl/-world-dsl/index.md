@@ -4,21 +4,16 @@
 
 `class WorldDsl`
 
-### Constructors
-
-| Name | Summary |
-|---|---|
-| [&lt;init&gt;](-init-.md) | `WorldDsl()` |
+DSL for creating a [World](../../com.juanmedina.kecs.world/-world/index.md).
 
 ### Properties
 
 | Name | Summary |
 |---|---|
-| [ecs](ecs.md) | `val ecs: `[`World`](../../com.juanmedina.kecs.world/-world/index.md) |
+| [world](world.md) | the [World](../../com.juanmedina.kecs.world/-world/index.md) that this DSL will return.`val world: `[`World`](../../com.juanmedina.kecs.world/-world/index.md) |
 
 ### Functions
 
 | Name | Summary |
 |---|---|
-| [ecs](ecs.md) | `fun ecs(): `[`World`](../../com.juanmedina.kecs.world/-world/index.md) |
-| [unaryPlus](unary-plus.md) | `operator fun <T : `[`System`](../../com.juanmedina.kecs.system/-system/index.md)`> T.unaryPlus(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [unaryPlus](unary-plus.md) | Unary plus operator to use inside the DSL receiver.`operator fun <T : `[`System`](../../com.juanmedina.kecs.system/-system/index.md)`> T.unaryPlus(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |

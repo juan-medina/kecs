@@ -30,4 +30,4 @@ Since it extend from [View](../../com.juanmedina.kecs.entity/-view/index.md) all
 
 | Name | Summary |
 |---|---|
-| [add](../../com.juanmedina.kecs.dsl/add.md) | DSL for adding [entities](../../com.juanmedina.kecs.entity/-entity/index.md) using [EntityDsl](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`fun `[`View`](../../com.juanmedina.kecs.entity/-view/index.md)`.add(init: `[`EntityDsl`](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../../com.juanmedina.kecs.entity/-entity/index.md) |
+| [add](../../com.juanmedina.kecs.dsl/add.md) | DSL for adding [entities](../../com.juanmedina.kecs.entity/-entity/index.md) using [EntityDsl](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md).`fun `[`View`](../../com.juanmedina.kecs.entity/-view/index.md)`.add(init: `[`EntityDsl`](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../../com.juanmedina.kecs.entity/-entity/index.md) |

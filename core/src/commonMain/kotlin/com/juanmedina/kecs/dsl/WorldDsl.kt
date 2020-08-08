@@ -18,13 +18,35 @@ package com.juanmedina.kecs.dsl
 import com.juanmedina.kecs.system.System
 import com.juanmedina.kecs.world.World
 
-@Dsl
-class WorldDsl {
-    val ecs = World()
-    fun ecs() = ecs
+/**
+ * DSL for creating a [World][com.juanmedina.kecs.world.World].
+ **/
+@KECSDsl
+class WorldDsl internal constructor() {
+    /**
+     * the [World][com.juanmedina.kecs.world.World] that this DSL will return.
+     */
+    val world = World()
+
+    /**
+     * Ends the DSL and return the created [World][com.juanmedina.kecs.world.World].
+     *
+     * @return the created [World][com.juanmedina.kecs.world.World].
+     */
+    internal fun ecs() = world
+
+    /**
+     * Unary plus operator to use inside the DSL receiver.
+     */
     inline operator fun <reified T : System> T.unaryPlus() {
-        ecs.add(this)
+        world.add(this)
     }
 }
 
+/**
+ * DSL for creating a [World][com.juanmedina.kecs.world.World] using [WorldDsl][com.juanmedina.kecs.dsl.WorldDsl].
+ *
+ * @param init A lambda receiver that will get a [WorldDsl][com.juanmedina.kecs.dsl.WorldDsl].
+ * @return a new created [World][com.juanmedina.kecs.world.World].
+ */
 fun world(init: WorldDsl.() -> Unit) = WorldDsl().apply(init).ecs()

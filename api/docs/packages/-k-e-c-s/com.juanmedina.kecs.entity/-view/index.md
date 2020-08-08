@@ -45,7 +45,7 @@ A View represent a set of entities in [World](../../com.juanmedina.kecs.world/-w
 
 | Name | Summary |
 |---|---|
-| [add](../../com.juanmedina.kecs.dsl/add.md) | DSL for adding [entities](../-entity/index.md) using [EntityDsl](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`fun `[`View`](./index.md)`.add(init: `[`EntityDsl`](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../-entity/index.md) |
+| [add](../../com.juanmedina.kecs.dsl/add.md) | DSL for adding [entities](../-entity/index.md) using [EntityDsl](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md).`fun `[`View`](./index.md)`.add(init: `[`EntityDsl`](../../com.juanmedina.kecs.dsl/-entity-dsl/index.md)`.() -> `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)`): `[`Entity`](../-entity/index.md) |
 
 ### Inheritors
 

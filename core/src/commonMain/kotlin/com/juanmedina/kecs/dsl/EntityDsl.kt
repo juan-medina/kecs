@@ -17,13 +17,35 @@ package com.juanmedina.kecs.dsl
 
 import com.juanmedina.kecs.entity.Entity
 
-@Dsl
-class EntityDsl {
+/**
+ * DSL for creating a [Entity][com.juanmedina.kecs.entity.Entity].
+ **/
+@KECSDsl
+class EntityDsl internal constructor() {
+    /**
+     * the [Entity][com.juanmedina.kecs.entity.Entity] that this DSL will return.
+     */
     val entity = Entity()
-    fun entity() = entity
+
+    /**
+     * Ends the DSL and return the created [Entity][com.juanmedina.kecs.entity.Entity].
+     *
+     * @return the created [Entity][com.juanmedina.kecs.entity.Entity].
+     */
+    internal fun entity() = entity
+
+    /**
+     * Unary plus operator to use inside the DSL receiver.
+     */
     inline operator fun <reified T : Any> T.unaryPlus() {
         entity.add(this)
     }
 }
 
+/**
+ * DSL for creating [entities][com.juanmedina.kecs.entity.Entity] using [EntityDsl][com.juanmedina.kecs.dsl.EntityDsl].
+ *
+ * @param init A lambda receiver that will get a [EntityDsl][com.juanmedina.kecs.dsl.EntityDsl].
+ * @return a new created [Entity][com.juanmedina.kecs.entity.Entity].
+ */
 fun entity(init: EntityDsl.() -> Unit) = EntityDsl().apply(init).entity()

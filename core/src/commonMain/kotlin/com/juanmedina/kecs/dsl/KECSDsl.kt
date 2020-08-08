@@ -15,5 +15,8 @@
 
 package com.juanmedina.kecs.dsl
 
+/**
+ * Annotation to mark as DSL our DSL classes
+ */
 @DslMarker
-annotation class Dsl
+internal annotation class KECSDsl

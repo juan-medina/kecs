@@ -3,4 +3,6 @@
 # entity
 
 `val entity: `[`Entity`](../../com.juanmedina.kecs.entity/-entity/index.md)
-`fun entity(): `[`Entity`](../../com.juanmedina.kecs.entity/-entity/index.md)
+
+the [Entity](../../com.juanmedina.kecs.entity/-entity/index.md) that this DSL will return.
+

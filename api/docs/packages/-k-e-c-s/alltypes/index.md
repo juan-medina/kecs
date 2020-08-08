@@ -9,11 +9,6 @@ more simple and without the need of using multiple threads neither fibers nor co
 |---|---|
 |
 
-##### [com.juanmedina.kecs.dsl.Dsl](../com.juanmedina.kecs.dsl/-dsl/index.md)
-
-
-|
-
 ##### [com.juanmedina.kecs.entity.Entity](../com.juanmedina.kecs.entity/-entity/index.md)
 
 An Entity represent a instance of an object in our world.
@@ -22,6 +17,8 @@ An Entity represent a instance of an object in our world.
 |
 
 ##### [com.juanmedina.kecs.dsl.EntityDsl](../com.juanmedina.kecs.dsl/-entity-dsl/index.md)
+
+DSL for creating a [Entity](../com.juanmedina.kecs.entity/-entity/index.md).
 
 
 |
@@ -49,5 +46,7 @@ our *ECS*.
 |
 
 ##### [com.juanmedina.kecs.dsl.WorldDsl](../com.juanmedina.kecs.dsl/-world-dsl/index.md)
+
+DSL for creating a [World](../com.juanmedina.kecs.world/-world/index.md).
 
 
