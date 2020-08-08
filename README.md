@@ -1,6 +1,8 @@
 # Kotlin Entity Component System
 Kotlin Cross-platform Entity Component System
 
+<center>![KECS](https://juan-medina.github.io/kecs/icon-wide.svg)</center>
+
 [![License: Apache2](https://img.shields.io/badge/license-Apache%202-blue.svg)](/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://juan-medina.github.io/kecs/)
 
