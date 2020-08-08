@@ -35,12 +35,8 @@ class DslTests {
     class MoveSystem : System() {
         override fun update(delta: Float, total: Float, world: World) {
             world.view(Velocity::class, Position::class).forEach {
-                val vel = it.get<Velocity>()
-                val pos = it.get<Position>().copy()
-
+                val (vel, pos) = it.pair<Velocity, Position>()
                 pos += vel
-
-                it.set(pos)
             }
         }
     }

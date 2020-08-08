@@ -550,7 +550,7 @@ example an animal race.</p>
     <span class="c1">// we create the lure entity, with him name, at the initial position</span>
     <span class="c1">//  and with movement set to the lure speed, we will save the reference</span>
     <span class="c1">//  to use it latter</span>
-    <span class="k">val</span> <span class="py">lure</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
+    <span class="k">val</span> <span class="py">lureRef</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">add</span> <span class="p">{</span>
         <span class="p">+</span><span class="n">Lure</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Mechanical Rabbit&quot;</span><span class="p">)</span>
         <span class="p">+</span><span class="n">Position</span><span class="p">(</span><span class="n">at</span> <span class="p">=</span> <span class="m">0.0f</span><span class="p">)</span>
         <span class="p">+</span><span class="n">Movement</span><span class="p">(</span><span class="n">speed</span> <span class="p">=</span> <span class="n">LURE_SPEED</span><span class="p">)</span>
@@ -595,23 +595,20 @@ example an animal race.</p>
 
     <span class="c1">// we will get the name and time component from our lure entity using it</span>
     <span class="c1">//  saved reference, surprisingly it will always take 5s</span>
-    <span class="k">val</span> <span class="py">lureName</span> <span class="p">=</span> <span class="n">lure</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Lure</span><span class="p">&gt;().</span><span class="n">name</span>
-    <span class="k">val</span> <span class="py">lureTime</span> <span class="p">=</span> <span class="n">lure</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;().</span><span class="n">time</span>
-    <span class="n">println</span><span class="p">(</span><span class="s">&quot;$lureName arrived in ${lureTime.threeDecimals()}s \n&quot;</span><span class="p">)</span>
+    <span class="k">val</span> <span class="p">(</span><span class="py">lure</span><span class="p">,</span> <span class="py">pos</span><span class="p">)</span> <span class="p">=</span> <span class="n">lureRef</span><span class="p">.</span><span class="n">pair</span><span class="p">&lt;</span><span class="n">Lure</span><span class="p">,</span> <span class="n">Position</span><span class="p">&gt;()</span>
+    <span class="n">println</span><span class="p">(</span><span class="s">&quot;${lure.name} arrived in ${pos.time.threeDecimals()}s \n&quot;</span><span class="p">)</span>
 
     <span class="n">println</span><span class="p">(</span><span class="s">&quot;Final lines:\n&quot;</span><span class="p">)</span>
 
     <span class="c1">// we will get all entities that has an Animal and a Position and sorted by</span>
     <span class="c1">//  the time they take to rich that position</span>
-    <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Animal</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">sortedBy</span> <span class="p">{</span>
-        <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;().</span><span class="n">time</span>
-    <span class="p">}.</span><span class="n">forEachIndexed</span> <span class="p">{</span> <span class="n">place</span><span class="p">,</span> <span class="n">it</span> <span class="p">-&gt;</span>
+    <span class="n">world</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">,</span> <span class="n">Position</span><span class="p">&gt;().</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span> <span class="p">-&gt;</span>
+        <span class="n">position</span><span class="p">.</span><span class="n">time</span>
+    <span class="p">}.</span><span class="n">forEachIndexed</span> <span class="p">{</span> <span class="n">place</span><span class="p">,</span> <span class="p">(</span><span class="n">animal</span><span class="p">,</span> <span class="n">animalPos</span><span class="p">)</span> <span class="p">-&gt;</span>
         <span class="c1">// get the components of the entity and display it</span>
-        <span class="k">val</span> <span class="py">animal</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">&gt;()</span>
-        <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
         <span class="n">println</span><span class="p">(</span>
             <span class="s">&quot;${(place + 1).withSuffix()} ${animal.name} in &quot;</span> <span class="p">+</span>
-                <span class="s">&quot;${pos.time.threeDecimals()}s&quot;</span>
+                <span class="s">&quot;${animalPos.time.threeDecimals()}s&quot;</span>
         <span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -620,13 +617,9 @@ example an animal race.</p>
 <span class="k">class</span> <span class="nc">MovementSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// get entities that has position and movement</span>
-        <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Movement</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
-            <span class="c1">// get the movement component</span>
-            <span class="k">val</span> <span class="py">movement</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Movement</span><span class="p">&gt;()</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">,</span> <span class="n">Movement</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">movement</span><span class="p">)</span> <span class="p">-&gt;</span>
             <span class="c1">// if we are running</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">movement</span><span class="p">.</span><span class="n">status</span> <span class="p">==</span> <span class="n">MovementStatus</span><span class="p">.</span><span class="n">Running</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// get the position component</span>
-                <span class="k">val</span> <span class="py">position</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
                 <span class="c1">// calculate the step base on delta time and speed</span>
                 <span class="k">val</span> <span class="py">step</span> <span class="p">=</span> <span class="p">(</span><span class="n">movement</span><span class="p">.</span><span class="n">speed</span> <span class="p">*</span> <span class="n">delta</span><span class="p">)</span>
                 <span class="c1">// calculate new position, without passing the end</span>
@@ -649,9 +642,7 @@ example an animal race.</p>
         <span class="k">if</span> <span class="p">(!</span><span class="n">world</span><span class="p">.</span><span class="n">hasComponent</span><span class="p">&lt;</span><span class="n">Winner</span><span class="p">&gt;())</span> <span class="p">{</span>
             <span class="c1">// get entities that are animal and has position, we</span>
             <span class="c1">// dont need movement, neither the lure</span>
-            <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Animal</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
-                <span class="k">val</span> <span class="py">position</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
-                <span class="k">val</span> <span class="py">animal</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Animal</span><span class="p">&gt;()</span>
+            <span class="n">world</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">,</span> <span class="n">Animal</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">animal</span><span class="p">)</span> <span class="p">-&gt;</span>
                 <span class="c1">// if we are at the end</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">position</span><span class="p">.</span><span class="n">at</span> <span class="p">==</span> <span class="n">RACE_LENGTH</span><span class="p">)</span> <span class="p">{</span>
                     <span class="c1">// add to the world the winner</span>
@@ -676,8 +667,7 @@ example an animal race.</p>
             <span class="c1">// if all are stopped</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">allStopped</span><span class="p">)</span> <span class="p">{</span>
                 <span class="c1">// set that the race has ended</span>
-                <span class="k">val</span> <span class="py">status</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">entity</span><span class="p">(</span><span class="n">RaceStatus</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
-                <span class="n">status</span><span class="p">.</span><span class="k">set</span><span class="p">(</span><span class="n">RaceStatus</span><span class="p">.</span><span class="n">Ended</span><span class="p">)</span>
+                <span class="n">world</span><span class="p">.</span><span class="n">entity</span><span class="p">&lt;</span><span class="n">RaceStatus</span><span class="p">&gt;().</span><span class="k">set</span><span class="p">(</span><span class="n">RaceStatus</span><span class="p">.</span><span class="n">Ended</span><span class="p">)</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>

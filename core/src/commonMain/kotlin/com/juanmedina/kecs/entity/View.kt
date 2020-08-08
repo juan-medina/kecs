@@ -44,6 +44,50 @@ open class View() : MutableCollection<Entity> {
     fun view(vararg types: KClass<out Any>) = View(filter { it.hasComponents(*types) })
 
     /**
+     * Send to a receiver a set of [Entities][com.juanmedina.kecs.entity.Entity] for the given types
+     *
+     * @param types set of [KClass] that we need on the entities.
+     * @param receiver function that will receive the entities.
+     */
+    fun view(vararg types: KClass<out Any>, receiver: (Entity) -> Unit) = view(*types).forEach(receiver)
+
+    /**
+     * Return a set of [Pair] from the components of the given type.
+     *
+     * This could be use for destructing declarations.
+     */
+    inline fun <reified T : Any, reified K : Any> pairs() = view(T::class, K::class).map { it.pair<T, K>() }
+
+    /**
+     * Send a set of [Pair] from the components of the given type to a receiver.
+     *
+     * This could be use for destructing declarations.
+     *
+     * @param receiver function that will receive the pairs.
+     */
+    inline fun <reified T : Any, reified K : Any> pairs(receiver: (Pair<T, K>) -> Unit) =
+        pairs<T, K>().forEach(receiver)
+
+    /**
+     * Return a set of [Triple] from the components of the given type.
+     *
+     * This could be use for destructing declarations.
+     */
+    inline fun <reified T : Any, reified K : Any, reified V : Any> triples() = view(T::class, K::class).map {
+        it.triple<T, K, V>()
+    }
+
+    /**
+     * Send a set of [Triple] from the components of the given type to a receiver.
+     *
+     * This could be use for destructing declarations.
+     *
+     * @param receiver function that will receive the triples.
+     */
+    inline fun <reified T : Any, reified K : Any, reified V : Any> triples(receiver: (Triple<T, K, V>) -> Unit) =
+        triples<T, K, V>().forEach(receiver)
+
+    /**
      * Return the components in our view for a giving class.
      */
     inline fun <reified T : Any> components() = filter { it.hasComponent<T>() }.map { it.get<T>() }
@@ -66,6 +110,26 @@ open class View() : MutableCollection<Entity> {
      * @param types Component classes such Position::class
      */
     fun entity(vararg types: KClass<out Any>) = single { it.hasComponents(*types) }
+
+    /**
+     * Return a single [Entity][com.juanmedina.kecs.entity.Entity] that has a component of the giving type, or
+     *  throws exception if there is more than one.
+     */
+    inline fun <reified T : Any> entity() = single { it.hasComponents(T::class) }
+
+    /**
+     * Return a set [entities][com.juanmedina.kecs.entity.Entity] that has a component of the giving type.
+     */
+    inline fun <reified T : Any> entities() = filter { it.hasComponents(T::class) }
+
+    /**
+     * Send to a receiver a set of [entities][com.juanmedina.kecs.entity.Entity] that has a component of the
+     *  giving type.
+     *
+     *  @param receiver function that will receive the entities.
+     */
+    inline fun <reified T : Any> entities(receiver: (Entity) -> Unit) = filter { it.hasComponents(T::class) }
+        .forEach(receiver)
 
     /**
      * Number of entities in our View.

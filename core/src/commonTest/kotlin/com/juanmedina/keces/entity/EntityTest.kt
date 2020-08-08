@@ -26,6 +26,8 @@ class EntityTest {
 
     data class Velocity(val x: Float, val y: Float)
 
+    data class Player(val name: String)
+
     enum class EntityState {
         InitialState,
         EndState
@@ -162,5 +164,40 @@ class EntityTest {
         state = ent.get()
 
         assertEquals(EntityState.EndState, state)
+    }
+
+    @Test
+    fun `we can get pairs`() {
+        val ent = Entity()
+
+        ent.add(Position(1.0f, 2.0f))
+        ent.add(Velocity(3.0f, 4.0f))
+
+        val (pos, vel) = ent.pair<Position, Velocity>()
+
+        assertEquals(1.0f, pos.x)
+        assertEquals(2.0f, pos.y)
+
+        assertEquals(3.0f, vel.x)
+        assertEquals(4.0f, vel.y)
+    }
+
+    @Test
+    fun `we can get triple`() {
+        val ent = Entity()
+
+        ent.add(Position(1.0f, 2.0f))
+        ent.add(Velocity(3.0f, 4.0f))
+        ent.add(Player("player1"))
+
+        val (pos, vel, player) = ent.triple<Position, Velocity, Player>()
+
+        assertEquals(1.0f, pos.x)
+        assertEquals(2.0f, pos.y)
+
+        assertEquals(3.0f, vel.x)
+        assertEquals(4.0f, vel.y)
+
+        assertEquals(player.name, "player1")
     }
 }

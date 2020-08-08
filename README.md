@@ -95,13 +95,8 @@ data class Position(var x: Float, var y: Float) {
 
 class MoveSystem : System() {
     override fun update(delta: Float, total: Float, world: World) {
-        world.view(Velocity::class, Position::class).forEach {
-            val vel = it.get<Velocity>()
-            val pos = it.get<Position>().copy()
-
+        world.pairs<Velocity, Position> { (vel, pos) ->
             pos += vel
-
-            it.set(pos)
         }
     }
 }

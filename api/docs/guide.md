@@ -48,6 +48,15 @@ val player = myEntity.get<Player>()
 println("the player is ${player.name}")
 ```
 
+### Getting Destructuring
+
+We could have Destructuring declarations to obtain components using pair or triple.
+
+```kotlin
+val (vel, pos) = myEntity.pair<Velocity, Position>()
+val (vel, pos, player) = myEntity.triple<Velocity, Position, Player>()
+```
+
 ### Adding the entity to our world
 
 Now that our entity has what we need we could add it to our world.
@@ -64,7 +73,7 @@ in this example we will just move the position base on the delta time happen bet
 ```kotlin
 class MoveSystem : System() {
     override fun update(delta: Float, total: Float, world: World) {
-        world.view(Position::class).forEach {
+        world.entities<Position> {
             val pos = it.get<Position>()
 
             pos.x += 5.0f * delta
@@ -136,7 +145,7 @@ If we look at the code of the System that we create before we could see the upda
 ```kotlin
 class MoveSystem : System() {
     override fun update(delta: Float, total: Float, world: World) {
-        world.view(Position::class).forEach {
+        world.entities<Position> {
             val pos = it.get<Position>()
 
             pos.x += 5.0f * delta
@@ -160,7 +169,7 @@ So far we have created a System using a class, however we could creat Anonymous 
 val world = world {
     +object : System() {
         override fun update(delta: Float, total: Float, world: World) {
-            world.view(Position::class).forEach {
+            world.entities<Position> {
                 val pos = it.get<Position>()
 
                 pos.x += 5.0f * delta
@@ -181,6 +190,36 @@ We could get a subview of a view just using the view function, giving the compon
 we are interested on.
 ```kotlin
 val view = world.view(Position::class, Velocity::class)
+```
+
+### Creating views from pairs
+
+We can creat views from pairs
+
+```kotlin
+val view = world.pairs<Position, Velocity>()
+view.forEach { (pos, vel) ->
+    // do something with pos and vel
+}
+//or
+val view = world.pairs<Position, Velocity> { (pos, vel) ->
+    // do something with pos and vel
+}
+```
+
+### Creating views from triples
+
+We can creat views from pairs
+
+```kotlin
+val view = world.triples<Position, Velocity, Player>()
+view.forEach { (pos, vel, player) ->
+    // do something with pos, vel and player
+}
+//or
+val view = world.pairs<Position, Velocity> { (pos, vel, player) ->
+    // do something with pos, vel and player
+}
 ```
 
 This view will contain all the entities that has a Position and  Velocity component.
@@ -209,6 +248,48 @@ Some times we may want to obtain a single Entity from a view.
 
 ```kotlin
 val entity1 = view.entity(Player::class)
+//or
+val entity1 = view.entity<Player>()
+```
+
+### Obtaining a set of Entities
+
+Some times we may want to obtain a set Entities from a view.
+
+```kotlin
+val entity1 = view.entitie(Player::class)
+//or
+val entity1 = view.entitie<Player>()
+```
+
+### Obtaining Pairs of Entities
+
+Some times we may want to obtain a set of pairs from Entities int a view.
+
+```kotlin
+view.pairs<Player, Position> { (player, pos) ->
+    // do something with player and pos
+}
+//or
+val entities = view.pairs<Player, Position>()
+entities.forEach { (player, pos) ->
+    // do something with player and pos
+}
+```
+
+### Obtaining Triples of Entities
+
+Some times we may want to obtain a set of triples from Entities int a view.
+
+```kotlin
+view.triple<Player, Position, Velocity> { (player, pos, vel) ->
+    // do something with player, pos and velocity
+}
+//or
+val entities = view.pairs<Player, Position>()
+entities.forEach { (player, pos, vel) ->
+    // do something with player, pos and velocity
+}
 ```
 
 This will return the entity that has a Player component, it will fail if we have more than one.

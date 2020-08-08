@@ -29,6 +29,8 @@ class ViewTest {
 
     data class Velocity(val x: Float, val y: Float)
 
+    data class Player(val name: String)
+
     @Test
     fun `we can create a view and add an existing entity`() {
         val view = View()
@@ -192,6 +194,161 @@ class ViewTest {
     }
 
     @Test
+    fun `we can view on using a receiver`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+        }
+
+        view.view(Position::class, Velocity::class) {
+            val (pos, vel) = it.pair<Position, Velocity>()
+
+            assertEquals(0.0f, pos.x)
+            assertEquals(0.0f, pos.y)
+
+            assertEquals(1.0f, vel.x)
+            assertEquals(2.0f, vel.y)
+        }
+    }
+
+    @Test
+    fun `we can view on using a pairs`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+        }
+
+        val window = view.pairs<Position, Velocity>()
+
+        assertEquals(2, window.size)
+
+        window.forEach { (pos, vel) ->
+            assertEquals(0.0f, pos.x)
+            assertEquals(0.0f, pos.y)
+
+            assertEquals(1.0f, vel.x)
+            assertEquals(2.0f, vel.y)
+        }
+    }
+
+    @Test
+    fun `we can view on using a pairs with a receiver`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+        }
+
+        view.pairs<Position, Velocity> { (pos, vel) ->
+            assertEquals(0.0f, pos.x)
+            assertEquals(0.0f, pos.y)
+
+            assertEquals(1.0f, vel.x)
+            assertEquals(2.0f, vel.y)
+        }
+    }
+
+    @Test
+    fun `we can view on using a triples`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+            +Player("player1")
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+            +Player("player2")
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Player("player2")
+        }
+
+        val window = view.triples<Position, Velocity, Player>()
+
+        assertEquals(2, window.size)
+
+        window.forEach { (pos, vel, player) ->
+            assertEquals(0.0f, pos.x)
+            assertEquals(0.0f, pos.y)
+
+            assertEquals(1.0f, vel.x)
+            assertEquals(2.0f, vel.y)
+
+            assertTrue((player.name == "player1") or (player.name == "player2"))
+        }
+    }
+
+    @Test
+    fun `we can view on using a trples with a receiver`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+            +Player("player1")
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+            +Player("player2")
+        }
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Player("player2")
+        }
+
+        view.triples<Position, Velocity, Player> { (pos, vel, player) ->
+            assertEquals(0.0f, pos.x)
+            assertEquals(0.0f, pos.y)
+
+            assertEquals(1.0f, vel.x)
+            assertEquals(2.0f, vel.y)
+
+            assertTrue((player.name == "player1") or (player.name == "player2"))
+        }
+    }
+
+    @Test
     fun `we can get components on classes`() {
         val view = View()
 
@@ -264,6 +421,75 @@ class ViewTest {
 
         assertEquals(1.0f, vel.x)
         assertEquals(2.0f, vel.y)
+    }
+
+    @Test
+    fun `we can get a single entity on type`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Velocity(2.0f, 3.0f)
+        }
+
+        val ent = view.entity<Position>()
+
+        val pos = ent.get<Position>()
+        val vel = ent.get<Velocity>()
+
+        assertEquals(0.0f, pos.x)
+        assertEquals(0.0f, pos.y)
+
+        assertEquals(1.0f, vel.x)
+        assertEquals(2.0f, vel.y)
+    }
+
+    @Test
+    fun `we can get a set of entities on type`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Velocity(1.0f, 2.0f)
+        }
+
+        val entities = view.entities<Velocity>()
+
+        assertEquals(2, entities.size)
+
+        entities.forEach {
+            val vel = it.get<Velocity>()
+            assertEquals(1.0f, vel.x)
+            assertEquals(2.0f, vel.y)
+        }
+    }
+
+    @Test
+    fun ` we can get a set of entities on type in a receiver`() {
+        val view = View()
+
+        view.add {
+            +Position(0.0f, 0.0f)
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.add {
+            +Velocity(1.0f, 2.0f)
+        }
+
+        view.entities<Velocity> {
+            val vel = it.get<Velocity>()
+            assertEquals(1.0f, vel.x)
+            assertEquals(2.0f, vel.y)
+        }
     }
 
     @Test

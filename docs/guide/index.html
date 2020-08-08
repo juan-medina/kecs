@@ -281,6 +281,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getting-destructuring" class="md-nav__link">
+    Getting Destructuring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#adding-the-entity-to-our-world" class="md-nav__link">
     Adding the entity to our world
   </a>
@@ -383,6 +390,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#creating-views-from-pairs" class="md-nav__link">
+    Creating views from pairs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-views-from-triples" class="md-nav__link">
+    Creating views from triples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iterating-views" class="md-nav__link">
     Iterating views
   </a>
@@ -392,6 +413,27 @@
           <li class="md-nav__item">
   <a href="#obtaining-a-single-entity" class="md-nav__link">
     Obtaining a single Entity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-a-set-of-entities" class="md-nav__link">
+    Obtaining a set of Entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-pairs-of-entities" class="md-nav__link">
+    Obtaining Pairs of Entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-triples-of-entities" class="md-nav__link">
+    Obtaining Triples of Entities
   </a>
   
 </li>
@@ -506,6 +548,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#getting-destructuring" class="md-nav__link">
+    Getting Destructuring
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#adding-the-entity-to-our-world" class="md-nav__link">
     Adding the entity to our world
   </a>
@@ -608,6 +657,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#creating-views-from-pairs" class="md-nav__link">
+    Creating views from pairs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creating-views-from-triples" class="md-nav__link">
+    Creating views from triples
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#iterating-views" class="md-nav__link">
     Iterating views
   </a>
@@ -617,6 +680,27 @@
           <li class="md-nav__item">
   <a href="#obtaining-a-single-entity" class="md-nav__link">
     Obtaining a single Entity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-a-set-of-entities" class="md-nav__link">
+    Obtaining a set of Entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-pairs-of-entities" class="md-nav__link">
+    Obtaining Pairs of Entities
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#obtaining-triples-of-entities" class="md-nav__link">
+    Obtaining Triples of Entities
   </a>
   
 </li>
@@ -696,6 +780,12 @@ represent what that entity contains.</p>
 <span class="n">println</span><span class="p">(</span><span class="s">&quot;the player is ${player.name}&quot;</span><span class="p">)</span>
 </code></pre></div>
 
+<h3 id="getting-destructuring">Getting Destructuring<a class="headerlink" href="#getting-destructuring" title="Permanent link">&para;</a></h3>
+<p>We could have Destructuring declarations to obtain components using pair or triple.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="p">(</span><span class="py">vel</span><span class="p">,</span> <span class="py">pos</span><span class="p">)</span> <span class="p">=</span> <span class="n">myEntity</span><span class="p">.</span><span class="n">pair</span><span class="p">&lt;</span><span class="n">Velocity</span><span class="p">,</span> <span class="n">Position</span><span class="p">&gt;()</span>
+<span class="k">val</span> <span class="p">(</span><span class="py">vel</span><span class="p">,</span> <span class="py">pos</span><span class="p">,</span> <span class="py">player</span><span class="p">)</span> <span class="p">=</span> <span class="n">myEntity</span><span class="p">.</span><span class="n">triple</span><span class="p">&lt;</span><span class="n">Velocity</span><span class="p">,</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Player</span><span class="p">&gt;()</span>
+</code></pre></div>
+
 <h3 id="adding-the-entity-to-our-world">Adding the entity to our world<a class="headerlink" href="#adding-the-entity-to-our-world" title="Permanent link">&para;</a></h3>
 <p>Now that our entity has what we need we could add it to our world.</p>
 <div class="highlight"><pre><span></span><code><span class="n">world</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">myEntity</span><span class="p">)</span>
@@ -706,7 +796,7 @@ represent what that entity contains.</p>
 in this example we will just move the position base on the delta time happen between updates.</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MoveSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">entities</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;</span> <span class="p">{</span>
             <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
 
             <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
@@ -758,7 +848,7 @@ we did before.</p>
 <p>If we look at the code of the System that we create before we could see the update function.</p>
 <p><div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MoveSystem</span> <span class="p">:</span> <span class="n">System</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+        <span class="n">world</span><span class="p">.</span><span class="n">entities</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;</span> <span class="p">{</span>
             <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
 
             <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
@@ -777,7 +867,7 @@ our system get called.</p>
 <div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">world</span> <span class="p">=</span> <span class="n">world</span> <span class="p">{</span>
     <span class="p">+</span><span class="k">object</span> <span class="p">:</span> <span class="nc">System</span><span class="p">()</span> <span class="p">{</span>
         <span class="k">override</span> <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">total</span><span class="p">:</span> <span class="n">Float</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">).</span><span class="n">forEach</span> <span class="p">{</span>
+            <span class="n">world</span><span class="p">.</span><span class="n">entities</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;</span> <span class="p">{</span>
                 <span class="k">val</span> <span class="py">pos</span> <span class="p">=</span> <span class="n">it</span><span class="p">.</span><span class="k">get</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">&gt;()</span>
 
                 <span class="n">pos</span><span class="p">.</span><span class="n">x</span> <span class="p">+=</span> <span class="m">5.0f</span> <span class="p">*</span> <span class="n">delta</span>
@@ -795,6 +885,30 @@ our system get called.</p>
 we are interested on.
 <div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">view</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">view</span><span class="p">(</span><span class="n">Position</span><span class="o">::</span><span class="k">class</span><span class="p">,</span> <span class="n">Velocity</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
 </code></pre></div></p>
+<h3 id="creating-views-from-pairs">Creating views from pairs<a class="headerlink" href="#creating-views-from-pairs" title="Permanent link">&para;</a></h3>
+<p>We can creat views from pairs</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">view</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">,</span> <span class="n">Velocity</span><span class="p">&gt;()</span>
+<span class="n">view</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="c1">// do something with pos and vel</span>
+<span class="p">}</span>
+<span class="c1">//or</span>
+<span class="k">val</span> <span class="py">view</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">,</span> <span class="n">Velocity</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="c1">// do something with pos and vel</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="creating-views-from-triples">Creating views from triples<a class="headerlink" href="#creating-views-from-triples" title="Permanent link">&para;</a></h3>
+<p>We can creat views from pairs</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">view</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">triples</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">,</span> <span class="n">Velocity</span><span class="p">,</span> <span class="n">Player</span><span class="p">&gt;()</span>
+<span class="n">view</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="c1">// do something with pos, vel and player</span>
+<span class="p">}</span>
+<span class="c1">//or</span>
+<span class="k">val</span> <span class="py">view</span> <span class="p">=</span> <span class="n">world</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Position</span><span class="p">,</span> <span class="n">Velocity</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">player</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="c1">// do something with pos, vel and player</span>
+<span class="p">}</span>
+</code></pre></div>
+
 <p>This view will contain all the entities that has a Position and  Velocity component.</p>
 <h3 id="iterating-views">Iterating views<a class="headerlink" href="#iterating-views" title="Permanent link">&para;</a></h3>
 <p>Views implement the Iterable<Entity> interface, so we could use normal Iterators functions.</p>
@@ -814,6 +928,39 @@ we are interested on.
 <h3 id="obtaining-a-single-entity">Obtaining a single Entity<a class="headerlink" href="#obtaining-a-single-entity" title="Permanent link">&para;</a></h3>
 <p>Some times we may want to obtain a single Entity from a view.</p>
 <div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">entity1</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">entity</span><span class="p">(</span><span class="n">Player</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="c1">//or</span>
+<span class="k">val</span> <span class="py">entity1</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">entity</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">&gt;()</span>
+</code></pre></div>
+
+<h3 id="obtaining-a-set-of-entities">Obtaining a set of Entities<a class="headerlink" href="#obtaining-a-set-of-entities" title="Permanent link">&para;</a></h3>
+<p>Some times we may want to obtain a set Entities from a view.</p>
+<div class="highlight"><pre><span></span><code><span class="k">val</span> <span class="py">entity1</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">entitie</span><span class="p">(</span><span class="n">Player</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="c1">//or</span>
+<span class="k">val</span> <span class="py">entity1</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">entitie</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">&gt;()</span>
+</code></pre></div>
+
+<h3 id="obtaining-pairs-of-entities">Obtaining Pairs of Entities<a class="headerlink" href="#obtaining-pairs-of-entities" title="Permanent link">&para;</a></h3>
+<p>Some times we may want to obtain a set of pairs from Entities int a view.</p>
+<div class="highlight"><pre><span></span><code><span class="n">view</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">,</span> <span class="n">Position</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="c1">// do something with player and pos</span>
+<span class="p">}</span>
+<span class="c1">//or</span>
+<span class="k">val</span> <span class="py">entities</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">,</span> <span class="n">Position</span><span class="p">&gt;()</span>
+<span class="n">entities</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="c1">// do something with player and pos</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h3 id="obtaining-triples-of-entities">Obtaining Triples of Entities<a class="headerlink" href="#obtaining-triples-of-entities" title="Permanent link">&para;</a></h3>
+<p>Some times we may want to obtain a set of triples from Entities int a view.</p>
+<div class="highlight"><pre><span></span><code><span class="n">view</span><span class="p">.</span><span class="n">triple</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">,</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Velocity</span><span class="p">&gt;</span> <span class="p">{</span> <span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="c1">// do something with player, pos and velocity</span>
+<span class="p">}</span>
+<span class="c1">//or</span>
+<span class="k">val</span> <span class="py">entities</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">pairs</span><span class="p">&lt;</span><span class="n">Player</span><span class="p">,</span> <span class="n">Position</span><span class="p">&gt;()</span>
+<span class="n">entities</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span> <span class="p">(</span><span class="n">player</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">vel</span><span class="p">)</span> <span class="p">-&gt;</span>
+    <span class="c1">// do something with player, pos and velocity</span>
+<span class="p">}</span>
 </code></pre></div>
 
 <p>This will return the entity that has a Player component, it will fail if we have more than one.</p>

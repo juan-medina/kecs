@@ -173,7 +173,7 @@ fun animalRace() {
     // we create the lure entity, with him name, at the initial position
     //  and with movement set to the lure speed, we will save the reference
     //  to use it latter
-    val lure = world.add {
+    val lureRef = world.add {
         +Lure(name = "Mechanical Rabbit")
         +Position(at = 0.0f)
         +Movement(speed = LURE_SPEED)
@@ -218,23 +218,20 @@ fun animalRace() {
 
     // we will get the name and time component from our lure entity using it
     //  saved reference, surprisingly it will always take 5s
-    val lureName = lure.get<Lure>().name
-    val lureTime = lure.get<Position>().time
-    println("$lureName arrived in ${lureTime.threeDecimals()}s \n")
+    val (lure, pos) = lureRef.pair<Lure, Position>()
+    println("${lure.name} arrived in ${pos.time.threeDecimals()}s \n")
 
     println("Final lines:\n")
 
     // we will get all entities that has an Animal and a Position and sorted by
     //  the time they take to rich that position
-    world.view(Animal::class, Position::class).sortedBy {
-        it.get<Position>().time
-    }.forEachIndexed { place, it ->
+    world.pairs<Animal, Position>().sortedBy { (_, position) ->
+        position.time
+    }.forEachIndexed { place, (animal, animalPos) ->
         // get the components of the entity and display it
-        val animal = it.get<Animal>()
-        val pos = it.get<Position>()
         println(
             "${(place + 1).withSuffix()} ${animal.name} in " +
-                "${pos.time.threeDecimals()}s"
+                "${animalPos.time.threeDecimals()}s"
         )
     }
 }
@@ -243,13 +240,9 @@ fun animalRace() {
 class MovementSystem : System() {
     override fun update(delta: Float, total: Float, world: World) {
         // get entities that has position and movement
-        world.view(Position::class, Movement::class).forEach {
-            // get the movement component
-            val movement = it.get<Movement>()
+        world.pairs<Position, Movement> { (position, movement) ->
             // if we are running
             if (movement.status == MovementStatus.Running) {
-                // get the position component
-                val position = it.get<Position>()
                 // calculate the step base on delta time and speed
                 val step = (movement.speed * delta)
                 // calculate new position, without passing the end
@@ -272,9 +265,7 @@ class WinnerSystem : System() {
         if (!world.hasComponent<Winner>()) {
             // get entities that are animal and has position, we
             // dont need movement, neither the lure
-            world.view(Position::class, Animal::class).forEach {
-                val position = it.get<Position>()
-                val animal = it.get<Animal>()
+            world.pairs<Position, Animal> { (position, animal) ->
                 // if we are at the end
                 if (position.at == RACE_LENGTH) {
                     // add to the world the winner
@@ -299,8 +290,7 @@ class RaceSystem : System() {
             // if all are stopped
             if (allStopped) {
                 // set that the race has ended
-                val status = world.entity(RaceStatus::class)
-                status.set(RaceStatus.Ended)
+                world.entity<RaceStatus>().set(RaceStatus.Ended)
             }
         }
     }

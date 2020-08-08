@@ -35,6 +35,20 @@ class Entity {
     val components = hashMapOf<KClass<*>, Any>()
 
     /**
+     * Creates a [Pair] from two components types.
+     *
+     * This can be use for a Destructuring declaration.
+     */
+    inline fun <reified T : Any, reified K : Any> pair() = Pair(get<T>(), get<K>())
+
+    /**
+     * Creates a [Triple] from three components types
+     *
+     * This can be use for a Destructuring declaration.
+     */
+    inline fun <reified T : Any, reified K : Any, reified V : Any> triple() = Triple(get<T>(), get<K>(), get<V>())
+
+    /**
      * Add a component to this entity.
      *
      * @param component the component to add to the entity, we can have only one per the given type.
