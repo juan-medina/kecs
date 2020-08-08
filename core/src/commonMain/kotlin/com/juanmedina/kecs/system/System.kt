@@ -17,6 +17,18 @@ package com.juanmedina.kecs.system
 
 import com.juanmedina.kecs.world.World
 
+/**
+ * A system take care of update our world base on the entities of the our world.
+ *
+ * @constructor create a system, you must implement [com.juanmedina.kecs.system.System.update].
+ */
 abstract class System {
+    /**
+     * get notified by the world that this system needs update.
+     *
+     * @param delta time since last update in seconds.
+     * @param total total time since the world was created.
+     * @param world the ECS world that needs updates.
+     */
     abstract fun update(delta: Float, total: Float, world: World)
 }

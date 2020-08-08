@@ -306,6 +306,7 @@
                 <p><a href="../../">KECS</a> / <a href="../">com.juanmedina.kecs.system</a> / <a href="./">System</a></p>
 <h1 id="system">System<a class="headerlink" href="#system" title="Permanent link">&para;</a></h1>
 <p><code>abstract class System</code></p>
+<p>A system take care of update our world base on the entities of the our world.</p>
 <h3 id="constructors">Constructors<a class="headerlink" href="#constructors" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -317,7 +318,7 @@
 <tbody>
 <tr>
 <td><a href="-init-/">&lt;init&gt;</a></td>
-<td><code>System()</code></td>
+<td>A system take care of update our world base on the entities of the our world.<code>System()</code></td>
 </tr>
 </tbody>
 </table>
@@ -332,7 +333,7 @@
 <tbody>
 <tr>
 <td><a href="update/">update</a></td>
-<td><code>abstract fun update(delta:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><code>Float</code></a><code>, total:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><code>Float</code></a><code>, world:</code><a href="../../com.juanmedina.kecs.world/-world/"><code>World</code></a><code>):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a></td>
+<td>get notified by the world that this system needs update.<code>abstract fun update(delta:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><code>Float</code></a><code>, total:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><code>Float</code></a><code>, world:</code><a href="../../com.juanmedina.kecs.world/-world/"><code>World</code></a><code>):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a></td>
 </tr>
 </tbody>
 </table>

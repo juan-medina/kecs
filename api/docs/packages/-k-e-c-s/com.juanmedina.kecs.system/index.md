@@ -8,4 +8,4 @@ classes for creating systems
 
 | Name | Summary |
 |---|---|
-| [System](-system/index.md) | `abstract class System` |
+| [System](-system/index.md) | A system take care of update our world base on the entities of the our world.`abstract class System` |

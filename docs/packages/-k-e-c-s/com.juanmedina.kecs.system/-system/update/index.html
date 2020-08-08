@@ -261,6 +261,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -282,6 +299,11 @@
                 <p><a href="../../../">KECS</a> / <a href="../../">com.juanmedina.kecs.system</a> / <a href="../">System</a> / <a href="./">update</a></p>
 <h1 id="update">update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h1>
 <p><code>abstract fun update(delta:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><code>Float</code></a><code>, total:</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-float/index.html"><code>Float</code></a><code>, world:</code><a href="../../../com.juanmedina.kecs.world/-world/"><code>World</code></a><code>):</code><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><code>Unit</code></a></p>
+<p>get notified by the world that this system needs update.</p>
+<h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
+<p><code>delta</code> - time since last update in seconds.</p>
+<p><code>total</code> - total time since the world was created.</p>
+<p><code>world</code> - the ECS world that needs updates.</p>
                 
               
               
