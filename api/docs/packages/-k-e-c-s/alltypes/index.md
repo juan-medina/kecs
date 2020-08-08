@@ -36,6 +36,8 @@ more simple and without the need of using multiple threads neither fibers nor co
 
 ##### [com.juanmedina.kecs.entity.View](../com.juanmedina.kecs.entity/-view/index.md)
 
+A View represent a set of entities in [World](../com.juanmedina.kecs.world/-world/index.md).
+
 
 |
 

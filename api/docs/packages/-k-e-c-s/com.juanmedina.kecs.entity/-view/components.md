@@ -3,3 +3,6 @@
 # components
 
 `fun <reified T : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> components(): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<T>`
+
+Return the components in our view for a giving class.
+

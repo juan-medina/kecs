@@ -27,6 +27,8 @@ import com.juanmedina.kecs.system.System
  *  get notified with the state of our world.
  *
  * Since it extend from [View][com.juanmedina.kecs.entity.View] allow to flexible query our [entities][com.juanmedina.kecs.entity.Entity].
+ *
+ * @constructor Creates an empty World.
  */
 class World : View() {
     private val systems = arrayListOf<System>()
@@ -35,7 +37,7 @@ class World : View() {
 
     /**
      * Perform a [world][com.juanmedina.kecs.world] update, triggering the [update][com.juanmedina.kecs.system.System.update] method
-     * in each of the [systems][com.juanmedina.kecs.system.System] added to the [world][com.juanmedina.kecs.world].
+     * in each of the [systems][com.juanmedina.kecs.system.System] added to the world.
      */
     fun update() {
         val new = Platform.getSystemMillis()
@@ -51,7 +53,9 @@ class World : View() {
     }
 
     /**
-     * Adds a [systems][com.juanmedina.kecs.system.System] to our [world][com.juanmedina.kecs.world]
+     * Adds a [systems][com.juanmedina.kecs.system.System] to our world.
+     *
+     * @param system a [System][com.juanmedina.kecs.system.System].
      */
     fun add(system: System) {
         systems.add(system)

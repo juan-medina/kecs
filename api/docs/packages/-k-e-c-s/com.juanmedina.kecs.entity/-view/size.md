@@ -3,3 +3,6 @@
 # size
 
 `open val size: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)
+
+Number of entities in our View.
+

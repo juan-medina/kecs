@@ -7,6 +7,6 @@ rm -rf api/docs/packages
 
 mkdir docs
 
-./gradlew dokka
+./gradlew clean dokka
 
 mkdocs build

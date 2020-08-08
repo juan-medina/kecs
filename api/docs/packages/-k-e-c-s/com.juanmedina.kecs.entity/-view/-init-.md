@@ -2,5 +2,10 @@
 
 # &lt;init&gt;
 
-`View(entities: `[`Iterable`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/index.html)`<`[`Entity`](../-entity/index.md)`>)`
 `View()`
+
+Creates a empty [View](index.md).
+
+**Constructor**
+Creates a empty [View](index.md).
+
