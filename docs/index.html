@@ -245,22 +245,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#add-jcenter-to-gradle" class="md-nav__link">
+    Add jcenter to gradle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-jcenter-to-maven" class="md-nav__link">
+    Add jcenter to maven
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#multi-platform-gradle-project" class="md-nav__link">
-    Multi-platform gradle project
+    Multi-platform Gradle project
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#single-platform-gradle-project" class="md-nav__link">
-    Single-platform gradle project
+    Single-platform Gradle project
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#maven-project" class="md-nav__link">
-    Maven project
+  <a href="#single-platform-maven-project" class="md-nav__link">
+    Single-platform Maven project
   </a>
   
 </li>
@@ -387,22 +401,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#add-jcenter-to-gradle" class="md-nav__link">
+    Add jcenter to gradle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-jcenter-to-maven" class="md-nav__link">
+    Add jcenter to maven
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#multi-platform-gradle-project" class="md-nav__link">
-    Multi-platform gradle project
+    Multi-platform Gradle project
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#single-platform-gradle-project" class="md-nav__link">
-    Single-platform gradle project
+    Single-platform Gradle project
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#maven-project" class="md-nav__link">
-    Maven project
+  <a href="#single-platform-maven-project" class="md-nav__link">
+    Single-platform Maven project
   </a>
   
 </li>
@@ -450,7 +478,8 @@
 <p>Kotlin Cross-platform Entity Component System</p>
 <p><img alt="KECS" src="https://juan-medina.github.io/kecs/icon-wide.svg" /></p>
 <p><a href="/LICENSE"><img alt="License: Apache2" src="https://img.shields.io/badge/license-Apache%202-blue.svg" /></a>
-<a href="https://juan-medina.github.io/kecs/"><img alt="Docs" src="https://img.shields.io/badge/docs-latest-brightgreen.svg" /></a></p>
+<a href="https://juan-medina.github.io/kecs/"><img alt="Docs" src="https://img.shields.io/badge/docs-latest-brightgreen.svg" /></a>
+<a href="https://bintray.com/juan-medina/kecs/kecs/_latestVersion"><img alt="Download" src="https://api.bintray.com/packages/juan-medina/kecs/kecs/images/download.svg" /> </a></p>
 <h2 id="platforms">Platforms<a class="headerlink" href="#platforms" title="Permanent link">&para;</a></h2>
 <p><img alt="Platform: Linux x64" src="https://img.shields.io/badge/platform%3A%20Linux%20x64-Ok-green" />
 <img alt="Platform: JVM" src="https://img.shields.io/badge/platform%3A%20JVM-Ok-green" />
@@ -465,44 +494,57 @@ more simple and without the need of using multiple threads neither fibers nor co
 systems.</p>
 <p>If you like to learn more about what is an ECS we try to give some clarification on <a href="https://juan-medina.github.io/kecs/ecs/">this section</a>.</p>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<p>Currently, KECS is not available in any distribution system, you need to clone and install it locally.</p>
-<div class="highlight"><pre><span></span><code>&gt; git clone git@github.com:juan-medina/kecs.git
-&gt; <span class="nb">cd</span> keces
-&gt; gradlew publishToMavenLocal
+<p>Currently, KECS is available in jcenter, first we need to add the repositories,
+if we do not have them.</p>
+<h3 id="add-jcenter-to-gradle">Add jcenter to gradle<a class="headerlink" href="#add-jcenter-to-gradle" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">repositories</span> <span class="o">{</span>
+    <span class="n">jcenter</span><span class="o">()</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="add-jcenter-to-maven">Add jcenter to maven<a class="headerlink" href="#add-jcenter-to-maven" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="nt">&lt;repositories&gt;</span>
+    <span class="nt">&lt;repository&gt;</span>
+        <span class="nt">&lt;id&gt;</span>jcenter<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;name&gt;</span>bintray<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;url&gt;</span>https://jcenter.bintray.com<span class="nt">&lt;/url&gt;</span>
+    <span class="nt">&lt;/repository&gt;</span>
+<span class="nt">&lt;/repositories&gt;</span>
 </code></pre></div>
 
 <p>This will install the multi-platform module for all the platforms in your system.</p>
-<h3 id="multi-platform-gradle-project">Multi-platform gradle project<a class="headerlink" href="#multi-platform-gradle-project" title="Permanent link">&para;</a></h3>
-<p>If you are building a multi-platform gradle project you could add the overall module
-that will include all the dependencies for your specific platforms.</p>
-<p><div class="highlight"><pre><span></span><code><span class="n">kotlin</span> <span class="o">{</span>
+<h3 id="multi-platform-gradle-project">Multi-platform Gradle project<a class="headerlink" href="#multi-platform-gradle-project" title="Permanent link">&para;</a></h3>
+<p>If you are  creating a multi-platform project you need to add to the platforms that you need</p>
+<div class="highlight"><pre><span></span><code><span class="n">kotlin</span> <span class="o">{</span>
     <span class="n">sourceSets</span> <span class="o">{</span>
-        <span class="n">commonMain</span> <span class="o">{</span>
+        <span class="n">jvmMain</span> <span class="o">{</span>
             <span class="n">dependencies</span> <span class="o">{</span>
                 <span class="n">implementation</span> <span class="nf">kotlin</span><span class="o">(</span><span class="s1">&#39;stdlib-common&#39;</span><span class="o">)</span>
-                <span class="n">api</span><span class="o">(</span><span class="s1">&#39;com.juanmedina:kecs:0.0.1&#39;</span><span class="o">)</span>
+                <span class="n">implementation</span> <span class="s1">&#39;com.juanmedina:kecs-jvm:1.0.0&#39;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">linuxMain</span> <span class="o">{</span>
+            <span class="n">dependencies</span> <span class="o">{</span>
+                <span class="n">implementation</span> <span class="s1">&#39;com.juanmedina:kecs-linux:1.0.0&#39;</span>
             <span class="o">}</span>
         <span class="o">}</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div>
-For this to work you need to enable the gradle metadata module adding to the settings.gradle</p>
-<div class="highlight"><pre><span></span><code><span class="n">enableFeaturePreview</span><span class="o">(</span><span class="s1">&#39;GRADLE_METADATA&#39;</span><span class="o">)</span>
-</code></pre></div>
 
-<h3 id="single-platform-gradle-project">Single-platform gradle project<a class="headerlink" href="#single-platform-gradle-project" title="Permanent link">&para;</a></h3>
+<h3 id="single-platform-gradle-project">Single-platform Gradle project<a class="headerlink" href="#single-platform-gradle-project" title="Permanent link">&para;</a></h3>
 <p>For just adding as dependency for a simple platform you could do this in gradle:</p>
 <div class="highlight"><pre><span></span><code><span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">api</span><span class="o">(</span><span class="s1">&#39;com.juanmedina:kecs-jvm:0.0.1&#39;</span><span class="o">)</span>
+    <span class="n">api</span><span class="o">(</span><span class="s1">&#39;com.juanmedina:kecs-jvm:1.0.0&#39;</span><span class="o">)</span>
 <span class="o">}</span>
 </code></pre></div>
 
-<h3 id="maven-project">Maven project<a class="headerlink" href="#maven-project" title="Permanent link">&para;</a></h3>
+<h3 id="single-platform-maven-project">Single-platform Maven project<a class="headerlink" href="#single-platform-maven-project" title="Permanent link">&para;</a></h3>
 <p>If you use maven you need to include the dependencies of the platforms that you target:
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>com.juanmedina<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>kecs-jvm<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>0.0.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></p>
 <h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>

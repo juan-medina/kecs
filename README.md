@@ -5,6 +5,7 @@ Kotlin Cross-platform Entity Component System
 
 [![License: Apache2](https://img.shields.io/badge/license-Apache%202-blue.svg)](/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://juan-medina.github.io/kecs/)
+[![Download](https://api.bintray.com/packages/juan-medina/kecs/kecs/images/download.svg) ](https://bintray.com/juan-medina/kecs/kecs/_latestVersion)
 
 ## Platforms
 ![Platform: Linux x64](https://img.shields.io/badge/platform%3A%20Linux%20x64-Ok-green)
@@ -27,56 +28,69 @@ If you like to learn more about what is an ECS we try to give some clarification
 
 ## Installation
 
-Currently, KECS is not available in any distribution system, you need to clone and install it locally.
+Currently, KECS is available in jcenter, first we need to add the repositories,
+if we do not have them.
 
-```bash
-> git clone git@github.com:juan-medina/kecs.git
-> cd keces
-> gradlew publishToMavenLocal
+### Add jcenter to gradle
+```groovy
+repositories {
+    jcenter()
+}
+```
+
+### Add jcenter to maven
+
+```xml
+<repositories>
+    <repository>
+        <id>jcenter</id>
+        <name>bintray</name>
+        <url>https://jcenter.bintray.com</url>
+    </repository>
+</repositories>
 ```
 
 This will install the multi-platform module for all the platforms in your system.
 
-### Multi-platform gradle project
+### Multi-platform Gradle project
 
-If you are building a multi-platform gradle project you could add the overall module
-that will include all the dependencies for your specific platforms.
+If you are  creating a multi-platform project you need to add to the platforms that you need
 
 ```groovy
 kotlin {
     sourceSets {
-        commonMain {
+        jvmMain {
             dependencies {
                 implementation kotlin('stdlib-common')
-                api('com.juanmedina:kecs:0.0.1')
+                implementation 'com.juanmedina:kecs-jvm:1.0.0'
+            }
+        }
+        linuxMain {
+            dependencies {
+                implementation 'com.juanmedina:kecs-linux:1.0.0'
             }
         }
     }
 }
 ```
-For this to work you need to enable the gradle metadata module adding to the settings.gradle
 
-```groovy
-enableFeaturePreview('GRADLE_METADATA')
-```
-
-### Single-platform gradle project
+### Single-platform Gradle project
 
 For just adding as dependency for a simple platform you could do this in gradle:
 
 ```groovy
 dependencies {
-    api('com.juanmedina:kecs-jvm:0.0.1')
+    api('com.juanmedina:kecs-jvm:1.0.0')
 }
 ```
 
-### Maven project
+### Single-platform Maven project
 If you use maven you need to include the dependencies of the platforms that you target:
 ```xml
 <dependency>
     <groupId>com.juanmedina</groupId>
     <artifactId>kecs-jvm</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
