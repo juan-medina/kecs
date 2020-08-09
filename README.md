@@ -5,7 +5,9 @@ Kotlin Cross-platform Entity Component System
 
 [![License: Apache2](https://img.shields.io/badge/license-Apache%202-blue.svg)](/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://juan-medina.github.io/kecs/)
-[![Download](https://api.bintray.com/packages/juan-medina/kecs/kecs/images/download.svg) ](https://bintray.com/juan-medina/kecs/kecs/_latestVersion)
+[![Download](https://api.bintray.com/packages/juan-medina/kecs/kecs/images/download.svg)](https://bintray.com/juan-medina/kecs/kecs/_latestVersion)
+[![Download](https://img.shields.io/badge/try-playground-brightgreen)](https://juan-medina.github.io/kecs/playground/)
+
 
 ## Platforms
 ![Platform: Linux x64](https://img.shields.io/badge/platform%3A%20Linux%20x64-Ok-green)
@@ -97,7 +99,7 @@ If you use maven you need to include the dependencies of the platforms that you 
 ## Basic Usage
 
 This is a basic example, check the [user guide](https://juan-medina.github.io/kecs/guide/), the [advance example](https://juan-medina.github.io/kecs/example/), or the [API Documentation](https://juan-medina.github.io/kecs/packages/-k-e-c-s/)
-for learning more about using KECS.
+for learning more about using KECS or try the [Playground](https://juan-medina.github.io/kecs/playground/) for practical experimentation.
 
 ```Kotlin
 data class Velocity(val x: Float, val y: Float)

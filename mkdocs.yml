@@ -12,6 +12,7 @@ pages:
     - What is a ECS: 'ecs.md'
     - User Guide: 'guide.md'
     - Advance Example : 'example.md'
+    - Playground : 'playground.md'
     - API Documentation: 'packages/-k-e-c-s/index.md'
 theme:
     name: material
