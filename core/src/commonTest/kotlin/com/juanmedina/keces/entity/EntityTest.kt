@@ -200,4 +200,24 @@ class EntityTest {
 
         assertEquals(player.name, "player1")
     }
+
+    @Test
+    fun `we can get a String from a entity`() {
+        val ent = Entity()
+
+        ent.add(Position(1.0f, 2.0f))
+        ent.add(Velocity(3.0f, 4.0f))
+        ent.add(Player("player1"))
+
+        val str = ent.toString()
+
+        assertTrue("""Entity\(.*\)""".toRegex().matches(str))
+        val velocityMatch = ent.get<Velocity>().toString().replace("(", "\\(").replace(")", "\\)")
+        val positionMatch = ent.get<Position>().toString().replace("(", "\\(").replace(")", "\\)")
+        val playerMatch = ent.get<Player>().toString().replace("(", "\\(").replace(")", "\\)")
+
+        assertTrue(".*$velocityMatch.*".toRegex().matches(str))
+        assertTrue(".*$positionMatch.*".toRegex().matches(str))
+        assertTrue(".*$playerMatch.*".toRegex().matches(str))
+    }
 }

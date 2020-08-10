@@ -2,6 +2,10 @@
 
 # entities
 
+`protected val entities: `[`ArrayList`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-array-list/index.html)`<`[`Entity`](../-entity/index.md)`>`
+
+[Entities](../-entity/index.md) storage.
+
 `fun <reified T : `[`Any`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html)`> entities(): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<`[`Entity`](../-entity/index.md)`>`
 
 Return a set [entities](../-entity/index.md) that has a component of the giving type.

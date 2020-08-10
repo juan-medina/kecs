@@ -519,4 +519,21 @@ class ViewTest {
         assertTrue(view.hasComponent<Velocity>())
         assertFalse(view.hasComponent<Position>())
     }
+
+    @Test
+    fun `we can get a String from a view`() {
+        val view = View()
+
+        view.add {
+            +Velocity(1.0f, 2.0f)
+            +Position(0.0f, 0.0f)
+        }
+        view.add {
+            +Velocity(1.0f, 2.0f)
+        }
+
+        val str = view.toString()
+
+        assertTrue("""View\(entities=.*\)""".toRegex().matches(str))
+    }
 }

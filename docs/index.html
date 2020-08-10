@@ -494,10 +494,10 @@
 <a href="https://bintray.com/juan-medina/kecs/kecs/_latestVersion"><img alt="Download" src="https://api.bintray.com/packages/juan-medina/kecs/kecs/images/download.svg" /></a>
 <a href="https://juan-medina.github.io/kecs/playground/"><img alt="Download" src="https://img.shields.io/badge/try-playground-brightgreen" /></a></p>
 <h2 id="platforms">Platforms<a class="headerlink" href="#platforms" title="Permanent link">&para;</a></h2>
-<p><img alt="Platform: Linux x64" src="https://img.shields.io/badge/platform%3A%20Linux%20x64-Ok-green" />
-<img alt="Platform: JVM" src="https://img.shields.io/badge/platform%3A%20JVM-Ok-green" />
+<p><img alt="Platform: JVM" src="https://img.shields.io/badge/platform%3A%20JVM-Ok-green" />
+<img alt="Platform: Linux x64" src="https://img.shields.io/badge/platform%3A%20Linux%20x64-Ok-green" />
+<img alt="Platform: Windows x64" src="https://img.shields.io/badge/platform%3A%20Windows%20x64-Ok-green" />
 <img alt="Platform: JS" src="https://img.shields.io/badge/platform%3A%20JS-Stand%20By-red" />
-<img alt="Platform: Windows" src="https://img.shields.io/badge/platform%3A%20Windows-Stand%20By-red" />
 <img alt="Platform: MAC" src="https://img.shields.io/badge/platform%3A%20Mac-Stand%20By-red" /></p>
 <h2 id="info">Info<a class="headerlink" href="#info" title="Permanent link">&para;</a></h2>
 <p>KECS is a Cross-platform Entity Component System design to create concurrent applications, such games,
@@ -533,12 +533,17 @@ if we do not have them.</p>
         <span class="n">jvmMain</span> <span class="o">{</span>
             <span class="n">dependencies</span> <span class="o">{</span>
                 <span class="n">implementation</span> <span class="nf">kotlin</span><span class="o">(</span><span class="s1">&#39;stdlib-common&#39;</span><span class="o">)</span>
-                <span class="n">implementation</span> <span class="s1">&#39;com.juanmedina:kecs-jvm:1.0.0&#39;</span>
+                <span class="n">implementation</span> <span class="s1">&#39;com.juanmedina:kecs-jvm:1.0.1&#39;</span>
             <span class="o">}</span>
         <span class="o">}</span>
         <span class="n">linuxMain</span> <span class="o">{</span>
             <span class="n">dependencies</span> <span class="o">{</span>
-                <span class="n">implementation</span> <span class="s1">&#39;com.juanmedina:kecs-linux:1.0.0&#39;</span>
+                <span class="n">implementation</span> <span class="s1">&#39;com.juanmedina:kecs-linux:1.0.1&#39;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="n">mingwMain</span> <span class="o">{</span>
+            <span class="n">dependencies</span> <span class="o">{</span>
+                <span class="n">implementation</span> <span class="s1">&#39;com.juanmedina:kecs-mingw:1.0.1&#39;</span>
             <span class="o">}</span>
         <span class="o">}</span>
     <span class="o">}</span>
@@ -548,7 +553,7 @@ if we do not have them.</p>
 <h3 id="single-platform-gradle-project">Single-platform Gradle project<a class="headerlink" href="#single-platform-gradle-project" title="Permanent link">&para;</a></h3>
 <p>For just adding as dependency for a simple platform you could do this in gradle:</p>
 <div class="highlight"><pre><span></span><code><span class="n">dependencies</span> <span class="o">{</span>
-    <span class="n">api</span><span class="o">(</span><span class="s1">&#39;com.juanmedina:kecs-jvm:1.0.0&#39;</span><span class="o">)</span>
+    <span class="n">implementation</span> <span class="s1">&#39;com.juanmedina:kecs-jvm:1.0.1&#39;</span>
 <span class="o">}</span>
 </code></pre></div>
 
@@ -557,7 +562,7 @@ if we do not have them.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">&lt;dependency&gt;</span>
     <span class="nt">&lt;groupId&gt;</span>com.juanmedina<span class="nt">&lt;/groupId&gt;</span>
     <span class="nt">&lt;artifactId&gt;</span>kecs-jvm<span class="nt">&lt;/artifactId&gt;</span>
-    <span class="nt">&lt;version&gt;</span>1.0.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;version&gt;</span>1.0.1<span class="nt">&lt;/version&gt;</span>
 <span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div></p>
 <h2 id="basic-usage">Basic Usage<a class="headerlink" href="#basic-usage" title="Permanent link">&para;</a></h2>

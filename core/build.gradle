@@ -21,18 +21,15 @@ def BINTRAY_ORGINIZATION= 'juan-medina'
 def ISSUE_URL= 'https://github.com/juan-medina/kecs/issues'
 def SITE_URL= 'https://juan-medina.github.io/kecs/'
 def VCS_URL= 'https://github.com/juan-medina/kecs.git'
-def LIBRARY_VERSION_NAME='1.0.1.SNAPSHOT'
+def LIBRARY_VERSION_NAME='1.0.1'
 
 group GROUP_ID
 version LIBRARY_VERSION_NAME
 
 kotlin {
     jvm()
-    // For ARM, should be changed to iosArm32 or iosArm64
-    // For Linux, should be changed to e.g. linuxX64
-    // For MacOS, should be changed to e.g. macosX64
-    // For Windows, should be changed to e.g. mingwX64
     linuxX64("linux")
+    mingwX64("mingw")
     sourceSets {
         commonMain {
             dependencies {
@@ -62,6 +59,12 @@ kotlin {
             dependsOn commonMain
         }
         linuxTest {
+            dependsOn commonTest
+        }
+        mingwMain {
+            dependsOn commonMain
+        }
+        mingwTest {
             dependsOn commonTest
         }
     }

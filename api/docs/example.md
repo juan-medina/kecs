@@ -13,6 +13,8 @@ If you like to run this example, from the root path of this project you could ru
 > graddlew runSampleJvm
 > graddlew runSampleLinuxDebug
 > graddlew runSampleLinuxRelease
+> graddlew runSampleMingwDebug
+> graddlew runSampleMingwRelease
 ```
 
 ### Source Code

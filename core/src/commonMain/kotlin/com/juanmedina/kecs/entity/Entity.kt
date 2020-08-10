@@ -115,4 +115,12 @@ class Entity {
             components.remove(found::class)
         }
     }
+
+    /**
+     * Generates an String that represent the [entity][com.juanmedina.kecs.entity.Entity].
+     * @return [String] with the entity details.
+     */
+    override fun toString(): String {
+        return "Entity(components=${components.values})"
+    }
 }

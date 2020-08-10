@@ -2,6 +2,8 @@
 
 In this Playground you could experiment with KECS, you could run and edit the example bellow.
 
+_Sometimes the play button will take some time to show, please wait._
+
 ```kotlin
 import com.juanmedina.kecs.dsl.add
 import com.juanmedina.kecs.dsl.world
@@ -50,10 +52,10 @@ fun main() {
     }
 
     world.update()
-    
+
     world.pairs<GameObject, Position> { (obj, pos) ->
-    	println("$obj $pos")    
-    }    
+    	println("$obj $pos")
+    }
 }
 
 ```

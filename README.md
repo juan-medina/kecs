@@ -10,10 +10,10 @@ Kotlin Cross-platform Entity Component System
 
 
 ## Platforms
-![Platform: Linux x64](https://img.shields.io/badge/platform%3A%20Linux%20x64-Ok-green)
 ![Platform: JVM](https://img.shields.io/badge/platform%3A%20JVM-Ok-green)
+![Platform: Linux x64](https://img.shields.io/badge/platform%3A%20Linux%20x64-Ok-green)
+![Platform: Windows x64](https://img.shields.io/badge/platform%3A%20Windows%20x64-Ok-green)
 ![Platform: JS](https://img.shields.io/badge/platform%3A%20JS-Stand%20By-red)
-![Platform: Windows](https://img.shields.io/badge/platform%3A%20Windows-Stand%20By-red)
 ![Platform: MAC](https://img.shields.io/badge/platform%3A%20Mac-Stand%20By-red)
 
 ## Info
@@ -64,12 +64,17 @@ kotlin {
         jvmMain {
             dependencies {
                 implementation kotlin('stdlib-common')
-                implementation 'com.juanmedina:kecs-jvm:1.0.0'
+                implementation 'com.juanmedina:kecs-jvm:1.0.1'
             }
         }
         linuxMain {
             dependencies {
-                implementation 'com.juanmedina:kecs-linux:1.0.0'
+                implementation 'com.juanmedina:kecs-linux:1.0.1'
+            }
+        }
+        mingwMain {
+            dependencies {
+                implementation 'com.juanmedina:kecs-mingw:1.0.1'
             }
         }
     }
@@ -82,7 +87,7 @@ For just adding as dependency for a simple platform you could do this in gradle:
 
 ```groovy
 dependencies {
-    api('com.juanmedina:kecs-jvm:1.0.0')
+    implementation 'com.juanmedina:kecs-jvm:1.0.1'
 }
 ```
 
@@ -92,7 +97,7 @@ If you use maven you need to include the dependencies of the platforms that you 
 <dependency>
     <groupId>com.juanmedina</groupId>
     <artifactId>kecs-jvm</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 

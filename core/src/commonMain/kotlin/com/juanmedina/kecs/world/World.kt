@@ -62,4 +62,13 @@ class World : View() {
     fun add(system: System) {
         systems.add(system)
     }
+
+    /**
+     * Generates an String that represent the [world][com.juanmedina.kecs.world].
+     * @return [String] with the world details.
+     */
+    override fun toString(): String {
+        val systemStr = systems.map { it::class.simpleName }
+        return "World(systems=$systemStr, currentTime=$current, totalTime=$total, entities=${super.entities})"
+    }
 }

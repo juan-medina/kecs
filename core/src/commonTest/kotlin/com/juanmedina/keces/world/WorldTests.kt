@@ -16,14 +16,20 @@
 package com.juanmedina.keces.world
 
 import com.juanmedina.keces.platform.test.TestUtils
+import com.juanmedina.kecs.entity.Entity
 import com.juanmedina.kecs.system.System
 import com.juanmedina.kecs.world.World
 import kotlin.math.truncate
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
+import kotlin.test.assertTrue
 
 class WorldTests {
+    data class Position(val x: Float, val y: Float)
+
+    data class Velocity(val x: Float, val y: Float)
+
     class RecordTimeSystem : System() {
         val deltas = arrayListOf<Float>()
         var updates = 0
@@ -56,5 +62,28 @@ class WorldTests {
         assertEquals(rts.deltas.sum(), rts.total, "sum of deltas should be equal to total")
         val approximately = (2..steps).sum().toFloat()
         assertEquals(truncate(rts.total), approximately, "we should record approximately time")
+    }
+
+    @Test
+    fun `we should get string from world`() {
+        val ecs = World()
+        val rts = RecordTimeSystem()
+        ecs.add(rts)
+
+        val entity1 = Entity()
+        entity1.add(Position(0.0f, 0.0f))
+        entity1.add(Velocity(1.0f, 2.0f))
+        ecs.add(entity1)
+
+        val entity2 = Entity()
+        entity2.add(Position(0.0f, 0.0f))
+        entity2.add(Velocity(1.0f, 2.0f))
+        ecs.add(entity2)
+
+        val str = ecs.toString()
+
+        assertTrue("""World\(.*.*\)""".toRegex().matches(str))
+        assertTrue(".*entities=.*".toRegex().matches(str))
+        assertTrue(".*systems=.*".toRegex().matches(str))
     }
 }

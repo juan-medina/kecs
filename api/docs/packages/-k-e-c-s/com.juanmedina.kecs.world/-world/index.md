@@ -24,6 +24,7 @@ Since it extend from [View](../../com.juanmedina.kecs.entity/-view/index.md) all
 | Name | Summary |
 |---|---|
 | [add](add.md) | Adds a [systems](../../com.juanmedina.kecs.system/-system/index.md) to our world.`fun add(system: `[`System`](../../com.juanmedina.kecs.system/-system/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [toString](to-string.md) | Generates an String that represent the [world](../index.md).`fun toString(): `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) |
 | [update](update.md) | Perform a [world](../index.md) update, triggering the [update](../../com.juanmedina.kecs.system/-system/update.md) method in each of the [systems](../../com.juanmedina.kecs.system/-system/index.md) added to the world.`fun update(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 
 ### Extension Functions

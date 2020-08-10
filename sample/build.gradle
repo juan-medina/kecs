@@ -13,10 +13,15 @@ kotlin {
     // For Linux, should be changed to e.g. linuxX64
     // For MacOS, should be changed to e.g. macosX64
     // For Windows, should be changed to e.g. mingwX64
+    mingwX64("mingw"){
+        binaries {
+            executable {
+            }
+        }
+    }
     linuxX64("linux") {
         binaries {
             executable {
-
             }
         }
     }
@@ -52,6 +57,12 @@ kotlin {
         linuxTest {
             dependsOn commonTest
         }
+        mingwMain {
+            dependsOn commonMain
+        }
+        mingwTest {
+            dependsOn commonTest
+        }
     }
     targets {
         jvm()
@@ -81,4 +92,14 @@ tasks.register("runSampleLinuxDebug") {
 tasks.register("runSampleLinuxRelease") {
     group = taskGroupRunSample
     dependsOn("runReleaseExecutableLinux")
+}
+
+tasks.register("runSampleMingwDebug") {
+    group = taskGroupRunSample
+    dependsOn("runDebugExecutableMingw")
+}
+
+tasks.register("runSampleMingwRelease") {
+    group = taskGroupRunSample
+    dependsOn("runReleaseExecutableMingw")
 }

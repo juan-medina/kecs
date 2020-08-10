@@ -33,7 +33,7 @@ open class View() : MutableCollection<Entity> {
     /**
      * [Entities][com.juanmedina.kecs.entity.Entity] storage.
      */
-    private val entities = arrayListOf<Entity>()
+    protected val entities = arrayListOf<Entity>()
 
     /**
      * Create a sub-view giving a set of component classes.
@@ -200,4 +200,12 @@ open class View() : MutableCollection<Entity> {
      * @param elements [entities][com.juanmedina.kecs.entity.Entity] to retain in our view.
      */
     override fun retainAll(elements: Collection<Entity>) = entities.retainAll(elements)
+
+    /**
+     * Generates an String that represent the [world][com.juanmedina.kecs.entity.View].
+     * @return [String] with the view details.
+     */
+    override fun toString(): String {
+        return "View(entities=$entities)"
+    }
 }
