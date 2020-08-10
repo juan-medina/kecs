@@ -16,8 +16,8 @@ pages:
     - API Documentation: 'packages/-k-e-c-s/index.md'
 theme:
     name: material
-    logo: 'icon.svg'
-    favicon: 'icon.svg'
+    logo: 'favicon.ico'
+    favicon: 'favicon.ico'
     palette:
         scheme: slate
 extra_css:
