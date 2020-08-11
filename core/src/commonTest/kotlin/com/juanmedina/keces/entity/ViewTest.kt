@@ -301,11 +301,11 @@ class ViewTest {
             +Player("player2")
         }
 
-        val window = view.triples<Position, Velocity, Player>()
+        val window = view.triples<Position, Player, Velocity>()
 
         assertEquals(2, window.size)
 
-        window.forEach { (pos, vel, player) ->
+        window.forEach { (pos, player, vel) ->
             assertEquals(0.0f, pos.x)
             assertEquals(0.0f, pos.y)
 

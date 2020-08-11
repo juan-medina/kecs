@@ -64,17 +64,17 @@ kotlin {
         jvmMain {
             dependencies {
                 implementation kotlin('stdlib-common')
-                implementation 'com.juanmedina:kecs-jvm:1.0.1'
+                implementation 'com.juanmedina:kecs-jvm:1.0.2'
             }
         }
         linuxMain {
             dependencies {
-                implementation 'com.juanmedina:kecs-linux:1.0.1'
+                implementation 'com.juanmedina:kecs-linux:1.0.2'
             }
         }
         mingwMain {
             dependencies {
-                implementation 'com.juanmedina:kecs-mingw:1.0.1'
+                implementation 'com.juanmedina:kecs-mingw:1.0.2'
             }
         }
     }
@@ -87,7 +87,7 @@ For just adding as dependency for a simple platform you could do this in gradle:
 
 ```groovy
 dependencies {
-    implementation 'com.juanmedina:kecs-jvm:1.0.1'
+    implementation 'com.juanmedina:kecs-jvm:1.0.2'
 }
 ```
 
@@ -97,7 +97,7 @@ If you use maven you need to include the dependencies of the platforms that you 
 <dependency>
     <groupId>com.juanmedina</groupId>
     <artifactId>kecs-jvm</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 

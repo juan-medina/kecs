@@ -21,7 +21,7 @@ def BINTRAY_ORGINIZATION= 'juan-medina'
 def ISSUE_URL= 'https://github.com/juan-medina/kecs/issues'
 def SITE_URL= 'https://juan-medina.github.io/kecs/'
 def VCS_URL= 'https://github.com/juan-medina/kecs.git'
-def LIBRARY_VERSION_NAME='1.0.1'
+def LIBRARY_VERSION_NAME='1.0.2'
 
 group GROUP_ID
 version LIBRARY_VERSION_NAME

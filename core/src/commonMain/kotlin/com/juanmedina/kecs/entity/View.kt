@@ -73,7 +73,7 @@ open class View() : MutableCollection<Entity> {
      *
      * This could be use for destructing declarations.
      */
-    inline fun <reified T : Any, reified K : Any, reified V : Any> triples() = view(T::class, K::class).map {
+    inline fun <reified T : Any, reified K : Any, reified V : Any> triples() = view(T::class, K::class, V::class).map {
         it.triple<T, K, V>()
     }
 
