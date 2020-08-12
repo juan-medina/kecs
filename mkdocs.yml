@@ -1,6 +1,6 @@
 site_name: 'Kotlin ECS'
 site_url: 'https://juan-medina.github.io/kecs/'
-site_description: 'tbc.'
+site_description: 'Kotlin Cross-platform Entity Component System'
 site_author: 'Juan Medina'
 copyright: '© 2020 Juan Medina'
 
